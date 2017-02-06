@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Common;
 using System.Data.Entity.Core.EntityClient;
 using System.Linq;
@@ -14,10 +15,10 @@ namespace WN.ProductStore.Controllers
     public class ProductController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<Product> Get()
+        public IEnumerable<Product> Get(int pageIndex, int pageSize)
         {
             var db = new DBContext();
-            var products = db.Product.ToList();
+            var products = db.Product.OrderBy(i=>i.Id).Skip(pageIndex).Take(pageSize).ToList();
             return products;
         }
 
