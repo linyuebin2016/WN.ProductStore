@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -16,6 +17,7 @@ namespace WN.ProductStore.Models
         /// 名称
         /// </summary>
         [MaxLength(100)]
+        [Required]
         public string Name { get; set; }
         /// <summary>
         /// 价格
@@ -27,5 +29,14 @@ namespace WN.ProductStore.Models
         /// </summary>
         [MaxLength(200)]
         public string Remark { get; set; }
+
+        public Product()
+        {
+            this.CreateTime = DateTime.Now;
+        }
+
+        [MaxLength(50)]
+        public string Color { get; set; }
+
     }
 }

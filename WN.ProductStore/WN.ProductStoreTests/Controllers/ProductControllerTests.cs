@@ -14,7 +14,9 @@ namespace WN.ProductStore.Controllers.Tests
         [TestMethod()]
         public void GetTest()
         {
-            Assert.Fail();
+            //ProductController p = new ProductController();
+            //var reslut= p.Get();
+            //Assert.Fail();
         }
     }
 }
