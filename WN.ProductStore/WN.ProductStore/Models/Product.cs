@@ -9,10 +9,8 @@ using System.Web;
 namespace WN.ProductStore.Models
 {
     [Table("Product")]
-    public class Product
+    public class Product : BaseEntiy
     {
-        [Key]
-        public Guid Id { get; set; }
         /// <summary>
         /// 名称
         /// </summary>
@@ -37,6 +35,8 @@ namespace WN.ProductStore.Models
 
         [MaxLength(50)]
         public string Color { get; set; }
+
+        public string Size { get; set; }
 
     }
 }

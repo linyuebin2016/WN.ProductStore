@@ -12,8 +12,8 @@ namespace WN.ProductStore.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-            var db = new DBContext();
-            var products = db.Product.ToList();
+            //var db = new DBContext();
+            //var products = db.Product.ToList();
             return View();
         }
     }

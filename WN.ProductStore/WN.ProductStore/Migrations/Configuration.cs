@@ -29,12 +29,12 @@ namespace WN.ProductStore.Migrations
             //    );
             //
 
-            Product product = new Product();
-            product.Id = Guid.NewGuid();
-            product.Name = "iphone 7";
-            product.CreateTime = DateTime.Now;
-            context.Product.Add(product);
-            base.Seed(context);
+            //Product product = new Product();
+            //product.Id = Guid.NewGuid();
+            //product.Name = "iphone 7";
+            //product.CreateTime = DateTime.Now;
+            //context.Product.Add(product);
+            //base.Seed(context);
         }
     }
 }

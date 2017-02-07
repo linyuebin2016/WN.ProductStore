@@ -250,7 +250,9 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseEntiy.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Stock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Repository\DBContext.cs" />
