@@ -6,10 +6,9 @@ using System.Web;
 
 namespace WN.ProductStore.Models
 {
-    [Table("Customer")]
-    public class Customer:BaseEntiy
+    [Table("OrderDetail")]
+    public class OrderDetail:BaseEntiy
     {
-        public string Name { get; set; }
-        public int PhoneNumber { get; set; }
+        public Guid ProductId { get; set; }
     }
 }

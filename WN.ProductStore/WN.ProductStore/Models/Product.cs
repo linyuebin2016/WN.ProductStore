@@ -11,7 +11,7 @@ namespace WN.ProductStore.Models
     [Table("Product")]
     public class Product : BaseEntiy
     {
-        
+
         public Product()
         {
             this.CreateTime = DateTime.Now;
@@ -32,11 +32,12 @@ namespace WN.ProductStore.Models
         /// </summary>
         [MaxLength(200)]
         public string Remark { get; set; }
-        
+
         [MaxLength(50)]
         public string Color { get; set; }
 
         public string Size { get; set; }
+        public List<ProductImage> ProductImages { get;set;}
 
     }
 }
