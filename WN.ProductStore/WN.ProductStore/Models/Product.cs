@@ -11,6 +11,11 @@ namespace WN.ProductStore.Models
     [Table("Product")]
     public class Product : BaseEntiy
     {
+        
+        public Product()
+        {
+            this.CreateTime = DateTime.Now;
+        }
         /// <summary>
         /// 名称
         /// </summary>
@@ -27,12 +32,7 @@ namespace WN.ProductStore.Models
         /// </summary>
         [MaxLength(200)]
         public string Remark { get; set; }
-
-        public Product()
-        {
-            this.CreateTime = DateTime.Now;
-        }
-
+        
         [MaxLength(50)]
         public string Color { get; set; }
 

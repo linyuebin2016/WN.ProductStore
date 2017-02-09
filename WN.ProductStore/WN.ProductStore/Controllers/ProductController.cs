@@ -33,9 +33,9 @@ namespace WN.ProductStore.Controllers
         }
 
         // GET api/<controller>/5
-        public string GetProduct(int id)
+        public Product GetProduct(Guid id)
         {
-            return "value";
+            return db.Product.FirstOrDefault(i => i.Id == id);
         }
 
         // PUT api/<controller>/5
@@ -45,9 +45,19 @@ namespace WN.ProductStore.Controllers
             db.SaveChanges();
         }
 
-        // DELETE api/<controller>/5
-        public void DeleteProduct(int id)
+        public void Update(Product product)
         {
+            db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+            db.Product.Attach(product);
+            db.SaveChanges();
+        }
+
+        // DELETE api/<controller>/5
+        public void Delete(Guid id)
+        {
+            var product = GetProduct(id);
+            db.Product.Remove(product);
+            db.SaveChanges();
         }
     }
 }
