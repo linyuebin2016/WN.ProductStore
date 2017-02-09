@@ -1,18 +1,16 @@
 'use strict';
 
 angular.
-  module('phonecatApp').
+  module('myApp',['ngAnimate','ngRoute']).
   config(['$locationProvider' ,'$routeProvider',
     function config($locationProvider, $routeProvider) {
       $locationProvider.hashPrefix('!');
 
       $routeProvider.
-        when('/phones', {
-          template: '<phone-list></phone-list>'
+        when('/product', {
+            templateUrl: 'product/product-list.html',
+            controller: 'ProductListController'
         }).
-        when('/phones/:phoneId', {
-          template: '<phone-detail></phone-detail>'
-        }).
-        otherwise('/phones');
+        otherwise('/product');
     }
   ]);

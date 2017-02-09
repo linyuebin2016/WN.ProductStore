@@ -4,11 +4,16 @@
 angular.
   module('phoneList').
   component('phoneList', {
-    templateUrl: 'phone-list/phone-list.template.html',
+    templateUrl: 'product/phone-list.template.html',
     controller: ['Phone',
-      function PhoneListController(Phone) {
-        this.phones = Phone.query();
-        this.orderProp = 'age';
+      function PhoneListController($http) {
+        //this.phones = Phone.query();
+        //this.orderProp = 'age';
+        $http.get("http://10.52.0.87/ProductStroe/api/Product?pageIndex=0&pageSize=10&name=")
+            .success(function (response) {
+              $scope.names = response;});
       }
+
+
     ]
   });
