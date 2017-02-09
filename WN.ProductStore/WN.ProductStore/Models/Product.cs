@@ -4,10 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace WN.ProductStore.Models
 {
+
     [Table("Product")]
     public class Product : BaseEntiy
     {
