@@ -4,24 +4,25 @@
       <!--Sidebar content-->
 
       <p>
-        Search:
+        Search:1111111111
         <input ng-model="$ctrl.query" />
       </p>
 
       <p>
         Sort by:
         <select ng-model="$ctrl.orderProp">
-          <option value="name">Alphabetical</option>
-          <option value="age">Newest</option>
+          <option value="name">Alphabet111ical</option>
+          <option value="age">Newe111st</option>
         </select>
       </p>
 
     </div>
     <div class="col-md-10">
       <!--Body content-->
-
+      dsfdsfsd1111
+{{names}}
       <ul class="phones">
-        <li ng-repeat="phone in $ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp"
+        <li ng-repeat="names in $ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp"
             class="thumbnail phone-list-item">
           <a href="#!/phones/{{phone.id}}" class="thumb">
             <img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}" />

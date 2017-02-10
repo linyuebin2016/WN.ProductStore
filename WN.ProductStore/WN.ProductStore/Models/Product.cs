@@ -13,7 +13,6 @@ namespace WN.ProductStore.Models
     [Table("Product")]
     public class Product : BaseEntiy
     {
-
         public Product()
         {
             this.CreateTime = DateTime.Now;
@@ -27,7 +26,9 @@ namespace WN.ProductStore.Models
         /// <summary>
         /// 价格
         /// </summary>
+
         public decimal Price { get; set; }
+
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// 备注
@@ -37,9 +38,10 @@ namespace WN.ProductStore.Models
 
         [MaxLength(50)]
         public string Color { get; set; }
-
+        [MaxLength(20)]
         public string Size { get; set; }
-        public List<ProductImage> ProductImages { get;set;}
+        [MaxLength(250)]
+        public string ImageUrl { get; set; }
 
     }
 }

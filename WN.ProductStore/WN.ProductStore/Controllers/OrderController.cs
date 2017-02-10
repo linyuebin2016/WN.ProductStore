@@ -5,15 +5,20 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WN.ProductStore.Models;
+using WN.ProductStore.Repository;
+using WN.ProductStore.ViewModel;
 
 namespace WN.ProductStore.Controllers
 {
     public class OrderController : ApiController
     {
+        DBContext db = new DBContext();
         // GET: api/Order
-        public IEnumerable<Order> Get()
+        public OrderView GetOrderList(int pageIndex, int pageSize)
         {
-            return null;
+            OrderView view = new OrderView();
+            view.Orders = db.Order.OrderByDescending(o=>o.CreateTime).Skip(pageIndex).Take(pageSize).ToList();
+            return view;
         }
 
         // GET: api/Order/5
