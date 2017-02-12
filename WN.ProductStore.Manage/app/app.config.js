@@ -11,6 +11,9 @@ angular.
             templateUrl: 'product/product-list.html',
             controller: 'ProductListController'
         }).
+        when("/phone",{
+          template:'<phone-list></phone-list>'
+        }).
         otherwise('/product');
     }
   ]);

@@ -1,7 +1,10 @@
 <div ng-controller="ProductListController">
   hello!!!!!!!!!!!!!!!!!
   {{name}}
-  <ul ng-repeat="a in res">
-    <li>{{a}}</li>
+
+  <input type="text" ng-model="num">
+  {{num}}
+  <ul ng-repeat="p in productList">
+    <li>{{p.name}}</li>
   </ul>
 </div>
