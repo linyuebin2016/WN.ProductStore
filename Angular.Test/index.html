@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+Ãû:  <input type="text" ng-model="firstName"><br>
+ÐÕ:  <input type="text" ng-model="lastName"><br>
+<br>
+ÐÕÃû: {{firstName + " " + lastName}}
+{{name}} {{dd|date:'yyyyÄê-MM-dd'}}
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.firstName = "John";
+    $scope.lastName = "Doe";
+	$scope.name='aaa';
+	$scope.dd=new Date();
+	
+});
+</script>
+
+</body>
+</html>
