@@ -1,7 +1,123 @@
-<div ng-controller="ProductListController">
-  hello!!!!!!!!!!!!!!!!!
-  {{name}}
-  <ul ng-repeat="a in res">
-    <li>{{a}}</li>
-  </ul>
+<div class="content" ng-controller="ProductListController">
+  <div class="header">
+    <div class="input-group search pull-right hidden-sm hidden-xs">
+      <div class="input-group">
+        <input type="text" class="form-control">
+              <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button"><i class="fa fa-search "></i></button>
+              </span>
+      </div>
+    </div>
+
+    <h1 class="page-title">Our Company News and Blog</h1>
+
+  </div>
+  <div class="main-content">
+
+
+    <div class="row">
+      <div class="col-sm-9 main-content">
+
+        <div id="blog-posts">
+
+          <div class="row padding-bottom" ng-repeat="p in productList">
+            <div class="col-md-4">
+              <a href="premium-blog-item.html" class="thumb"><img src="images/blog/503993_62595320.jpg" class="img-responsive hidden-xs"></a>
+            </div>
+            <div class="col-md-8">
+              <div class="post-summary">
+                <h3 style="margin-top: 0px;"><a href="premium-blog-item.html">{{p.Name}}</a></h3>
+                <p class="text-sm">June 13th, 2014</p>
+                <p>
+                  Lorem ipsum dolor sit amet, id nec conceptam conclusion emque. Et eam tation option tation option. Utinam salutatus ex eum.
+                  Lorem ipsum dolor sit amet, id nec conceptam conclusion emque.
+                </p>
+                <p><a class="btn btn-default btn-sm" href="premium-blog-item.html">Read more</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row padding-bottom">
+            <div class="col-md-4">
+              <a href="premium-blog-item.html" class="thumb"><img src="images/blog/625998_12886207.jpg" class="img-responsive hidden-xs"></a>
+            </div>
+            <div class="col-md-8">
+              <div class="post-summary">
+                <h3 style="margin-top: 0px;"><a href="premium-blog-item.html">Here is a title for the blog post</a></h3>
+                <p class="text-sm">June 13th, 2014</p>
+                <p>
+                  Lorem ipsum dolor sit amet, id nec conceptam conclusion emque. Et eam tation option tation option. Utinam salutatus ex eum.
+                  Lorem ipsum dolor sit amet, id nec conceptam conclusion emque.
+                </p>
+                <p><a class="btn btn-default btn-sm" href="premium-blog-item.html">Read more</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row padding-bottom">
+            <div class="col-md-4">
+              <a href="premium-blog-item.html" class="thumb"><img src="images/blog/737034_24905666.jpg" class="img-responsive hidden-xs"></a>
+            </div>
+            <div class="col-md-8">
+              <div class="post-summary">
+                <h3 style="margin-top: 0px;"><a href="premium-blog-item.html">Here is a title for the blog post</a></h3>
+                <p class="text-sm">June 13th, 2014</p>
+                <p>
+                  Lorem ipsum dolor sit amet, id nec conceptam conclusion emque. Et eam tation option tation option. Utinam salutatus ex eum.
+                  Lorem ipsum dolor sit amet, id nec conceptam conclusion emque.
+                </p>
+                <p><a class="btn btn-default btn-sm" href="premium-blog-item.html">Read more</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row padding-bottom">
+            <div class="col-md-4">
+              <a href="premium-blog-item.html" class="thumb"><img src="images/blog/789080_16753532.jpg" class="img-responsive hidden-xs"></a>
+            </div>
+            <div class="col-md-8">
+              <div class="post-summary">
+                <h3 style="margin-top: 0px;"><a href="premium-blog-item.html">Here is a title for the blog post</a></h3>
+                <p class="text-sm">June 13th, 2014</p>
+                <p>
+                  Lorem ipsum dolor sit amet, id nec conceptam conclusion emque. Et eam tation option tation option. Utinam salutatus ex eum.
+                  Lorem ipsum dolor sit amet, id nec conceptam conclusion emque.
+                </p>
+                <p><a class="btn btn-default btn-sm" href="premium-blog-item.html">Read more</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row padding-bottom">
+            <div class="col-md-4">
+              <a href="premium-blog-item.html" class="thumb"><img src="images/blog/888272_30368604.jpg" class="img-responsive hidden-xs"></a>
+            </div>
+            <div class="col-md-8">
+              <div class="post-summary">
+                <h3 style="margin-top: 0px;"><a href="premium-blog-item.html">Here is a title for the blog post</a></h3>
+                <p class="text-sm">June 13th, 2014</p>
+                <p>
+                  Lorem ipsum dolor sit amet, id nec conceptam conclusion emque. Et eam tation option tation option. Utinam salutatus ex eum.
+                  Lorem ipsum dolor sit amet, id nec conceptam conclusion emque.
+                </p>
+                <p><a class="btn btn-default btn-sm" href="premium-blog-item.html">Read more</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <ul class="fancy pagination">
+            <li><a href="#">?</a></li>
+            <li><a href="#">1</a></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">?</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
