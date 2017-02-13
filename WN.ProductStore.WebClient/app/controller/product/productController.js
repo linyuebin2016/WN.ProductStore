@@ -1,4 +1,4 @@
-angular.module('phoneList', []).
-controller("productController", function ($scope) {
-    console.log("ProductController");
-})
+// angular.module('phoneList', []).
+// controller("productController", function ($scope) {
+//     console.log("ProductController");
+// })

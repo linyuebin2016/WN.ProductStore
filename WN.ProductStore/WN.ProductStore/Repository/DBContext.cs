@@ -16,5 +16,7 @@ namespace WN.ProductStore.Repository
         public DbSet<ProductImage> ProductImage { get; set; }
         public DbSet<Order> Order { get; set; }
 
+        public DbSet<Customer> Customer { get; set; }
+
     }
 }
