@@ -15,5 +15,6 @@ namespace WN.ProductStore.Models
         public Guid ProductId { get; set; }
 
         public Product Product { get; set; }
+
     }
 }
