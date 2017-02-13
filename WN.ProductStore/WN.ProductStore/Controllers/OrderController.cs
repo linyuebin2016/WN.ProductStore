@@ -12,19 +12,21 @@ namespace WN.ProductStore.Controllers
 {
     public class OrderController : ApiController
     {
-        DBContext db = new DBContext();
+        DBContext db = new DBContext(); 
         // GET: api/Order
-        public OrderView GetOrderList(int pageIndex, int pageSize)
+        public OrderListView GetOrderList(int pageIndex, int pageSize)
         {
-            OrderView view = new OrderView();
+            OrderListView view = new OrderListView();
             view.Orders = db.Order.OrderByDescending(o=>o.CreateTime).Skip(pageIndex).Take(pageSize).ToList();
+            view.TotalCount = db.Order.Count();
             return view;
         }
 
         // GET: api/Order/5
-        public string Get(int id)
+        public Order GetOrderDetail(Guid id)
         {
-            return "value";
+            var Order= db.Order.FirstOrDefault(i => i.Id == id);
+            return Order;
         }
 
         // POST: api/Order
@@ -40,6 +42,16 @@ namespace WN.ProductStore.Controllers
         // DELETE: api/Order/5
         public void Delete(int id)
         {
+        }
+
+        /// <summary>
+        /// 下订单
+        /// </summary>
+        /// <param name="order"></param>
+        public void PlaceOrder(Order order)
+        {
+            db.Order.Add(order);
+            db.SaveChanges();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace WN.ProductStore.ViewModel
 {
     public class OrderView
     {
-        public List<Order> Orders { get; set; }
-        public int TotalCount { get; set; }
+        public Order Order { get; set; }
+        public OrderDetail OrderDetail { get; set; }
     }
 }

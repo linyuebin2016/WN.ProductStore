@@ -51,6 +51,7 @@ namespace WN.ProductStore.Controllers
         }
 
         // PUT api/<controller>/5
+        [HttpPost]
         public void Add(Product product)
         {
             db.Product.Add(product);

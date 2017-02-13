@@ -14,6 +14,10 @@ namespace WN.ProductStore.Models
         {
             this.CreateTime = new DateTime();
         }
+        /// <summary>
+        /// 订单编号
+        /// </summary>
+        public int OrderNo { get; set; }
         public DateTime CreateTime { get; set; }
         public decimal Total { get; set; }
         public OrderState OrderState { get; set; }

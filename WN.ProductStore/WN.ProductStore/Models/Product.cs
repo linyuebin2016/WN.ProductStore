@@ -31,10 +31,10 @@ namespace WN.ProductStore.Models
 
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// 备注
+        /// 介绍
         /// </summary>
         [MaxLength(200)]
-        public string Remark { get; set; }
+        public string Introduction { get; set; }
 
         [MaxLength(50)]
         public string Color { get; set; }
@@ -42,6 +42,11 @@ namespace WN.ProductStore.Models
         public string Size { get; set; }
         [MaxLength(250)]
         public string ImageUrl { get; set; }
+
+        /// <summary>
+        /// 产品内容
+        /// </summary>
+        public string Content { get; set; }
 
     }
 }

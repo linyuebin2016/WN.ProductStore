@@ -277,6 +277,7 @@
     <Compile Include="Repository\DBContext.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\OrderListView.cs" />
     <Compile Include="ViewModel\OrderView.cs" />
     <Compile Include="ViewModel\ProductListView.cs" />
     <Compile Include="ViewModel\ProductView.cs" />
