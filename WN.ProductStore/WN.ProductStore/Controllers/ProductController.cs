@@ -54,6 +54,7 @@ namespace WN.ProductStore.Controllers
         [HttpPost]
         public void Add(Product product)
         {
+            product.Id = Guid.NewGuid();
             db.Product.Add(product);
             db.SaveChanges();
         }
