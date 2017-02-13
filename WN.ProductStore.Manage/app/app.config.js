@@ -20,25 +20,6 @@ angular.
             templateUrl: 'product/product-list.html',
             controller: 'ProductListController'
         });
-
-
-        /*$routeProvider.
-        when('/', {
-            templateUrl: 'home/home.html',
-            controller: 'HomeController'
-        }).
-        when('/product', {
-            templateUrl: 'product/product-list.html',
-            controller: 'ProductListController'
-        }).
-<<<<<<< HEAD
-        otherwise('/home');*/
-=======
-        when("/phone",{
-          template:'<phone-list></phone-list>'
-        }).
-        otherwise('/product');
->>>>>>> 99f6b0a9d00d7f55269faf442b4c17ec1664bb1b
     }
   ])
   .controller('Controller',['$scope','$route', '$log','$http',
