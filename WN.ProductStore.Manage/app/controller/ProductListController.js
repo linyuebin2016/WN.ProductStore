@@ -1,17 +1,15 @@
 /**
  * Created by shengxiangyang on 2017-02-09.
  */
+define(function (require) {
+    var app = require('../app.config');
 
-angular.module('myApp').controller('ProductListController',['$scope','$route', '$log','$http',
-    function($scope, $route, $log,$http){
-        $scope.name = "dfdfd";
-         getList();
-        function getList() {
-            $http.get("http://10.52.0.87/ProductStroe/api/Product/GetProductList?pageIndex=0&pageSize=10&name=")
-                .success(function (response) {
-                    $scope.productList = response.Products;
-            });
-        }
-    }
-]);
+    app.controller('ProductListController', ['$scope','$http','ProductService', function ($scope,$http,ProductService) {
+        // shortcut to get angular injected service.
+        //var service = app.get('ProductService');
+        ProductService.getProductList().success(function (response) {
+            $scope.productList = response.Products;
+        });
+    }]);
+});
 
