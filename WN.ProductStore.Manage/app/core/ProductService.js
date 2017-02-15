@@ -30,8 +30,6 @@ define(function (require) {
             
             //新增商品信息
             saveProduct : function (product) {
-                var sHTML = $('.summernote').code();
-
                 return $http.post("http://10.52.0.87/ProductStroe/api/Product/add", {
                     Product: product
                 }, {

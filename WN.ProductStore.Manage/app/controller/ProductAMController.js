@@ -18,7 +18,7 @@ define(function (require) {
             $('.summernote').summernote({
                 height: 300,
                 lang: 'zh-CN',
-                placeholder: 'type here...'
+                placeholder: '请输入内容...'
             });
 
             $scope.productDetail = {};
@@ -35,7 +35,7 @@ define(function (require) {
             }
 
             $scope.save = function() {
-                var sHTML = $('.summernote').code();
+                $scope.productDetail.Content = $('#summernote_sp').summernote('code');
                 ProductService.saveProduct($scope.productDetail).success(function (response) {
                     alert("新增成功");
                 });
