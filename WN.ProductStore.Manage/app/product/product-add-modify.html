@@ -23,28 +23,29 @@
             <tr>
                 <td class="td1"><em class="red">*</em>商品尺寸</td>
                 <td>
-                    <input type="text" ng-model="productDetail.Name" maxlength="100"
+                    <input type="text" ng-model="productDetail.Size" maxlength="100"
                            class="form-control" placeholder="最多不超过20字符" style="width: 320px; display: inline-block;"/>
                 </td>
             </tr>
             <tr>
                 <td class="td1"><em class="red">*</em>商品颜色</td>
                 <td>
-                    <input type="text" ng-model="productDetail.Name" maxlength="100"
+                    <input type="text" ng-model="productDetail.Color" maxlength="100"
                            class="form-control" placeholder="最多不超过20字符" style="width: 320px; display: inline-block;"/>
                 </td>
             </tr>
             <tr>
                 <td class="td1"><em class="red">*</em>商品简介</td>
                 <td>
-                    <textarea class="form-control" rows="3" style="resize: none; width: 320px"></textarea>
+                    <textarea class="form-control" ng-model="productDetail.Introduction" rows="3"
+                              style="resize: none; width: 320px"></textarea>
                 </td>
             </tr>
             <tr>
                 <td class="td1"><em class="red">*</em>正文</td>
                 <td>
                     <div style="width: 800px;">
-                        <div class="form-control summernote" id="content"></div>
+                        <div class="form-control summernote" id="summernote" ng-model="productDetail.Content"></div>
                     </div>
                 </td>
             </tr>
@@ -63,14 +64,6 @@
                 <td class="td1"></td>
                 <td>
                     <button data-ng-click="save()" class="vs-bt bt-primary mr20">发布</button>
-                    <a data-ng-click="preview()" class="vs-bt bt-default mr20" data-toggle="modal"
-                       data-target="#myModal2">预览</a>
-                    <button data-ng-click="setCollectionSuccess(collectionDetailsVo.collectionId)" ng-if="!addOrEdit"
-                            class="vs-bt bt-default mr20">完成
-                    </button>
-                    <button data-ng-click="setCollectionFailer(collectionDetailsVo.collectionId)" ng-if="!addOrEdit"
-                            class="vs-bt bt-default mr20">失败
-                    </button>
                     <button data-ng-click="cancel()" class="vs-bt bt-default">取消</button>
                 </td>
             </tr>

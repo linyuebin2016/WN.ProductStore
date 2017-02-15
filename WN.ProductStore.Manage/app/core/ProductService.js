@@ -2,6 +2,11 @@ define(function (require) {
     var angular = require('angular');
     var app = require('../app.config');
     app.service('ProductService', ['$http',function($http) {
+
+        var postHeader = {
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+        };
+
         return {
             //获取商品列表
             getProductList : function() {
@@ -21,6 +26,17 @@ define(function (require) {
                         id: spid
                     }
                 })
+            },
+            
+            //新增商品信息
+            saveProduct : function (product) {
+                var sHTML = $('.summernote').code();
+
+                return $http.post("http://10.52.0.87/ProductStroe/api/Product/add", {
+                    Product: product
+                }, {
+                    headers: postHeader
+                });
             }
         };
     }]);
