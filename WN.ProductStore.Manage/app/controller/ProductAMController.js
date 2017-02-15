@@ -31,13 +31,16 @@ define(function (require) {
             function getProductDetail(spid) {
                 ProductService.getProductDetail(spid).success(function (response) {
                     $scope.productDetail = response.Product;
+                    $('.summernote').summernote('code',$scope.productDetail.Content);
                 });
             }
 
             $scope.save = function() {
                 $scope.productDetail.Content = $('#summernote_sp').summernote('code');
-                ProductService.saveProduct($scope.productDetail).success(function (response) {
-                    alert("新增成功");
+                ProductService.saveProduct($scope.productDetail).success(function (resultJson) {
+                    alert(resultJson + "新增成功");
+                }).error(function (e) {
+                    console.log('系统异常');
                 });
             }
         }
