@@ -26,6 +26,13 @@ define(function (require) {
                 controllerUrl: 'controller/ProductListController',
                 controller: 'ProductListController',
                 dependencies: ['core/ProductService']
+            }).
+            state('productAM', {
+                url: '/productAM/:spid',
+                templateUrl: 'product/product-add-modify.html',
+                controllerUrl: 'controller/ProductAMController',
+                controller: 'ProductAMController',
+                dependencies: ['core/ProductService']
             });
         }
     ]);

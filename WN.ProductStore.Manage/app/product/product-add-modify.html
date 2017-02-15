@@ -1,0 +1,121 @@
+<div class="content" ng-controller="ProductAMController">
+    <div>
+        <table class="admin-table" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="td1"><em class="red">*</em>商品分类</td>
+                <td>
+                    <select class="form-control" style="width: 320px">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><em class="red">*</em>商品名称</td>
+                <td>
+                    <input type="text" ng-model="productDetail.Name" maxlength="100"
+                           class="form-control" placeholder="最多不超过20字符" style="width: 320px; display: inline-block;"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><em class="red">*</em>商品尺寸</td>
+                <td>
+                    <input type="text" ng-model="productDetail.Name" maxlength="100"
+                           class="form-control" placeholder="最多不超过20字符" style="width: 320px; display: inline-block;"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><em class="red">*</em>商品颜色</td>
+                <td>
+                    <input type="text" ng-model="productDetail.Name" maxlength="100"
+                           class="form-control" placeholder="最多不超过20字符" style="width: 320px; display: inline-block;"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><em class="red">*</em>商品简介</td>
+                <td>
+                    <textarea class="form-control" rows="3" style="resize: none; width: 320px"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><em class="red">*</em>正文</td>
+                <td>
+                    <div style="width: 800px;">
+                        <div class="form-control summernote" id="content"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><em class="red">*</em>商品有效日期</td>
+                <td>
+                    <div class="input-group">
+                        <input type="text" class="form-control form_datetime" data-date-format="yyyy-mm-dd" placeholder=""/>
+                        <span class="input-group-addon" id="basic-addon2">
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"></td>
+                <td>
+                    <button data-ng-click="save()" class="vs-bt bt-primary mr20">发布</button>
+                    <a data-ng-click="preview()" class="vs-bt bt-default mr20" data-toggle="modal"
+                       data-target="#myModal2">预览</a>
+                    <button data-ng-click="setCollectionSuccess(collectionDetailsVo.collectionId)" ng-if="!addOrEdit"
+                            class="vs-bt bt-default mr20">完成
+                    </button>
+                    <button data-ng-click="setCollectionFailer(collectionDetailsVo.collectionId)" ng-if="!addOrEdit"
+                            class="vs-bt bt-default mr20">失败
+                    </button>
+                    <button data-ng-click="cancel()" class="vs-bt bt-default">取消</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!--预览-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" style="width: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">预览</h4>
+            </div>
+
+
+            <div class="modal-body modal-body-H clearfix">
+                <div class="main-tile clearfix">
+                    <div class="th"><h3>{{collectionDetailsVo.collectionName}}</h3></div>
+                    <div class="pull-left">
+                        <p class="time-tip time-end" style="width:130px;">还有<span ng-class="{'text-red':enrolEndDate<=3}">{{enrolEndDate}}</span>天报名截止</p>
+                        <p class="time-tip time-applied" style="width:130px;">还有<span ng-class="{'text-red':collectionEndDate<=3}">{{collectionEndDate}}</span>天征集截止</p>
+                    </div>
+                </div>
+                <!-- main-tile -->
+                <div class="main-content">
+                    <p id="preview-content"></p>
+                    <p class="text-right">{{orgName}} {{currDate}}</p>
+                </div>
+                <!-- main-content -->
+                <div class="main-other">
+                    <p>相关附件（{{collectionDetailsVo.attachmentVo.length + preViewFiles.length}}）</p>
+                    <p ng-repeat="file in collectionDetailsVo.attachmentVo track by file.attachId"><i
+                            class="fa fa-paperclip"></i> {{file.attachName}} {{ file.attachSize | byte }} </p>
+                    <p ng-repeat="file in preViewFiles"><i class="fa fa-paperclip"></i> {{file.fileName}} {{
+                        file.attachSize | byte }} </p>
+                    <div class="line"></div>
+                    <p>负责人（{{collectionDetailsVo.directorList.length}}）</p>
+                    <p>{{directors}}</p>
+                </div>
+            </div>
+            <div class="modal-footer" style="margin-top: 0;">
+                <button type="button" class="vs-bt bt-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
