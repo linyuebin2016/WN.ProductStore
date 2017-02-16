@@ -13,8 +13,12 @@ define(function (require) {
                 })
             },
             /**获取产品对应的库存数量 */
-            GetProductStockList: function () {
-                return $http.get(requestUrl + "/Stock/GetProductStockList")
+            GetProductStockList: function (queryString) {
+                return $http.get(requestUrl + "/Stock/GetProductStockList", {
+                    params: {
+                        queryString: queryString
+                    }
+                })
             },
 
             /**保存库存 */
