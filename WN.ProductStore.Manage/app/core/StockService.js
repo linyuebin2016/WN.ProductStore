@@ -3,6 +3,7 @@ define(function (require) {
     var app = require('../app.config');
     app.service('StockService', ['$http', function ($http) {
         var requestUrl = "http://10.52.0.87/ProductStroe/api";
+        var pageSize = 10;
         return {
             getStockList: function () {
                 return $http.get(requestUrl + "/Stock/GetStockList", {
@@ -13,9 +14,11 @@ define(function (require) {
                 })
             },
             /**获取产品对应的库存数量 */
-            GetProductStockList: function (queryString) {
+            GetProductStockList: function (pageIndex, queryString) {
                 return $http.get(requestUrl + "/Stock/GetProductStockList", {
                     params: {
+                        pageIndex: pageIndex,
+                        pageSize: pageSize,
                         queryString: queryString
                     }
                 })
