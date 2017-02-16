@@ -17,6 +17,7 @@ namespace WN.ProductStore.Repository
         public DbSet<Order> Order { get; set; }
 
         public DbSet<Customer> Customer { get; set; }
+        public DbSet<Stock> Stock { get; set; }
 
     }
 }

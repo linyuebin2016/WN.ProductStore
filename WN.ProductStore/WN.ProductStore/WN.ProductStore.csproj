@@ -250,6 +250,7 @@
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Global.asax.cs">
@@ -281,6 +282,7 @@
     <Compile Include="ViewModel\OrderView.cs" />
     <Compile Include="ViewModel\ProductListView.cs" />
     <Compile Include="ViewModel\ProductView.cs" />
+    <Compile Include="ViewModel\StockListView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

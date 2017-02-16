@@ -24,9 +24,13 @@ namespace WN.ProductStore.Models
         [Required]
         public string Name { get; set; }
         /// <summary>
+        /// 产品编号
+        /// </summary>
+        [MaxLength(30)]
+        public string ProductNo { get; set; }
+        /// <summary>
         /// 价格
         /// </summary>
-
         public decimal Price { get; set; }
 
         public DateTime CreateTime { get; set; }
