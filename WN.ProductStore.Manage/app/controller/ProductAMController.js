@@ -4,8 +4,8 @@
 define(function (require) {
     var app = require('../app.config');
 
-    app.controller('ProductAMController', ['$scope','$state','$stateParams','ProductService',
-        function ($scope,$state,$stateParams,ProductService) {
+    app.controller('ProductAMController', ['$scope','$sce','$state','$stateParams','ProductService',
+        function ($scope,$sce,$state,$stateParams,ProductService) {
 
             $('.form_datetime').datetimepicker({
                 minView: "month", //选择日期后，不会再跳转去选择时分秒
@@ -19,11 +19,12 @@ define(function (require) {
                 height: 300,
                 lang: 'zh-CN',
                 placeholder: '请输入内容...',
-                callbacks: {
-                    onImageUpload: function(files, editor, $editable) {
-                        sendFile(files);
-                    }
-                }
+                disableDragAndDrop:true,
+                //callbacks: {
+                //    onImageUpload: function(files, editor, $editable) {
+                //        sendFile(files);
+                //    }
+                //}
             });
 
             $scope.productDetail = {};
@@ -37,6 +38,7 @@ define(function (require) {
                 ProductService.getProductDetail(spid).success(function (response) {
                     $scope.productDetail = response.Product;
                     $('#summernote_sp').summernote('code',$scope.productDetail.Content);
+                    $scope.productDetail.Content = $sce.trustAsHtml($scope.productDetail.Content);
                 });
             }
 

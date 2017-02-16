@@ -13,6 +13,7 @@ require.config({
         'angular-async-loader': 'common/angular-async-loader/angular-async-loader.min',
         'angular-ui-router': 'common/angular-ui-route/angular-ui-router',
         'angular-animate': 'common/angular-animate/angular-animate',
+        'angular-sanitize': 'common/angular/angular-sanitize',
         'angular-resource': 'common/angular-resource/angular-resource',
         'jquery-knob': 'common/jQuery-Knob/js/jquery.knob',
         'datetimepicker': 'common/datetimepicker/js/bootstrap-datetimepicker',
@@ -52,9 +53,12 @@ require.config({
         },
         'ueditor-cn':{
             deps:['ueditor']
+        },
+        'angular-sanitize':{
+            deps:['angular']
         }
     },
-    deps:['moment','datetimepicker-cn','ueditor-cn']
+    deps:['moment','datetimepicker-cn','ueditor-cn','angular-sanitize']
 });
 require(['angular', './app-routes'], function (angular) {
     angular.element(document).ready(function () {
