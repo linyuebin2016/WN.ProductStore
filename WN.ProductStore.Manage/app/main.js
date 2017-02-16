@@ -5,7 +5,7 @@ require.config({
     baseUrl: '',
     paths: {
         'jquery': 'common/jquery/dist/jquery-1.11.1.min',
-        'bootstrap': 'common/bootstrap/dist/js/bootstrap',
+        'bootstrap': 'common/bootstrap/dist/js/bootstrap.min',
         'angular': 'common/angular/angular.min',
         'router': 'common/angular-route/angular-route',
         "moment" : "common/moment/moment",

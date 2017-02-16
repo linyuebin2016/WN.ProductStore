@@ -4,10 +4,18 @@
 define(function (require) {
     var app = require('../app.config');
 
-    app.controller('StockInController', ['$scope','StockService', function ($scope,StockService) {
-        StockService.getStockList().success(function (response) {
-            $scope.StockList = response.Stocks;
-        });
-    }]);
-});
+    app.controller('StockInController', ['$scope', 'StockService', '$state',
+        function ($scope, StockService, $state) {
+            StockService.GetProductStockList().success(function (response) {
+                $scope.Stocks = response.ProductStockList;
+            });
 
+            $scope.goAdd = function (product,stockId) {
+                $state.go("stockAdd", {
+                    product: product,
+                    stockId:stockId
+                });
+            }
+        }
+    ]);
+});
