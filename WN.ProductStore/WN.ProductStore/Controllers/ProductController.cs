@@ -61,13 +61,13 @@ namespace WN.ProductStore.Controllers
             db.SaveChanges();
         }
 
-        //[HttpPost]
-        //public void Update(Product product)
-        //{
-        //    db.Entry(product).State = System.Data.Entity.EntityState.Modified;
-        //    db.Product.Attach(product);
-        //    db.SaveChanges();
-        //}
+        [HttpPost]
+        public void Update(Product product)
+        {
+            db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+            db.Product.Attach(product);
+            db.SaveChanges();
+        }
 
         // DELETE api/<controller>/5
         public void Delete(Guid id)

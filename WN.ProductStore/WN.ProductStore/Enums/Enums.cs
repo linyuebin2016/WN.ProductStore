@@ -31,4 +31,16 @@ namespace WN.ProductStore.Enums
         /// </summary>
         CustomerService
     }
+
+    public enum StockState
+    {
+        /// <summary>
+        /// 入库
+        /// </summary>
+        In,
+        /// <summary>
+        /// 出库
+        /// </summary>
+        Out
+    }
 }
