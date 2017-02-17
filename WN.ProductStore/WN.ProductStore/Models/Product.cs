@@ -45,8 +45,8 @@ namespace WN.ProductStore.Models
         [MaxLength(20)]
         public string Size { get; set; }
         [MaxLength(250)]
-        public string ImageUrl { get; set; }
-
+        public ProductImage ImageUrls111111111111 { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
         /// <summary>
         /// 产品内容
         /// </summary>

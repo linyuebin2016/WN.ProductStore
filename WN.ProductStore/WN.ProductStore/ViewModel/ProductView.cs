@@ -9,6 +9,6 @@ namespace WN.ProductStore.ViewModel
     public class ProductView
     {
         public Product Product { get; set; }
-        public List<ProductImage> ProductImage { get; set; }
+        //public List<ProductImage> ProductImage { get; set; }
     }
 }

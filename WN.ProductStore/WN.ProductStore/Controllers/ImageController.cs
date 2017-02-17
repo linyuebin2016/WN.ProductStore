@@ -15,12 +15,13 @@ namespace WN.ProductStore.Controllers
 {
     public class ImageController : ApiController
     {
+        
         /// <summary>
         /// 图片上传  [FromBody]string token
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("api/Upload/ImgUpload")]
+        //[Route("api/Upload/ImgUpload")]
         public Task<Hashtable> ImgUpload1()
         {
             // 检查是否是 multipart/form-data 
@@ -127,7 +128,13 @@ namespace WN.ProductStore.Controllers
             if (!Request.Content.IsMimeMultipartContent("form-data"))
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             //文件保存目录路径
-            string SaveTempPath = "~/ProductImgs/";
+            string monthpath = DateTime.Now.ToString("yyyyMM")+"/";
+            string SaveTempPath = "~/UpLoadFiles/ProductImgs/"+ monthpath;
+                 
+            if (!Directory.Exists(HttpContext.Current.Server.MapPath(SaveTempPath)))
+            {
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath(SaveTempPath));
+            }
             String dirTempPath = HttpContext.Current.Server.MapPath(SaveTempPath);
             // 设置上传目录
             var provider = new MultipartFormDataStreamProvider(dirTempPath);
@@ -157,7 +164,7 @@ namespace WN.ProductStore.Controllers
                     {
                         string fileExt = orfilename.Substring(orfilename.LastIndexOf('.'));
                         //定义允许上传的文件扩展名
-                        String fileTypes = "gif,jpg,jpeg,png,bmp";
+                        String fileTypes = "gif,jpg,jpeg,png,bmp,ico";
                         if (String.IsNullOrEmpty(fileExt) || Array.IndexOf(fileTypes.Split(','), fileExt.Substring(1).ToLower()) == -1)
                         {
                             hash["error"] = 1;
@@ -171,11 +178,18 @@ namespace WN.ProductStore.Controllers
                             fileinfo.Delete();
                             hash["error"] = 0;
                             hash["errmsg"] = "上传成功";
+                            var _SaveTempPath = SaveTempPath.Replace('~',' ');
+                            hash["imgUrl"] = _SaveTempPath + newFileName + fileExt;
                         }
                     }
                     return hash;
                 });
             return task;
+        }
+
+        public void DeleteImage(List<string> images)
+        {
+            
         }
 
         public Task<HttpResponseMessage> PostFormData()

@@ -41,14 +41,14 @@ namespace WN.ProductStore.Controllers
 
         // GET api/<controller>/5
         [HttpGet]
-        public ProductView GetProduct(Guid id)
+        public Product GetProduct(Guid id)
         {
-            var view = new ProductView();
-            var images = db.ProductImage.Where(i => i.ProductId == id).ToList();
+            //var view = new ProductView();
+            //var images = db.ProductImage.Where(i => i.ProductId == id).ToList();
             var product = db.Product.FirstOrDefault(i => i.Id == id);
-            view.Product = product;
-            view.ProductImage = images;
-            return view;
+            //view.Product = product;
+            //view.ProductImage = images;
+            return product;
         }
 
         // PUT api/<controller>/5
@@ -74,6 +74,18 @@ namespace WN.ProductStore.Controllers
         {
             var product = db.Product.FirstOrDefault(i => i.Id == id);
             db.Product.Remove(product);
+            db.SaveChanges();
+        }
+
+        public void DeleteProductImage(Guid[] imageIds)
+        {
+            foreach (var item in imageIds)
+            {
+                var image = db.ProductImage.FirstOrDefault(i => i.Id == item);
+                String dirTempPath = HttpContext.Current.Server.MapPath("~"+ image.Url);
+                File.Delete(dirTempPath);
+                db.ProductImage.Remove(image);
+            }
             db.SaveChanges();
         }
     }
