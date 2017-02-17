@@ -1,7 +1,73 @@
-<div ng-controller="ProductListController">
-  hello!!!!!!!!!!!!!!!!!
-  {{name}}
-  <ul ng-repeat="a in res">
-    <li>{{a}}</li>
-  </ul>
+<div class="content" ng-controller="ProductListController">
+  <div class="header">
+    <div class="input-group search pull-right hidden-sm hidden-xs">
+      <div class="input-group">
+        <input type="text" class="form-control">
+              <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button"><i class="fa fa-search "></i></button>
+              </span>
+      </div>
+    </div>
+    <h1>商品列表</h1>
+  </div>
+  <div class="main-content">
+    <div class="row">
+      <div class="col-sm-9 main-content">
+
+        <div id="blog-posts">
+
+          <div class="row padding-bottom" ng-repeat="p in productList">
+            <div class="col-md-4">
+              <a href="premium-blog-item.html"><img src="images/blog/503993_62595320.jpg" class="img-rounded"></a>
+            </div>
+            <div class="col-md-8">
+              <div class="post-summary">
+                <h3 style="margin-top: 0px;"><a href="premium-blog-item.html">{{p.Name}}</a></h3>
+                <p class="text-sm">{{p.CreateTime | date:'yyyy-MM-dd'}}</p>
+                <p class="sp-text" ng-if="p.Introduction != null">
+                  {{p.Introduction}}
+                </p>
+                <p ng-if="p.Introduction == null">
+                  暂无介绍.
+                </p>
+                <p>
+                  <a ng-click="modifyProduct(p.Id)"><i class="fa fa-pencil"></i>修改</a>
+                  <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i>删除</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <ul class="fancy pagination">
+            <li><a href="#">上一页</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">下一页</a></li>
+          </ul>
+          <div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h3 id="myModalLabel">Delete Confirmation</h3>
+                </div>
+                <div class="modal-body">
+                  <p class="error-text"><i class="fa fa-warning modal-icon"></i>Are you sure you want to delete the user?<br>This cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                  <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

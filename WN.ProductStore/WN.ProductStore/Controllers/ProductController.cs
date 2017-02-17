@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Http;
 using WN.ProductStore.Models;
 using WN.ProductStore.Repository;
+using WN.ProductStore.ViewModel;
 
 namespace WN.ProductStore.Controllers
 {
@@ -18,44 +19,60 @@ namespace WN.ProductStore.Controllers
     {
         DBContext db = new DBContext();
         // GET api/<controller>
-        public IEnumerable<Product> GetProductList(int pageIndex, int pageSize, string name)
+        public ProductListView GetProductList(int pageIndex, int pageSize, string name)
         {
+            ProductListView list = new ProductListView();
+            List<Product> products = new List<Product>();
             if (!string.IsNullOrEmpty(name))
             {
-                return db.Product.Where(p => p.Name.Contains(name)).OrderBy(i => i.Id).Skip(pageIndex).Take(pageSize).ToList();
+                products= db.Product.Where(p => p.Name.Contains(name)).OrderBy(i => i.Id).Skip(pageIndex).Take(pageSize).ToList();
+                list.TotalCount = db.Product.Where(p => p.Name.Contains(name)).Count();
             }
             else
             {
-                var products = db.Product.OrderBy(i => i.Id).Skip(pageIndex).Take(pageSize).ToList();
-                return products;
-
+                products = db.Product.OrderBy(i => i.Id).Skip(pageIndex).Take(pageSize).ToList();
+                list.TotalCount = db.Product.Count();
             }
+
+            list.Products = products;
+      
+            return list;
         }
 
         // GET api/<controller>/5
-        public Product GetProduct(Guid id)
+        [HttpGet]
+        public ProductView GetProduct(Guid id)
         {
-            return db.Product.FirstOrDefault(i => i.Id == id);
+            var view = new ProductView();
+            var images = db.ProductImage.Where(i => i.ProductId == id).ToList();
+            var product = db.Product.FirstOrDefault(i => i.Id == id);
+            view.Product = product;
+            view.ProductImage = images;
+            return view;
         }
 
         // PUT api/<controller>/5
+        [HttpPost]
         public void Add(Product product)
         {
+            product.Id = Guid.NewGuid();
+            product.ProductNo = DateTime.Now.ToString("yyMMddss");
             db.Product.Add(product);
             db.SaveChanges();
         }
 
-        public void Update(Product product)
-        {
-            db.Entry(product).State = System.Data.Entity.EntityState.Modified;
-            db.Product.Attach(product);
-            db.SaveChanges();
-        }
+        //[HttpPost]
+        //public void Update(Product product)
+        //{
+        //    db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+        //    db.Product.Attach(product);
+        //    db.SaveChanges();
+        //}
 
         // DELETE api/<controller>/5
         public void Delete(Guid id)
         {
-            var product = GetProduct(id);
+            var product = db.Product.FirstOrDefault(i => i.Id == id);
             db.Product.Remove(product);
             db.SaveChanges();
         }

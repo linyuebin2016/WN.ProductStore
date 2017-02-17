@@ -10,5 +10,11 @@ namespace WN.ProductStore.Models
     public class OrderDetail:BaseEntiy
     {
         public Guid ProductId { get; set; }
+        /// <summary>
+        /// 数量
+        /// </summary>
+        public int Quantity { get; set; }
+        public Guid OrderId { get; set; }
+
     }
 }

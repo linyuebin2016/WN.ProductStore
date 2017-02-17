@@ -127,7 +127,7 @@ namespace WN.ProductStore.Controllers
             if (!Request.Content.IsMimeMultipartContent("form-data"))
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             //文件保存目录路径
-            string SaveTempPath = "~/SayPlaces/" + "/SayPic/SayPicTemp/";
+            string SaveTempPath = "~/ProductImgs/";
             String dirTempPath = HttpContext.Current.Server.MapPath(SaveTempPath);
             // 设置上传目录
             var provider = new MultipartFormDataStreamProvider(dirTempPath);

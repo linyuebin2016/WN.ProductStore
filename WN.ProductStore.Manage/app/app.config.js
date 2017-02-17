@@ -1,16 +1,12 @@
-'use strict';
+define(function (require, exports, module) {
+    var angular = require('angular');
+    var asyncLoader = require('angular-async-loader');
 
-angular.
-  module('myApp',['ngAnimate','ngRoute']).
-  config(['$locationProvider' ,'$routeProvider',
-    function config($locationProvider, $routeProvider) {
-      $locationProvider.hashPrefix('!');
+    require('angular-ui-router');
 
-      $routeProvider.
-        when('/product', {
-            templateUrl: 'product/product-list.html',
-            controller: 'ProductListController'
-        }).
-        otherwise('/product');
-    }
-  ]);
+    var app = angular.module('app', ['ui.router']);
+
+    asyncLoader.configure(app);
+
+    module.exports = app;
+});
