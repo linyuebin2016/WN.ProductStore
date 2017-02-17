@@ -12,9 +12,9 @@ define(function (require) {
         return {
             //获取商品列表
             getProductList : function() {
-                return $http.get(requestUrl +'/Product',{
+                return $http.get(requestUrl +'/Product/GetProductList',{
                     params: {
-                        pageIndex: 0,
+                        pageIndex: 1,
                         pageSize: 10,
                         name:''
                     }
@@ -44,14 +44,13 @@ define(function (require) {
 
             //上传图片
             uploadImg : function (imgs) {
-                var transFn = function (imgs) {
-                    return $.param(imgs);
-                };
-                var postCfg = {
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-                    transformRequest: imgs
-                };
-                return $http.post(requestUrl + "/Image/ImgUpload", imgs, postCfg);
+                return $http({
+                    method: 'post',
+                    url: requestUrl + '/Image/ImgUpload',
+                    data:imgs,
+                    headers: {'Content-Type': undefined},
+                    transformRequest: angular.identity
+                })
             }
         };
     }]);

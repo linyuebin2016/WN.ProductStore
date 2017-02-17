@@ -85,12 +85,15 @@
         <div>
             <form ng-submit="submit_form()">
                 <div>
-                    <div ng-repeat="item in thumb">
-                        <!-- 采用angular循环的方式，对存入thumb的图片进行展示 -->
-                        <label>
-                            <img ng-src="{{item.imgSrc}}"/>
-                        </label>
-                        <span ng-if="item.imgSrc" ng-click="img_del($index)">删除</span>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="panel panel-default">
+                            <p class="panel-heading">封面图片</p>
+                            <div class="panel-body gallery" ng-repeat="item in thumb">
+                                <img ng-src="{{item.imgSrc}}" class="img-polaroid">
+                                <div class="clearfix"></div>
+                                <a ng-if="item.imgSrc" ng-click="img_del($index)">删除</a>
+                            </div>
+                        </div>
                     </div>
                     <div ng-repeat="item in thumb_default">
                         <!-- 这里之所以写个循环，是为了后期万一需要多个‘加号’框 -->
