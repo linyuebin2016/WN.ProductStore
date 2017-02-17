@@ -51,13 +51,13 @@ define(function (require) {
                 });
             };
 
-            function sendFile(files, editor, $editable) {
+            function sendFile(files) {
                 var data = new FormData();
                 data.append("ajaxTaskFile", files[0]);
                 $.ajax({
                     data : data,
                     type : "POST",
-                    url : "api/Upload/ImgUpload", //图片上传出来的url，返回的是图片上传后的路径，http格式
+                    url : "http://10.52.0.87/ProductStroe/api/Image/ImgUpload", //图片上传出来的url，返回的是图片上传后的路径，http格式
                     cache : false,
                     contentType : false,
                     processData : false,
@@ -81,6 +81,14 @@ define(function (require) {
             };
 
             $scope.img_upload = function(files) {       //单次提交图片的函数
+                //第一种方法
+                sendFile(files);
+                var data = new FormData();      //以下为像后台提交图片数据
+                data.append('image', files[0]);
+                data.append('guid',$scope.guid);
+                //第二种方法
+                ProductService.uploadImg(data);
+                //第三种方法
                 $scope.guid = (new Date()).valueOf();   //通过时间戳创建一个随机数，作为键名使用
                 $scope.reader.readAsDataURL(files[0]);  //FileReader的方法，把图片转成base64
                 $scope.reader.onload = function(ev) {
@@ -91,12 +99,9 @@ define(function (require) {
                     });
                 };
 
-                var data = new FormData();      //以下为像后台提交图片数据
-                data.append('image', files[0]);
-                data.append('guid',$scope.guid);
                 $http({
                     method: 'post',
-                    url: 'http://10.52.0.87/ProductStroe/api/Upload/ImgUpload',
+                    url: 'http://10.52.0.87/ProductStroe/api/Image/ImgUpload',
                     data:data,
                     headers: {'Content-Type': undefined},
                     transformRequest: angular.identity

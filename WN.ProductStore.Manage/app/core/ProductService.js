@@ -7,12 +7,12 @@ define(function (require) {
             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
         };
 
-        var requestUrl = "http://10.52.0.87/ProductStroe/api/Product";
+        var requestUrl = "http://10.52.0.87/ProductStroe/api";
 
         return {
             //获取商品列表
             getProductList : function() {
-                return $http.get(requestUrl,{
+                return $http.get(requestUrl +'/Product',{
                     params: {
                         pageIndex: 0,
                         pageSize: 10,
@@ -23,7 +23,7 @@ define(function (require) {
 
             //获取商品详细信息
             getProductDetail : function(spid) {
-                return $http.get(requestUrl + "/getproduct",{
+                return $http.get(requestUrl + "/Product/getproduct",{
                     params: {
                         id: spid
                     }
@@ -39,7 +39,19 @@ define(function (require) {
                     headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                     transformRequest: transFn
                 };
-                return $http.post(requestUrl + "/add", product, postCfg);
+                return $http.post(requestUrl + "/Product/add", product, postCfg);
+            },
+
+            //上传图片
+            uploadImg : function (imgs) {
+                var transFn = function (imgs) {
+                    return $.param(imgs);
+                };
+                var postCfg = {
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                    transformRequest: imgs
+                };
+                return $http.post(requestUrl + "/Image/ImgUpload", imgs, postCfg);
             }
         };
     }]);
