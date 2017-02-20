@@ -23,14 +23,15 @@ namespace WN.ProductStore.Controllers
         {
             ProductListView list = new ProductListView();
             List<Product> products = new List<Product>();
+            int startRow = (pageIndex - 1) * pageSize;
             if (!string.IsNullOrEmpty(name))
             {
-                products= db.Product.Where(p => p.Name.Contains(name)).OrderBy(i => i.Id).Skip(pageIndex).Take(pageSize).ToList();
+                products= db.Product.Where(p => p.Name.Contains(name)).OrderBy(i => i.Id).Skip(startRow).Take(pageSize).ToList();
                 list.TotalCount = db.Product.Where(p => p.Name.Contains(name)).Count();
             }
             else
             {
-                products = db.Product.OrderBy(i => i.Id).Skip(pageIndex).Take(pageSize).ToList();
+                products = db.Product.OrderBy(i => i.Id).Skip(startRow).Take(pageSize).ToList();
                 list.TotalCount = db.Product.Count();
             }
 
@@ -39,7 +40,11 @@ namespace WN.ProductStore.Controllers
             return list;
         }
 
-        // GET api/<controller>/5
+        /// <summary>
+        /// 获取产品
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public Product GetProduct(Guid id)
         {
