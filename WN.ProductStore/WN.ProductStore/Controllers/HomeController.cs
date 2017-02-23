@@ -34,7 +34,7 @@ namespace WN.ProductStore.Controllers
             ProductImage img = new ProductImage();
             img.Url = "111111";
             listImg.Add(img);
-            model.ProductImages = listImg;
+            //model.ProductImages = listImg;
             p.Add(model);
         }
     }
