@@ -32,5 +32,12 @@ namespace WN.ProductStore.Controllers
             db.SaveChanges();
             return true;
         }
+
+        public bool DeleteCustomer(Guid id)
+        {
+          var   customer = db.Customer.FirstOrDefault(i => i.Id == id);
+            db.Customer.Remove(customer);
+            return true;
+        }
     }
 }
