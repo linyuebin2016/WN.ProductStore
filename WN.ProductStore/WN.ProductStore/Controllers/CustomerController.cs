@@ -25,19 +25,24 @@ namespace WN.ProductStore.Controllers
             return reslut;
         }
 
-        public bool AddCustomer(Customer customer)
+        public void AddCustomer(Customer customer)
         {
             customer.Id = Guid.NewGuid();
             db.Customer.Add(customer);
             db.SaveChanges();
-            return true;
         }
 
-        public bool DeleteCustomer(Guid id)
+        public void DeleteCustomer(Guid id)
         {
           var   customer = db.Customer.FirstOrDefault(i => i.Id == id);
             db.Customer.Remove(customer);
-            return true;
+        }
+
+        public void Update(Customer customer)
+        {
+            db.Entry(customer).State = System.Data.Entity.EntityState.Modified;
+            db.Customer.Attach(customer);
+            db.SaveChanges();
         }
     }
 }
