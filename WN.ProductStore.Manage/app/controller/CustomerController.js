@@ -55,6 +55,7 @@ define(function (require) {
             $scope.Delete = function (id) {
                 CustomerService.DeleteCustomer(id).success(function (resultJson) {
                     alert(resultJson + "删除成功");
+                     getCustomerList();
                 }).error(function (e) {
                     console.log('系统异常');
                 });

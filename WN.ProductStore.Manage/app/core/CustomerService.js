@@ -1,8 +1,7 @@
 define(function (require) {
-    var angular = require('angular');
-    var app = require('../app.config');
+    var angular = require('angular');    var app = require('../app.config');
     app.service('CustomerService', ['$http', function ($http) {
-        var requestUrl = "http://localhost/ProductStore/api";
+        var requestUrl = "http://192.168.1.111/ProductStore/api";
         var pageSize = 10;
         return {
             GetCustomerList: function (pageIndex, pageSize, queryString) {
