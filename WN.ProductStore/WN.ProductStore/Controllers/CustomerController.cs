@@ -32,9 +32,9 @@ namespace WN.ProductStore.Controllers
             db.SaveChanges();
         }
 
-        public void DeleteCustomer(Guid id)
+        public void DeleteCustomer(string id)
         {
-          var   customer = db.Customer.FirstOrDefault(i => i.Id == id);
+          var   customer = db.Customer.FirstOrDefault(i => i.Id.ToString() == id);
             db.Customer.Remove(customer);
         }
 
