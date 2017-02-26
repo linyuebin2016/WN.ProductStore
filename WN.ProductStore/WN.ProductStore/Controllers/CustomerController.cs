@@ -24,5 +24,13 @@ namespace WN.ProductStore.Controllers
             };
             return reslut;
         }
+
+        public bool AddCustomer(Customer customer)
+        {
+            customer.Id = Guid.NewGuid();
+            db.Customer.Add(customer);
+            db.SaveChanges();
+            return true;
+        }
     }
 }
