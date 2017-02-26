@@ -58,7 +58,21 @@ define(function (require) {
                     product: null,
                     stockId: null
                 }
-            });
+            }).
+            state('customerList', {
+                url: '/customerList',
+                templateUrl: 'views/customer/customerList.html',
+               controllerUrl: 'controller/CustomerController',
+               controller: 'CustomerController',
+                dependencies: ['core/CustomerService']
+            }).
+            state('customerAdd', {
+                url: '/customerAdd',
+                templateUrl: 'views/customer/customer-add-modify.html',
+               controllerUrl: 'controller/CustomerAddController',
+               controller: 'CustomerAddController',
+                dependencies: ['core/CustomerService']
+            })  ;
         }
     ]);
 });
