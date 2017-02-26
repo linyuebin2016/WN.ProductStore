@@ -240,3 +240,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/WN.ProductStore/WN.ProductStore/UpLoadFiles

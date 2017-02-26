@@ -4,8 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json.Serialization;
+
 using System.Web.Http.Cors;
+
 
 namespace WN.ProductStore
 {
@@ -26,9 +27,16 @@ namespace WN.ProductStore
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //config.EnableSystemDiagnosticsTracing();
+            //config.Formatters.JsonFormatter.SerializerSettings preserveReferencesHandling = preserveReferencesHandling.None;
+            //config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            //config.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
+            //config.Formatters.Remove(config.Formatters.XmlFormatter);
+
         }
     }
 }

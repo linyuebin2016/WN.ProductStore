@@ -81,46 +81,30 @@
             </tr>
         </table>
     </div>
-</div>
-<!--预览-->
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
-    <div class="modal-dialog" style="width: 80%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">预览</h4>
-            </div>
-
-
-            <div class="modal-body modal-body-H clearfix">
-                <div class="main-tile clearfix">
-                    <div class="th"><h3>{{collectionDetailsVo.collectionName}}</h3></div>
-                    <div class="pull-left">
-                        <p class="time-tip time-end" style="width:130px;">还有<span ng-class="{'text-red':enrolEndDate<=3}">{{enrolEndDate}}</span>天报名截止</p>
-                        <p class="time-tip time-applied" style="width:130px;">还有<span ng-class="{'text-red':collectionEndDate<=3}">{{collectionEndDate}}</span>天征集截止</p>
+    <section>
+        <div>
+            <form ng-submit="submit_form()">
+                <div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="panel panel-default">
+                            <p class="panel-heading">封面图片</p>
+                            <div class="panel-body gallery" ng-repeat="item in thumb">
+                                <img ng-src="{{item.imgSrc}}" class="img-polaroid">
+                                <div class="clearfix"></div>
+                                <a ng-if="item.imgSrc" ng-click="img_del($index)">删除</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-repeat="item in thumb_default">
+                        <!-- 这里之所以写个循环，是为了后期万一需要多个‘加号’框 -->
+                        <label>
+                            <input type="file" id="one-input" accept="image/*" file-model="images" onchange="angular.element(this).scope().img_upload(this.files)"/>
+                        </label>
                     </div>
                 </div>
-                <!-- main-tile -->
-                <div class="main-content">
-                    <p id="preview-content"></p>
-                    <p class="text-right">{{orgName}} {{currDate}}</p>
-                </div>
-                <!-- main-content -->
-                <div class="main-other">
-                    <p>相关附件（{{collectionDetailsVo.attachmentVo.length + preViewFiles.length}}）</p>
-                    <p ng-repeat="file in collectionDetailsVo.attachmentVo track by file.attachId"><i
-                            class="fa fa-paperclip"></i> {{file.attachName}} {{ file.attachSize | byte }} </p>
-                    <p ng-repeat="file in preViewFiles"><i class="fa fa-paperclip"></i> {{file.fileName}} {{
-                        file.attachSize | byte }} </p>
-                    <div class="line"></div>
-                    <p>负责人（{{collectionDetailsVo.directorList.length}}）</p>
-                    <p>{{directors}}</p>
-                </div>
-            </div>
-            <div class="modal-footer" style="margin-top: 0;">
-                <button type="button" class="vs-bt bt-default" data-dismiss="modal">关闭</button>
-            </div>
+                <p>(*^_^*)请详细描述您的需求，有助于我们快速定位并解决问题，希望我们的产品和服务能得到您的肯定。</p>
+                <input type="submit" name="" value="提 交" />
+            </form>
         </div>
-    </div>
+    </section>
 </div>

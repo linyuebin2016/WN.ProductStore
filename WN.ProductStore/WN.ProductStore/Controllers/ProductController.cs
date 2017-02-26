@@ -22,15 +22,16 @@ namespace WN.ProductStore.Controllers
         public ProductListView GetProductList(int pageIndex, int pageSize, string name)
         {
             ProductListView list = new ProductListView();
-            List<Product> products = new List<Product>();
+            List<Product> products;
+            
             if (!string.IsNullOrEmpty(name))
             {
-                products= db.Product.Where(p => p.Name.Contains(name)).OrderBy(i => i.Id).Skip(pageIndex).Take(pageSize).ToList();
+                products= db.Product.Where(p => p.Name.Contains(name)).OrderBy(i => i.Id).ToPage<Product>(pageIndex, pageSize).ToList();
                 list.TotalCount = db.Product.Where(p => p.Name.Contains(name)).Count();
             }
             else
             {
-                products = db.Product.OrderBy(i => i.Id).Skip(pageIndex).Take(pageSize).ToList();
+                products = db.Product.OrderBy(i => i.Id).ToPage<Product>(pageIndex, pageSize).ToList();
                 list.TotalCount = db.Product.Count();
             }
 
@@ -39,16 +40,19 @@ namespace WN.ProductStore.Controllers
             return list;
         }
 
-        // GET api/<controller>/5
+        /// <summary>
+        /// 获取产品
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
-        public ProductView GetProduct(Guid id)
+        public Product GetProduct(Guid id)
         {
-            var view = new ProductView();
+            //var view = new ProductView();
             var images = db.ProductImage.Where(i => i.ProductId == id).ToList();
             var product = db.Product.FirstOrDefault(i => i.Id == id);
-            view.Product = product;
-            view.ProductImage = images;
-            return view;
+            //product.ProductImages = images;
+            return product;
         }
 
         // PUT api/<controller>/5
@@ -61,19 +65,31 @@ namespace WN.ProductStore.Controllers
             db.SaveChanges();
         }
 
-        //[HttpPost]
-        //public void Update(Product product)
-        //{
-        //    db.Entry(product).State = System.Data.Entity.EntityState.Modified;
-        //    db.Product.Attach(product);
-        //    db.SaveChanges();
-        //}
+        [HttpPost]
+        public void Update(Product product)
+        {
+            db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+            db.Product.Attach(product);
+            db.SaveChanges();
+        }
 
         // DELETE api/<controller>/5
         public void Delete(Guid id)
         {
             var product = db.Product.FirstOrDefault(i => i.Id == id);
             db.Product.Remove(product);
+            db.SaveChanges();
+        }
+
+        public void DeleteProductImage(Guid[] imageIds)
+        {
+            foreach (var item in imageIds)
+            {
+                var image = db.ProductImage.FirstOrDefault(i => i.Id == item);
+                String dirTempPath = HttpContext.Current.Server.MapPath("~"+ image.Url);
+                File.Delete(dirTempPath);
+                db.ProductImage.Remove(image);
+            }
             db.SaveChanges();
         }
     }
