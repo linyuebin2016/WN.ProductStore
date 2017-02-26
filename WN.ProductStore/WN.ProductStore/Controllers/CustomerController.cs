@@ -24,7 +24,7 @@ namespace WN.ProductStore.Controllers
             };
             return reslut;
         }
-
+        [HttpPost]
         public void AddCustomer(Customer customer)
         {
             customer.Id = Guid.NewGuid();
