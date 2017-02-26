@@ -32,12 +32,16 @@ namespace WN.ProductStore.Controllers
             db.SaveChanges();
         }
 
+        //[HttpDelete]
+        [HttpGet]
         public void DeleteCustomer(string id)
         {
           var   customer = db.Customer.FirstOrDefault(i => i.Id.ToString() == id);
             db.Customer.Remove(customer);
+            db.SaveChanges();
         }
 
+        [HttpPost]
         public void Update(Customer customer)
         {
             db.Entry(customer).State = System.Data.Entity.EntityState.Modified;
