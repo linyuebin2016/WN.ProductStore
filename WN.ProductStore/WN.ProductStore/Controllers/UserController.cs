@@ -31,13 +31,13 @@ namespace WN.ProductStore.Controllers
             db.User.Add(user);
             db.SaveChanges();
         }
-
+        [HttpGet]
         public void DeleteCustomer(Guid id)
         {
             var customer = db.User.FirstOrDefault(i => i.Id == id);
             db.User.Remove(customer);
         }
-
+        [HttpPost]
         public void Update(User user)
         {
             db.Entry(user).State = System.Data.Entity.EntityState.Modified;
