@@ -1,0 +1,481 @@
+.channel-sideBar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 60px;
+    width: 240px;
+    padding: 0;
+    border-right: 1px solid #c8cbcc;
+    background-color: rgba(44, 44, 44, 1);
+
+    overflow-y: hidden;
+}
+
+.channel-topInfoBar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 300px;
+    z-index: 99;
+    padding: 8px 16px;
+    border-bottom: 1px solid #d9d9d9;
+    background-color: #fff;
+    -webkit-box-shadow: 0 1px 1px #d9d9d9;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.channel-topInfoBar .title {
+    max-width: 400px;
+}
+
+.channel-item-card {
+    display: inline-block;
+    width: 274px;
+    margin-right: 11px;
+    border-radius: 2px;
+}
+
+/**********PC端资讯号卡片**********/
+.channelPC-item-card {
+    display: inline-block;
+    width: 264px;
+    margin-right: 11px;
+    border-radius: 2px;
+}
+
+.channel-item-card:hover {
+    -webkit-box-shadow: 0 6px 10px rgba(0, 0, 0, .23), 0 10px 30px rgba(0, 0, 0, .19);
+       -moz-box-shadow: 0 6px 10px rgba(0, 0, 0, .23), 0 10px 30px rgba(0, 0, 0, .19);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, .23), 0 10px 30px rgba(0, 0, 0, .19);
+}
+
+.channel-detail-title {
+    padding: 32px 0;
+    text-align: left;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+.channel-detail-author {
+    padding-bottom: 16px;
+    text-align: left;
+}
+
+.channel-detail-info {
+    padding: 32px 0 32px 0;
+    border-top: 1px solid #d9d9d9;
+    line-height: 30px;
+}
+
+.channel-detail-info p {
+    margin: 0;
+}
+
+.channel-detail-info img {
+    max-width: 100%;
+}
+
+.channel-detail-praise {
+    padding-top: 12px;
+    padding-right: 125px;
+}
+
+.channel-detail-preAndNext {
+    padding: 16px 0;
+    border: 1px solid #d9d9d9;
+    border-right: 0;
+    border-left: 0;
+}
+
+.channel-detail-commentList {
+    padding: 28px 0 16px 0;
+}
+
+.channel-detail-reply {
+    padding: 0 0 5px 0;
+}
+
+/*资讯详情*/
+.channel-detail-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.channel-detail-praiseBtn {
+    margin-top: -9px;
+    background: url("../images/channel/article_zan_n.png") no-repeat 0 0;
+}
+
+.channel-detail-praiseBtn:hover,
+.channel-detail-praiseBtnMark {
+    margin-top: -9px;
+    background: url("../images/channel/article_zan_p.png") no-repeat 0 0;
+}
+
+.channel-detail-commentCount {
+    background: url("../images/channel/article_message_n.png") no-repeat 0 0;
+}
+
+/*.channel-detail-commentCount:hover{*/
+/*background: url("../images/channel/article_message_p.png") no-repeat 0 0;*/
+/*}*/
+
+/*咨询列表项*/
+.channel-item-icon {
+    position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.channel-item-icon .thunb_up {
+    position: absolute;
+    left: 4px;
+    font-size: 14px;
+    color: rgb(0, 140, 238);
+}
+
+.channel-item-commentCount {
+    background: url("../images/channel/message_n.png") no-repeat 0 0;
+}
+
+.channel-item-commentCount:hover,
+.channel-comment-reply:hover .channel-item-commentCount {
+    background: url("../images/channel/message_p.png") no-repeat 0 0;
+}
+
+.channel-item-praiseBtn {
+    margin-top: -3px;
+    background: url("../images/channel/zan_n.png") no-repeat 0 0;
+}
+
+.channel-item-praiseBtn:hover,
+.channel-item-praiseBtnMark {
+    margin-top: -3px;
+    background: url("../images/channel/zan_p.png") no-repeat 0 0;
+}
+
+.channel-preOrNextItem {
+    color: #333;
+    cursor: pointer;
+}
+
+.channel-item-list-none {
+    padding-top: 200px;
+    padding-left: 17%;
+    font-size: 26px;
+    color: #666;
+}
+
+.channel-detail-commentTdImg {
+    width: 40px;
+    padding-top: 5px;
+    vertical-align: top;
+}
+
+.channel-detail-contentTdImg {
+    padding-bottom: 25px;
+    padding-left: 13px;
+}
+
+.channel-sideBar-li {
+    padding: 11px 16px;
+    word-break: break-all;
+    cursor: pointer;
+}
+
+.channel-sideBar-li.active .badge {
+    color: #d84315 !important;
+    background-color: #fff;
+}
+
+.channel-sideBar-li .badge {
+    padding: 3px 6px;
+    font-weight: normal;
+    background: #d84c31;
+}
+
+.preAndNextTd {
+    padding-left: 13px;
+    font-size: 13px;
+    color: #333;
+}
+
+.channel-item-title {
+    max-width: 180px;
+    margin-top: 12px;
+    line-height: 1.4em;
+}
+
+.channel-item-description {
+    width: 100%;
+    max-height: 50px;
+    padding: 8px 0;
+    line-height: 21px;
+    overflow: hidden;
+}
+
+.channel-comment-block {
+    position: relative;
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.channel-comment-block:hover,
+.channel-comment-block:hover:before {
+    background-color: #fafafa;
+}
+
+.channel-comment-block:before {
+    position: absolute;
+    top: 23px;
+    right: auto;
+    bottom: auto;
+    left: -5px;
+    z-index: 2;
+    width: .6em;
+    height: .6em;
+    margin-top: -11px;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    background-color: #fff;
+    content: "";
+
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+    -webkit-transition: background .1s linear;
+       -moz-transition: background .1s linear;
+            transition: background .1s linear;
+}
+
+.channel-detail-fileList {
+    padding: 0 0 21px 0;
+}
+
+.channel-info-items > span {
+    padding-right: 6px;
+}
+
+.turnBackbtn {
+    width: 61px;
+    height: 30px;
+    padding-left: 9px;
+    line-height: 30px;
+    text-align: center;
+    background: url("../images/channel/btn_back_nomal.png") no-repeat 0 0;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.turnBackbtn:focus {
+    background: url("../images/channel/btn_back_focus.png") no-repeat 0 0;
+}
+
+.turnBackbtn:disabled {
+    background: url("../images/channel/btn_back_disable.png") no-repeat 0 0;
+}
+
+.turnBackbtn:hover {
+    background: url("../images/channel/btn_back_over.png") no-repeat 0 0;
+}
+
+.channel-list-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 300px;
+    background-color: #ececec;
+}
+
+/*设置不同屏幕尺寸下的列表容器大小*/
+
+.channel-list-box {
+    min-width: 586px;
+    margin: 0 auto;
+    padding-left: 11px;
+
+       -moz-transition: all .7s ease-in-out;
+    -webkit-transition: all .7s ease-in-out;
+         -o-transition: all .7s ease-in-out;
+            transition: all .7s ease-in-out;
+}
+
+@media screen and (min-width: 1024px) {
+    .channel-list-box {
+        width: 586px; /**2列卡片：286*2+12=584 **/
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    /** 1310 = 1024+ 286 以此类推**/
+    .channel-list-box {
+        width: 872px; /**3列卡片：286*3+12=870 **/
+    }
+}
+
+@media screen and (min-width: 1596px) {
+    .channel-list-box {
+        width: 1158px; /**4列卡片：286*4+12=1156 **/
+    }
+}
+
+@media screen and (min-width: 1882px) {
+    .channel-list-box {
+        width: 1444px; /**5列卡片：286*5+12=1442 **/
+    }
+}
+
+/**********PC端资讯号卡片列表**********/
+.channelPC-list-box {
+    min-width: 586px;
+    margin: 0 auto;
+    padding-left: 11px;
+
+       -moz-transition: all .7s ease-in-out;
+    -webkit-transition: all .7s ease-in-out;
+         -o-transition: all .7s ease-in-out;
+            transition: all .7s ease-in-out;
+}
+
+/**********PC端资讯号卡片**********/
+@media screen and (min-width: 748px) {
+    .channelPC-list-box {
+        width: 566px; /**2列卡片：276*2+12=564 **/
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    /** 1304 = 1024 + 276 以此类推**/
+    .channelPC-list-box {
+        width: 842px; /**3列卡片：276*3+12=840 **/
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .channelPC-list-box {
+        width: 1118px; /**4列卡片：276*4+12=1116 **/
+    }
+}
+
+@media screen and (min-width: 1576px) {
+    .channelPC-list-box {
+        width: 1394px; /**5列卡片：276*5+12=1392 **/
+    }
+}
+
+@media screen and (min-width: 1852px) {
+    .channelPC-list-box {
+        width: 1670px; /**6列卡片：276*6+12=1668 **/
+    }
+}
+
+.channel-list-content {
+    position: absolute;
+    top: 62px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-height: 100%;
+
+    overflow-y: auto;
+}
+
+.channel-view-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 270px;
+    background-color: #fff;
+}
+
+.channel-view-content {
+    position: absolute;
+    top: 56px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-height: 100%;
+
+    overflow-y: auto;
+    -webkit-user-select: text;
+}
+
+.channel-view-content .share-listview:hover {
+    color: #888;
+    cursor: pointer;
+}
+
+.channel-view-content .share-listview {
+    width: 60px;
+    height: 50px;
+    color: #666;
+}
+
+.channel-list-box .searchInput {
+    width: 274px;
+    margin-top: 32px;
+    margin-bottom: 20px;
+}
+
+/**********PC端资讯号列表搜索框**********/
+.channelPC-list-box .searchInput {
+    width: 264px;
+    margin-top: 32px;
+    margin-bottom: 20px;
+}
+
+.comment-content {
+    margin: 0;
+    padding-top: 4px;
+    word-break: break-all;
+    overflow: hidden;
+
+    -webkit-user-select: text;
+}
+
+.channel-detail-reply .fc-editor-content {
+    border: 1px solid #ccc;
+}
+
+.channel-comment-reply:hover {
+    color: #008cee;
+}
+
+.channel-comment-reply {
+    float: right;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.channel-comment-reply > span {
+    margin-right: 4px;
+}
+
+/******************************
+ *          PC端-资讯号
+ ******************************/
+.channel-sideBar-left {
+    left: 0;
+    width: 190px;
+}
+
+.channel-topInfoBar-left,
+.channel-list-bg-left,
+.channel-view-bg-left {
+    left: 190px;
+}
+
+.channel-list-bg-left {
+    left: 190px;
+}

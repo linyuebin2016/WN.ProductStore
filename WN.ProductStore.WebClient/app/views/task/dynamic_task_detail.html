@@ -1,0 +1,106 @@
+<div data-ng-controller="DynamicTaskDetailController" class="articleBg">
+    <article class="weui_article">
+        <h1>{{task.taskName}}</h1>
+        <p class="fs12 text-muted" style="margin:0;">
+            <span class="mr20">
+                <fc-user-image-for-wx user-id="task.createUserId" user-name="task.createUserName"
+                                      image-type="1"></fc-user-image-for-wx>
+            </span>
+            <span>{{task.createDate | date:'yyyy-MM-dd'}}</span>
+        </p>
+    </article>
+
+    <div class="weui_cells fs14" style="margin-top: 0;">
+        <div class="weui_cell">
+            <div data-ng-if="!task.voteState" class="weui_cell_bd weui_cell_primary">
+                <p>报名截止时间</p>
+            </div>
+            <div data-ng-if="!task.voteState && !task.enrollEndState" class="weui_cell_ft">{{task.enrollEndDate |
+                date:'yyyy-MM-dd'}}
+            </div>
+            <div data-ng-if="!task.voteState && task.enrollEndState" class="weui_cell_ft">报名已截止</div>
+
+            <div data-ng-if="task.voteState" class="weui_cell_bd weui_cell_primary">
+                <p>投票截止时间</p>
+            </div>
+            <div data-ng-if="task.voteState && !task.enrollEndState" class="weui_cell_ft">{{task.enrollEndDate |
+                date:'yyyy-MM-dd'}}
+            </div>
+            <div data-ng-if="task.voteState && task.enrollEndState" class="weui_cell_ft">投票已截止</div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>奖励积分</p>
+            </div>
+            <div class="weui_cell_ft color-warning">{{task.taskIntegral}}积分</div>
+        </div>
+    </div>
+    <!-- weui_cells -->
+
+    <article class="weui_article">
+        <section>
+            <div data-ng-bind-html="task.taskContent"></div>
+        </section>
+
+        <h3 data-ng-if="task.attachment.length>0">附件</h3>
+        <p data-ng-if="task.attachment.length>0" ng-repeat="attach in task.attachment">
+            <a href="javascript:;">{{attach.attachName}}</a>
+        </p>
+        <div class="line"></div>
+        <h3 data-ng-if="task.directorsName.length>0">负责人（{{task.directorsName.length}}）：</h3>
+        <p data-ng-if="task.directorsName.length>0">
+            <span ng-repeat="director in task.directorsName">{{director}}&nbsp;&nbsp;</span>
+        </p>
+        <h3 data-ng-if="!task.voteState && task.taskUsersName.length>0">报名（{{task.taskUsersName.length}}）：</h3>
+        <p data-ng-if="!task.voteState && task.taskUsersName.length>0">
+            <span ng-repeat="taskUser in task.taskUsersName">{{taskUser}}&nbsp;&nbsp;</span>
+        </p>
+        <!-- 问卷 -->
+        <div data-ng-if="task.voteState">
+            <div class="weui_cells_title">投票（{{task.voteTypeName}}）
+                <div class="pull-right">已投票 <span class="color-primary">{{task.voteFillCount}}</span> 人</div>
+            </div>
+            <div data-ng-if="task.voteType == 0" class="weui_cells weui_cells_radio weui_cells_tuopiao">
+                <label data-ng-repeat="item in task.voteItem" class="weui_cell weui_check_label">
+                    <div class="weui_cell_hd" style="padding-right:10px;">
+                        <input type="radio" name="{{task.taskId}}" class="weui_check" disabled>
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>{{item.itemOptionsName}}</p>
+                    </div>
+                    <div class="weui_cell_ft">{{item.votePercentage}}</div>
+                </label>
+            </div>
+            <div data-ng-if="task.voteType == 1" class="weui_cells weui_cells_checkbox weui_cells_tuopiao">
+                <label data-ng-repeat="item in task.voteItem" class="weui_cell weui_check_label">
+                    <div class="weui_cell_hd" style="padding-right:10px;">
+                        <input type="checkbox" name="{{task.taskId}}" class="weui_check" disabled>
+                        <i class="weui_icon_checked"></i>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>{{item.itemOptionsName}}</p>
+                    </div>
+                    <div class="weui_cell_ft">{{item.votePercentage}}</div>
+                </label>
+            </div>
+        </div>
+        <!-- 问卷 -->
+        <div class="h60"></div>
+        <!--<div>-->
+        <!--<a href="" ng-click="taskPraise(task)" ng-class="{true:'icon-btn-big active',false:'icon-btn-big'}[task.praiseState]" title="赞">-->
+        <!--<i class="icon icon-zan"></i>{{task.praiseCount}}-->
+        <!--</a>-->
+        <!--<a href="" ng-click="attentionTask(task)" ng-class="{true:'icon-btn-big active',false:'icon-btn-big'}[task.attentionState]" title="关注">-->
+        <!--<i class="icon icon-gz"></i>{{task.attentionCount}}-->
+        <!--</a>-->
+        <!--</div>-->
+    </article>
+    <fc-comment-for-wx ng-if="task.taskId" context-id="task.taskId" context-type="3"
+                       context-create-user-id="task.createUserId" enable-adopt="0"
+                       enable-readonly="0"
+                       praise-count="task.praiseCount" praise-state="task.praiseState"
+                       attention-count="task.attentionCount"
+                       attention-state="task.attentionState"></fc-comment-for-wx>
+
+</div>

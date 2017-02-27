@@ -1,0 +1,87 @@
+﻿
+<div class="pager-top-fixed" data-ng-controller="NoticeController">
+    <div class="publish_book_wrap header-tool">
+        <span class="top-btn top-btn-back"></span>
+        <h3>通知</h3>
+        <!-- <span class="top-btn"></span> -->
+        <!-- 输入内容后，给 top-btn 这个追加active -->
+    </div>
+    <div class="notice_collection">
+
+
+        <div class="weui_cells weui_cells_access" style="margin-top: 5px;">
+            <div data-ng-repeat="c in noticeTypeList">
+                <a class="weui_cell" href="" data-ng-click="goToNoticeItem(c.categoryId ,c.categoryName)">
+                    <div class="weui_cell_hd"><img src="images/m/notice_{{c.iconUrl}}.png" alt="" width="40"></div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>{{c.categoryName}}</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <span class="notice_number" data-ng-if="c.count>0">{{c.count}}</span>
+                    </div>
+                </a>
+
+            </div>
+            <!--<a class="weui_cell" href="" data-ng-click="goToNoticeItem(c.categoryId,c.iconUrl)">-->
+                <!--<div class="weui_cell_hd"><img src="images/m/notice_3.png" alt="" width="40"></div>-->
+                <!--<div class="weui_cell_bd weui_cell_primary">-->
+                    <!--<p>评论</p>-->
+                <!--</div>-->
+                <!--<div class="weui_cell_ft">-->
+                    <!--&lt;!&ndash; <span class="notice_number">12</span> &ndash;&gt;-->
+                <!--</div>-->
+            <!--</a>-->
+            <!--<a class="weui_cell" href="" data-ng-click="goToNoticeItem(c.categoryId,c.iconUrl)">-->
+                <!--<div class="weui_cell_hd"><img src="images/m/notice_4.png" alt="" width="40"></div>-->
+                <!--<div class="weui_cell_bd weui_cell_primary">-->
+                    <!--<p>赞</p>-->
+                <!--</div>-->
+                <!--<div class="weui_cell_ft">-->
+                    <!--&lt;!&ndash; <span class="notice_number">12</span> &ndash;&gt;-->
+                <!--</div>-->
+            <!--</a>-->
+            <!--<a class="weui_cell" href="" data-ng-click="goToNoticeItem(c.categoryId,c.iconUrl)">-->
+                <!--<div class="weui_cell_hd"><img src="images/m/notice_5.png" alt="" width="40"></div>-->
+                <!--<div class="weui_cell_bd weui_cell_primary">-->
+                    <!--<p>关注</p>-->
+                <!--</div>-->
+                <!--<div class="weui_cell_ft">-->
+                    <!--<span class="notice_number">12</span>-->
+                <!--</div>-->
+            <!--</a>-->
+            <!--<a class="weui_cell" href="" data-ng-click="goToNoticeItem(c.categoryId,c.iconUrl)">-->
+                <!--<div class="weui_cell_hd"><img src="images/m/notice_6.png" alt="" width="40"></div>-->
+                <!--<div class="weui_cell_bd weui_cell_primary">-->
+                    <!--<p>积分</p>-->
+                <!--</div>-->
+                <!--<div class="weui_cell_ft">-->
+                    <!--&lt;!&ndash; <span class="notice_number">12</span> &ndash;&gt;-->
+                <!--</div>-->
+            <!--</a>-->
+
+            <!--<a class="weui_cell" href="" data-ng-click="goToNoticeItem(c.categoryId,c.iconUrl)">-->
+                <!--<div class="weui_cell_hd"><img src="images/m/notice_2.png" alt="" width="40"></div>-->
+                <!--<div class="weui_cell_bd weui_cell_primary">-->
+                    <!--<p>红包</p>-->
+                <!--</div>-->
+                <!--<div class="weui_cell_ft">-->
+                    <!--&lt;!&ndash; <span class="notice_number">12</span> &ndash;&gt;-->
+                <!--</div>-->
+            <!--</a>-->
+
+            <!--<a class="weui_cell" href="" data-ng-click="goToNoticeItem(c.categoryId,c.iconUrl)">-->
+                <!--<div class="weui_cell_hd"><img src="images/m/notice_2.png" alt="" width="40"></div>-->
+                <!--<div class="weui_cell_bd weui_cell_primary">-->
+                    <!--<p>打赏</p>-->
+                <!--</div>-->
+                <!--<div class="weui_cell_ft">-->
+                    <!--<span class="notice_number">12</span>-->
+                <!--</div>-->
+            <!--</a>-->
+
+        </div>
+
+
+
+    </div>
+</div>

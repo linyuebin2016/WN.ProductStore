@@ -1,0 +1,40 @@
+<div data-ng-controller="mChannelItemDetailController" class="articleBg">
+    <div class="publish_book_wrap header-tool">
+        <span class="top-btn top-btn-back" onclick="window.history.back()"></span>
+        <h3>{{item.groupName}}</h3>
+ 
+        <!-- <span class="top-btn"></span> -->
+        <!-- 输入内容后，给 top-btn 这个追加active -->
+    </div>
+    <article class="weui_article">
+        <section>
+            <h1>{{item.title}}</h1>
+            <p class="fs12 text-muted" style="margin:0;"><span class="mr20">{{item.groupName}}</span><span>{{ item.createTime | date: 'MM月dd日' }}</span>
+            </p>
+            <p>
+                <img ng-src="{{::baseUrl}}fileUploadController/showPic/{{item.picId}}">
+            </p>
+            <p class="fs12 text-muted">{{item.description}}</p>
+            <div class="fs12 text-muted">
+                <span class="mr20">阅读{{ item.readCount +1}}</span>
+                <!--<a href="javascript:;" class="ico-btn" ng-class="{'active':item.praiseFlag}" title="赞"-->
+                <!--ng-click="itemAssist()"><i class="ico ico-up"></i>{{item.praiseCount}}</a>-->
+            </div>
+            <div class="line-lrs" ng-if="item.attachmentVoList.length>0">
+                <div class="line-l"></div>
+                <div class="line-c fs12 text-muted">附件</div>
+                <div class="line-l"></div>
+            </div>
+            <div class="weui_panel weui_panel_none weui_panel_access">
+                <a ng-repeat="attach in item.attachmentVoList" class="weui_panel_ft" href="javascript:;">
+                    <i class="ico-attachment"></i>
+                    <span class="mr20" ng-click="attachView(attach)">{{attach.attachName}}</span>
+                    <span>{{attach.attachSize | byte}}</span>
+                </a>
+            </div>
+        </section>
+    </article>
+    <fc-a-reward ng-if="item.groupName" context-id="item.topicItiemId" reward-user="item.createUserId" context-type="2"></fc-a-reward>
+    <fc-comment-for-wx ng-if="item.topicItiemId" context-id="item.topicItiemId" context-type="2" context-create-user-id="item.createUserId"
+        enable-adopt="0" enable-readonly="0" praise-count="item.praiseCount" praise-state="item.praiseFlag"></fc-comment-for-wx>
+</div>

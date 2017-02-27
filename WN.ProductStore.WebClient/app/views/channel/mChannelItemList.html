@@ -1,0 +1,48 @@
+<div class="container-fluid" data-ng-controller="mChannelItemListController" fc-infinite-scroll="scrollHandler" target="window">
+
+       <div class="publish_book_wrap header-tool">
+        <span class="top-btn top-btn-back" onclick="window.history.back()"></span>
+        <h3>{{channelVo.groupName}}   </h3>
+        <!-- <span class="top-btn"></span> -->
+        <!-- 输入内容后，给 top-btn 这个追加active -->
+    </div>
+    
+    <div data-ng-repeat="item in groupItem.itemList">
+        <div class="time-pos-c">
+            <span class="time-line-pos">{{item.createTime|date:'yyyy-MM-dd hh:mm'}}</span>
+        </div>
+        <article class="weui_article weui_article_2">
+            <section></section>
+            <a href="" ng-click="goItemDetail(item)">
+                <h1>{{item.title}}</h1>
+                <p class="fs12 text-muted" style="margin:0;"><span class="mr20">{{item.groupName}}</span><span class="mr20">{{item.createTime|date:'yyyy年MM月dd日'}}</span><span>阅读{{item.readCount}}</span></p>
+                <p>
+                    <img ng-src="{{::baseUrl}}fileUploadController/showPic/{{item.picId}}">
+                </p>
+                <p class="fs12 text-muted">{{item.description}}</p>
+            </a>
+            <div class="line"></div>
+            <div class="zan-pl-box">
+                <a href="javascript:;" ng-class="{1:'ico-btn active',0:'ico-btn'}[item.praiseFlag]" title="赞" data-ng-click="itemAssist(item)"><i class="ico ico-up"></i>{{item.praiseCount}}</a>
+                <div class="zan-user-list text-muted" ng-click="goPariseDetail(item)"><span ng-repeat="user in item.latetestPraiseUser">{{user.userName}}</span></div>
+            </div>
+            <!--<div class="zan-pl-box">
+                    <a href="#" class="ico-btn" title="关注"><i class="ico ico-heart"></i>10</a>
+                </div>-->
+            </section>
+        </article>
+    </div>
+
+    <div class="weui_msg" ng-if="groupItem.itemList.length==0" style="margin-top:50px;">
+      <div class="weui_icon_area"><img src="../../images/m/no-text.png" width="150"></div>
+      <div class="weui_text_area">
+        <h2 class="weui_msg_title"></h2>
+        <p class="weui_msg_desc">暂时没有内容，去其他地方逛逛</p>
+      </div>
+    </div>
+
+    <div class="h60"></div>
+    <footer class="footer-fixed">
+        <a href="" ng-click="goChannelDetail()" id='show-confirm' class="weui_btn weui_btn_default">查看资讯号详情</a>
+    </footer>
+</div>

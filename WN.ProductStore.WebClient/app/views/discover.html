@@ -1,0 +1,129 @@
+<!-- weui_panel -->
+<div class="weui_tab page-ptr-navbar pager-top-fixed" style="padding-top: 0" data-ng-controller="DiscoverController">
+    <div class="weui_navbar top-fixed" style="top: 0">
+        <a class="weui_navbar_item" ng-class="{'weui_bar_item_on':tabIndex==1}" data-ng-click="tabIndex=1">
+          资讯号
+        </a>
+        <a class="weui_navbar_item" ng-class="{'weui_bar_item_on':tabIndex==2}" data-ng-click="tabIndex=2">
+          好书
+        </a>
+        <a class="weui_navbar_item" ng-class="{'weui_bar_item_on':tabIndex==3}" data-ng-click="tabIndex=3">
+          九三之声
+        </a>
+    </div>
+    <div class="weui_tab_bd" style="margin-top: 25px;">
+        <!-- tab1 -->
+        <div id="tab1" class="weui_tab_bd_item " ng-class="{'weui_tab_bd_item_active':tabIndex==1}">
+            <div class="weui_panel weui_panel_access" ng-if="manageList.length>0">
+                <div class="weui_panel_bd">
+                    <div class="weui_media_box weui_media_text">
+                        <h4 class="weui_media_title">我管理的资讯号</h4>
+                        <div class="weui_media_desc">
+                            <ul class="show-gallery">
+                                <li ng-repeat="item in manageList" ng-click="goChannelItemList(item)">
+                                    <img ng-src="{{::baseUrl}}fileUploadController/showPic/{{item.picId}}" alt="">
+                                    <p class="gallery-title">{{item.groupName}}</p>
+                                    <div class="gallery-num">
+                                        <p>资讯：{{item.itemTotal}}</p>
+                                        <p>关注：{{item.contractUserTotal}}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- panel1 END-->
+            <!-- panel2 -->
+            <div class="weui_panel weui_panel_access">
+                <div class="weui_panel_bd">
+                    <div class="weui_media_box weui_media_text">
+                        <div class="weui_cell" style="padding: 0">
+                            <h4 class="gallery-title weui_media_title weui_cell_bd weui_cell_primary"><span class="">我关注的资讯号</span></h4>
+                            <a href="" class="weui_cell_ft gallery-more" ng-click="goChannelAttentionMore()">更多 ></a>
+                        </div>
+                        <div class="weui_media_desc" >
+                            <ul class="show-gallery">
+                                <li ng-repeat="attention in attentionList" ng-click="goChannelItemList(attention)">
+                                    <img ng-src="{{::baseUrl}}fileUploadController/showPic/{{attention.picId}}"  alt="">
+                                    <p class="gallery-title">{{attention.groupName}}</p>
+                                    <div class="gallery-num">
+                                        <p>资讯：{{attention.itemTotal}}</p>
+                                        <p>关注：{{attention.contractUserTotal}}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- panel2 END-->
+            <!-- panel3 -->
+            <div class="weui_panel weui_panel_access my_at_news">
+              <div class="weui_panel_bd">
+                <div class="weui_media_box weui_media_text">
+                  <div class="weui_cell" style="padding: 0">
+                    <h4 class="gallery-title weui_media_title weui_cell_bd weui_cell_primary"><span>我关注的资讯动态</span></h4>
+                    <a href="" class="weui_cell_ft gallery-more" ng-click="goChannelAttentionMore()">更多 ></a>
+                  </div>
+                  <div class="weui_media_desc">
+                    <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg" ng-click="goChannelItemList(attention)" ng-repeat="attention in attentionList">
+                      <div class="weui_media_bd">
+                        <h4 class="weui_media_title">{{attention.recentItemTitle}}</h4>
+                        <p class="weui_media_desc">{{attention.description}}</p>
+                      </div>
+                      <div class="weui_media_hd">
+                        <img width="131" height="72" class="weui_media_appmsg_thumb" ng-src="{{::baseUrl}}fileUploadController/showPic/{{attention.recentItemPicId}}" alt="{{attention.recentItemTitle}}">
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- panel3 END-->
+            <!-- panel4 -->
+            <div class="weui_panel weui_panel_access">
+                <div class="weui_panel_bd">
+                    <div class="weui_media_box weui_media_text">
+                        <div class="weui_cell" style="padding: 0">
+                            <h4 class="gallery-title weui_media_title weui_cell_bd weui_cell_primary"><span class="">我可能感兴趣的资讯号</span></h4>
+                            <a href="" class="weui_cell_ft gallery-more" ng-click="goChannelRecommend()">更多 ></a>
+                        </div>
+                        <div class="weui_media_desc">
+                            <ul class="show-gallery">
+                                <li ng-repeat="c in channelRecommends" ng-click="subscribeChannel(c.groupId)" >
+                                    <img ng-src="{{::baseUrl}}fileUploadController/showPic/{{c.picId}}" alt=""  >
+                                    <p class="gallery-title"  >{{c.groupName}}</p>
+                                    <div class="gallery-num"  >
+                                        <p>资讯：{{c.itemTotal}}</p>
+                                        <p>关注：{{c.contractUserTotal}}</p>
+                                    </div>
+                                    <!--<div class="gallery_att_btn">
+                                        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary">关注</a>
+                                    </div>-->
+                                </li>
+                              
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- panel4 END-->
+        </div>
+        <!-- tab1 END -->
+        <!-- tab2 -->
+        <div id="tab2" class="weui_tab_bd_item" ng-class="{'weui_tab_bd_item_active':tabIndex==2}">
+            <fc-book-home></fc-book-home>
+        </div>
+        <!-- tab2 END -->
+        <!-- tab3 -->
+        <!--<div id="tab3" class="weui_tab_bd_item">
+            <div class="weui_panel weui_panel_access">
+                <div class="weui_panel_bd">
+                    3
+                </div>
+            </div>
+        </div>-->
+        <!-- tab3 END -->
+    </div>
+</div>

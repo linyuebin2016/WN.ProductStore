@@ -1,0 +1,38 @@
+<div class="weui_panel weui_panel_access" style="margin-bottom: 52px;" data-ng-controller="BookController" fc-infinite-scroll="scrollHandler" target="window" >
+    <div class="sorting-box">
+        <a href="javascript:;" data-ng-class="{'active':sort.orders==1}" ng-click="sortBy(sorts[1])">点赞最多</a>
+        <a href="javascript:;" data-ng-class="{'active':sort.orders==2}" ng-click="sortBy(sorts[2])">评论最多</a>
+        <a href="javascript:;" data-ng-class="{'active':sort.orders==0}" ng-click="sortBy(sorts[0])">最新推荐</a>
+    </div>
+    <div class="weui_panel_bd">
+        <a ng-repeat="book in BookList" class="weui_media_box weui_media_appmsg" data-ng-click="queryItemById(book)">
+            <div class="weui_media_hd" style="width: 60px;height: 80px;">
+                <img class="weui_media_appmsg_thumb" ng-src="{{::baseUrl}}fileUploadController/showPic/{{book.goodBookSmallPicId}}" alt="" style="width: 60px;height: 80px;">
+            </div>
+            <div class="weui_media_bd">
+                <h4 class="weui_media_title">{{book.goodBookName}}</h4>
+                <div class="weui-book">
+                    <div class="weui-book-l" style="width: 22px;height: 22px;">
+                        <img ng-if="!book.createUserPicId" class="weui_media_appmsg_thumb" src="images/user-def.png"/>
+                        <img ng-if="book.createUserPicId" class="weui_media_appmsg_thumb" ng-src="{{::baseUrl}}fileUploadController/showPic/{{book.createUserPicId}}"/>
+                    </div>
+                    <div class="weui-book-c">
+                        <span>{{book.createUserName}}</span>推荐
+                    </div>
+                    <div class="weui-book-r">
+                        <span class="tips-time">
+                            <img ng-if="!book.userPraiseState" src="images/m/icon-zan.png">
+                            <img ng-if="book.userPraiseState" src="images/m/icon-zan-active.png">{{book.praiseCount}}
+                        </span>
+                        <span class="tips-time">
+                            <img src="images/m/icon-pl.png">{{book.replyCount}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <footer class="footer-fixed">
+        <a data-ng-click="newBook()" id="show-confirm" class="weui_btn weui_btn_primary">推荐好书</a>
+    </footer>
+</div>

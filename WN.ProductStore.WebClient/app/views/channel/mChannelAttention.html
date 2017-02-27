@@ -1,0 +1,16 @@
+<div class="container-fluid" ng-controller="mChannelAttentionController">
+ 
+    <div class="weui_panel weui_panel_access" style="margin-top:15px;">
+        <div class="weui_panel_bd">
+            <a href="" class="weui_media_box weui_media_appmsg" ng-repeat="attention in attentionList">
+                <div class="weui_media_hd badge-pos-re" ng-click="goChannelItemList(attention)">
+                    <img ng-src="{{::baseUrl}}fileUploadController/showPic/{{attention.picId}}" width="60" height="60">
+                </div>
+                <div class="weui_media_bd" ng-click="goChannelItemList(attention)">
+                    <h4 class="weui_media_title">{{attention.groupName}}
+                    </h4>
+                    <p class="weui_media_desc">{{attention.description}}</p>
+                </div>
+            </a>
+        </div>
+    </div>

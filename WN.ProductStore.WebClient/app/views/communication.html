@@ -1,0 +1,41 @@
+<div class="weui_tab" data-ng-controller="CommunicationController">
+
+    <!-- weui_panel -->
+    <div class="pager-top-fixed">
+
+        <div class="weui_tab page-ptr-navbar">
+            <div class="top-fixed">
+                <div class="publish_book_wrap header-tool">
+
+                    <div class="top_notice_eara">
+                        <!-- 有消息时显示样式 -->
+                        <!-- <span>23</span><img src="../../images/m/has_notice_icon.png" alt=""> -->
+                        <!-- 有消息时显示样式  END-->
+                        <!-- 无消息时显示样式 -->
+                        <img src="../../images/m/notice_icon.png" alt="">
+                        <!-- 无消息时显示样式 END-->
+                    </div>
+                    <!-- 有通知时显示下面这个
+            <div class="publish_btn"><img src="../../images/m/has_notice_icon.png" alt=""></div> -->
+                    <div class="weui_navbar" style="position: relative;margin:0 50px;">
+                        <a href="#tab1" class="weui_navbar_item weui_bar_item_on" ui-sref=".doctorTopicList({contextType:4,listType:0})">
+                互助
+              </a>
+                        <a href="#tab2" class="weui_navbar_item" ui-sref=".doctorTopicList({contextType:5,listType:0})">
+                话题
+              </a>
+                    </div>
+                    <span class="top-btn"></span>
+                </div>
+            </div>
+
+            <div class="weui_tab_bd" style="padding-bottom: 0">
+                <!--<div ui-view></div>-->
+                <!--contextType="4" listType="0" -->
+                <!--<div fc-doctortopiclist></div>-->
+                <fc-boook-home></fc-boook-home>
+            </div>
+
+        </div>
+    </div>
+</div>

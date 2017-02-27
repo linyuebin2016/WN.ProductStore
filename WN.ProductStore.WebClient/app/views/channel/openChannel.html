@@ -1,0 +1,114 @@
+<div  data-ng-controller="OpenChannelController">
+    <div data-ng-if="!showSetLogo">
+        <div class="top-bar">
+            <h3 class="pull-left">申请开通资讯号</h3>
+        </div>
+        <!-- top-bar -->
+        <div class="container-fluid fancy-scrollbar" adaptive-height paddingtop=60>
+            <div class="userInfo" style="margin-top:50px;">
+                <div class="userImg">
+                    <div><img data-ng-src="{{logoUrl}}"></div>
+                    <button class="btn btn-default" data-ng-click="setLogo()">上传logo</button>
+                </div>
+                <table class="user-table">
+                    <tr>
+                        <td colspan="3">
+                            <p class="text-warning"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;&nbsp;目前只支持开通官方资讯号
+                            </p></td>
+                    </tr>
+                    <tr>
+                        <td class="td1">开通组织</td>
+                        <td width="300">
+                            <ui-select ng-model="listSelected.value" theme="select2" style="width:100%;"
+                                       title="请选择一个组织"
+                                       on-select="onSelectCallback($item, $model)">
+                                <ui-select-match placeholder="请输入开通组织名">
+                                    {{$select.selected.orgName}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="item in orgList | filter: $select.search"
+                                                   refresh="refreshOrg($select.search)"
+                                                   refresh-delay="500">
+                                    <div ng-bind-html="item.orgName | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+
+                        </td>
+                        <td style="padding-left:10px;"><p class="text-danger" data-ng-if="existOrgChannel">咨询号已存在</p>
+                        </td>
+                    </tr>
+                    <!--<tr>-->
+                    <!--<td class="td1">发布范围</td>-->
+                    <!--<td>-->
+                    <!--<select class="form-control">-->
+                    <!--<option>世界</option>-->
+                    <!--<option>国家</option>-->
+                    <!--<option>省内</option>-->
+                    <!--<option>市内</option>-->
+                    <!--<option>社内</option>-->
+                    <!--</select>-->
+                    <!--</td>-->
+                    <!--<td style="padding-left:10px;"></td>-->
+                    <!--</tr>-->
+                    <tr>
+                        <td class="td1">运营者</td>
+                        <td><input data-ng-model="channelDetailVo.createUserName" type="text" class="form-control"
+                                   readonly></td>
+                    </tr>
+                    <tr>
+                        <td class="td1" valign="top">功能介绍</td>
+                        <td>
+                            <textarea data-ng-model="channelDetailVo.description" class="form-control"
+                                      style="height:165px;" ng-change="checkText()"></textarea>
+                            <p>已输入 {{currWordsCount}} /{{limitWordsCount}}个字</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td1">手机号码</td>
+                        <td><input data-ng-model="channelDetailVo.mobile" type="text" class="form-control" readonly>
+                        </td>
+                        <td style="padding-left:10px;">
+                            <button class="btn btn-default btn-sm" data-ng-click="getPhoneVerifyCode()"
+                                    data-ng-disabled="phoneVerifyCode.isSend">
+                                {{phoneVerifyCode.title}}
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td1">短信验证码</td>
+                        <td><input data-ng-model="channelDetailVo.validateCode" type="text" class="form-control"
+                                   placeholder="请输入手机短信收到的验证码" maxlength="10"></td>
+                        <td style="padding-left:10px;">
+                        </td>
+                    </tr>
+                    <tr height="50"></tr>
+                    <tr>
+                        <td colspan="3" class="text-center">
+                            <button class="btn btn-primary" style="width:30%;" data-toggle="modal"
+                                    data-target="#ktModal" data-ng-click="applyForOpen()" data-ng-disabled="applyButton.disable">{{applyButton.title}}
+                            </button>
+                        </td>
+                    </tr>
+                    <tr height="50"></tr>
+
+                </table>
+            </div>
+            <!-- userInfo -->
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- contentRight -->
+    <div data-fc-user-pic-setting type="topic" data-ng-if="showSetLogo"></div>
+</div>
+<!-- contentBox -->
+
+
+
+
+
+
+
+
+
+
+
+

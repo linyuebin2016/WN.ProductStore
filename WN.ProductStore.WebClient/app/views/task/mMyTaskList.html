@@ -1,0 +1,205 @@
+<div data-ng-controller="MMyTaskListController">
+
+<div class="weui_tab">
+
+  <div class="weui_navbar top-fixed">
+    <a href="javascript:;" class="weui_navbar_item weui_bar_item_on">
+      我负责的
+    </a>
+    <a href="javascript:;" class="weui_navbar_item">
+      我报名的
+    </a>
+    <a href="javascript:;" class="weui_navbar_item">
+      已结束的
+    </a>
+   </div>
+
+  <div class="weui_tab_bd">
+    <div class="weui_tab_bd_item weui_tab_bd_item_active">
+      <!-- 我负责的 -->
+    <!-- <div class="weui_cells_title fs16">我负责的</div> -->
+    <div data-ng-repeat="wfzdczyz in wfzdczyzList" class="weui_panel weui_panel_access">
+        <div class="weui_panel_bd">
+                <a href="" data-ng-click="queryItemById(0,wfzdczyz.collectionId,wfzdczyz)" class="weui_media_box weui_media_appmsg">
+                <div class="weui_media_hd">
+                    <img class="weui_media_appmsg_thumb" src="images/m/tips-czyz.png" alt="">
+                </div>
+                <div class="weui_media_bd">
+                    <h4 class="weui_media_title">{{wfzdczyz.collectionName}}</h4>
+                    <div class="title-info-cell">
+                        <div class="title-info-cell-fl"></div>
+                        <div class="title-info-cell-fr">
+                            <span data-ng-if="wfzdczyz.participantsName" class="tips-time"><img src="images/m/icon-ren.png">{{wfzdczyz.participantsName.length}}</span>
+                            <span data-ng-if="!wfzdczyz.participantsName" class="tips-time"><img src="images/m/icon-ren.png">0</span>
+                            <span class="tips-time"><img src="images/m/icon-cl.png">{{wfzdczyz.submitCount}}</span>
+                            <span ng-if="!wfzdczyz.enrolEndState" class="tips-time">还有 {{wfzdczyz.enrolEndDay}} 天</span>
+                            <span ng-if="wfzdczyz.enrolEndState" class="tips-time tips-time-hot">报名结束</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a ng-if="wfzdczyz.auditState == 0" class="weui_btn weui_btn_default fs16" href="" ng-click="submitWfzdczyz(wfzdczyz)" style="line-height: 2.8;">提交征集</a>
+            <a ng-if="wfzdczyz.auditState != 0" class="weui_btn weui_btn_default weui_btn_disabled  fs16" href="javascript:void(0);" style="line-height: 2.8;">已提交</a>
+        </div>
+    </div>
+    <div data-ng-repeat="wfzdrw in wfzdrwList" class="weui_panel weui_panel_access">
+        <div class="weui_panel_bd">
+            <a href="" data-ng-click="queryItemById(1,wfzdrw.taskId,wfzdrw)" class="weui_media_box weui_media_appmsg">
+                <div class="weui_media_hd">
+                    <img class="weui_media_appmsg_thumb" src="images/m/tips-sw.png" alt="">
+                </div>
+                <div class="weui_media_bd">
+                    <h4 class="weui_media_title">{{wfzdrw.taskName}}</h4>
+                    <div class="title-info-cell">
+                        <div class="title-info-cell-fl"></div>
+                        <div class="title-info-cell-fr">
+                            <span class="tips-zf"><i>{{wfzdrw.taskIntegral}}</i> 积分</span>
+                            <span class="tips-time"><img src="images/m/icon-ren.png">{{wfzdrw.enrollCount}}</span>
+                            <span class="tips-time"><img src="images/m/icon-cl.png">{{wfzdrw.materialCount}}</span>
+                            <span ng-if="!wfzdrw.enrollEndState" class="tips-time">还有 {{wfzdrw.enrollEndDay}} 天</span>
+                            <span ng-if="wfzdrw.enrollEndState" class="tips-time tips-time-hot">报名结束</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a ng-if="!wfzdrw.voteState && wfzdrw.clockState == 1 && wfzdrw.taskClockState == 0" class="weui_btn weui_btn_default fs16" href="" ng-click="startClock(wfzdrw)" style="line-height: 2.8;">开启打卡</a>
+            <a ng-if="!wfzdrw.voteState && wfzdrw.clockState == 1 && wfzdrw.taskClockState == 1" class="weui_btn weui_btn_default fs16" href="" ng-click="startClock(wfzdrw)" style="line-height: 2.8;">正在打卡</a>
+            <a ng-if="!wfzdrw.voteState && wfzdrw.clockState == 1 && wfzdrw.taskClockState == 2" class="weui_btn weui_btn_default fs16" href="" ng-click="startClock(wfzdrw)" style="line-height: 2.8;">继续打卡</a>
+        </div>
+    </div>
+    <div class="weui_msg" ng-if="wfzdczyzList.length == 0 && wfzdrwList.length == 0">
+        <div class="weui_icon_area"><img src="images/m/no-text.png" width="150"></div>
+        <div class="weui_text_area">
+            <h2 class="weui_msg_title"></h2>
+            <p class="weui_msg_desc">暂时没有内容，去其他地方逛逛</p>
+        </div>
+    </div>
+
+
+    </div>
+    <!-- tab1 -->
+    <div class="weui_tab_bd_item">
+      <!-- 我报名的 -->
+    <!-- <div class="weui_cells_title fs16" style="margin-top: 20px;">我报名的</div> -->
+    <div data-ng-repeat="wbmdczyz in wbmdczyzList" class="weui_panel weui_panel_access">
+        <div class="weui_panel_bd">
+            <a href="" data-ng-click="queryItemById(2,wbmdczyz.collectionId,wbmdczyz)" class="weui_media_box weui_media_appmsg">
+                <div class="weui_media_hd">
+                    <img class="weui_media_appmsg_thumb" src="images/m/tips-czyz.png" alt="">
+                </div>
+                <div class="weui_media_bd">
+                    <h4 class="weui_media_title">{{wbmdczyz.collectionName}}</h4>
+                    <div class="title-info-cell">
+                        <div class="title-info-cell-fl"></div>
+                        <div class="title-info-cell-fr">
+                            <span class="tips-time"><img src="images/m/icon-ren.png">{{wbmdczyz.participantCounts}}</span>
+                            <span ng-if="!wbmdczyz.enroleEndState" class="tips-time">还有 {{wbmdczyz.enroleEndDays}} 天</span>
+                            <span ng-if="wbmdczyz.enroleEndState" class="tips-time tips-time-hot">报名结束</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a ng-if="!wbmdczyz.submitState" class="weui_btn weui_btn_default weui_btn_disabled fs16" href="javascript:void(0);" style="line-height: 2.8;">未上传，请到PC端操作</a>
+            <a ng-if="wbmdczyz.submitState" class="weui_btn weui_btn_default weui_btn_disabled fs16" href="javascript:void(0);" style="line-height: 2.8;">已上传</a>
+        </div>
+    </div>
+    <div data-ng-repeat="wbmdrw in wbmdrwList" class="weui_panel weui_panel_access">
+        <div class="weui_panel_bd">
+            <a href="" data-ng-click="queryItemById(3,wbmdrw.taskId,wbmdrw)" class="weui_media_box weui_media_appmsg">
+                <div class="weui_media_hd">
+                    <img class="weui_media_appmsg_thumb" src="images/m/tips-sw.png" alt="">
+                </div>
+                <div class="weui_media_bd">
+                    <h4 class="weui_media_title">{{wbmdrw.taskName}}</h4>
+                    <div class="title-info-cell">
+                        <div class="title-info-cell-fl"></div>
+                        <div class="title-info-cell-fr">
+                            <span class="tips-zf"><i>{{wbmdrw.taskIntegral}}</i> 积分</span>
+                            <span class="tips-time"><img src="images/m/icon-ren.png">{{wbmdrw.enrollCount}}</span>
+                            <span ng-if="!wbmdrw.enrollEndState" class="tips-time">还有 {{wbmdrw.enrollEndDay}} 天</span>
+                            <span ng-if="wbmdrw.enrollEndState" class="tips-time tips-time-hot">报名结束</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a ng-if="!wbmdrw.voteState && wbmdrw.clockState ==1 && wbmdrw.taskClockState ==0" class="weui_btn weui_btn_default weui_btn_disabled fs16" href=""  style="line-height: 2.8;">未开启打卡</a>
+            <a ng-if="!wbmdrw.voteState && wbmdrw.clockState ==1 && wbmdrw.taskClockState ==1 && wbmdrw.userClockState ==0" class="weui_btn weui_btn_default fs16" href="" ng-click="rwBmrClock(wbmdrw)" style="line-height: 2.8;">点击打卡</a>
+            <a ng-if="!wbmdrw.voteState && wbmdrw.clockState ==1 && wbmdrw.taskClockState ==1 && wbmdrw.userClockState ==1" class="weui_btn weui_btn_default weui_btn_disabled fs16" href="javascript:void(0);" style="line-height: 2.8;">已打卡</a>
+            <a ng-if="!wbmdrw.voteState && wbmdrw.clockState ==1 && wbmdrw.taskClockState ==2 && wbmdrw.userClockState ==0" class="weui_btn weui_btn_default weui_btn_disabled fs16" href="javascript:void(0);" style="line-height: 2.8;">未打卡</a>
+        </div>
+    </div>
+    <div class="weui_msg" ng-if="wbmdczyzList.length == 0 && wbmdrwList.length == 0">
+        <div class="weui_icon_area"><img src="images/m/no-text.png" width="150"></div>
+        <div class="weui_text_area">
+            <h2 class="weui_msg_title"></h2>
+            <p class="weui_msg_desc">暂时没有内容，去其他地方逛逛</p>
+        </div>
+    </div>
+
+
+    </div>
+    <!-- tab2 -->
+    <div class="weui_tab_bd_item">
+      <!-- 已结束的 -->
+    <!-- <div class="weui_cells_title fs16" style="margin-top: 20px;">已结束</div> -->
+    <div data-ng-repeat="yjsczyz in yjsczyzList" class="weui_panel weui_panel_access">
+        <div class="weui_panel_bd">
+            <a href="" data-ng-click="queryItemById(0,yjsczyz.collectionId,yjsczyz)" class="weui_media_box weui_media_appmsg">
+                <div class="weui_media_hd">
+                    <img class="weui_media_appmsg_thumb" src="images/m/tips-czyz.png" alt="">
+                </div>
+                <div class="weui_media_bd">
+                    <h4 class="weui_media_title">{{yjsczyz.collectionName}}</h4>
+                    <div class="title-info-cell">
+                        <div class="title-info-cell-fl"></div>
+                        <div class="title-info-cell-fr">
+                            <span data-ng-if="yjsczyz.participantsName" class="tips-time"><img src="images/m/icon-ren.png">{{yjsczyz.participantsName.length}}</span>
+                            <span data-ng-if="!yjsczyz.participantsName" class="tips-time"><img src="images/m/icon-ren.png">0</span>
+                            <span data-ng-if="yjsczyz.submitCount" class="tips-time"><img src="images/m/icon-cl.png">{{yjsczyz.submitCount}}</span>
+                            <span data-ng-if="!yjsczyz.submitCount" class="tips-time"><img src="images/m/icon-cl.png">0</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div data-ng-repeat="yjsrw in yjsrwList" class="weui_panel weui_panel_access">
+        <div class="weui_panel_bd">
+            <a href="" data-ng-click="queryItemById(1,yjsrw.taskId,yjsrw)" class="weui_media_box weui_media_appmsg">
+                <div class="weui_media_hd">
+                    <img class="weui_media_appmsg_thumb" src="images/m/tips-sw.png" alt="">
+                </div>
+                <div class="weui_media_bd">
+                    <h4 class="weui_media_title">{{yjsrw.taskName}}</h4>
+                    <div class="title-info-cell">
+                        <div class="title-info-cell-fl"></div>
+                        <div class="title-info-cell-fr">
+                            <span class="tips-zf"><i>{{yjsrw.taskIntegral}}</i> 积分</span>
+                            <span class="tips-time"><img src="images/m/icon-ren.png">{{yjsrw.enrollCount}}</span>
+                            <span class="tips-time"><img src="images/m/icon-cl.png">{{yjsrw.materialCount}}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="weui_msg" ng-if="yjsczyzList.length == 0 && yjsrwList.length == 0">
+        <div class="weui_icon_area"><img src="images/m/no-text.png" width="150"></div>
+        <div class="weui_text_area">
+            <h2 class="weui_msg_title"></h2>
+            <p class="weui_msg_desc">暂时没有内容，去其他地方逛逛</p>
+        </div>
+    </div>
+
+    </div>
+    <!-- tab3 -->
+
+  </div>
+  <!-- weui_tab_bd -->
+</div>
+<!-- weui_tab -->
+
+    
+
+    
+</div>

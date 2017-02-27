@@ -1,0 +1,42 @@
+<div fc-infinite-scroll="scrollHandler" target="window"  data-ng-controller="doctorTopicListController">
+   <div id="title" class="weui_cells_title" data-ng-if="listType>0">{{title}}</div>
+   <div class="weui_panel weui_panel_access">
+    
+      <div class="weui_panel_bd">
+        <a href="" class="weui_media_box weui_media_appmsg box-line-3" data-ng-if="topics && topics.length > 0" ng-repeat="topic in topics" >
+          <div class="weui_media_hd" style="width:45px;height: 45px;">
+            <!--<img class="weui_media_appmsg_thumb" ng-src="{{topic.userPicUrl}}" alt="">-->
+              <fc-user-image-for-wx user-id="topic.createUserId" user-image="topic.createUserPicId"></fc-user-image-for-wx>
+          </div>
+          <div class="weui_media_bd" ng-click="gotoTopic(3,topic.topicId)">
+            <h4 class="weui_media_title">{{topic.topicTitle}}</h4>
+            <p class="weui_media_desc"><span data-ng-if="listType==0 || listType==2">{{topic.createUserName}}&nbsp;</span>{{topic.createDate | moment}}<span class="color-error pull-right" data-ng-if="listType>0 && topic.replyNoReadCount>0">有{{topic.replyNoReadCount}}条新回复</span></p>
+          </div> 
+          <div class="weui_media_desc" data-ng-bind-html="topic.topicContent"></div>
+          <div class="title-info-cell">
+           <div class="title-info-cell-fr">
+             <span class="tips-sure" data-ng-if="(listType==0 || listType==1) && topic.adoptState"><i class="weui_icon_success_no_circle"></i> 采纳</span>
+             <span class="tips-sure" data-ng-if="listType==2 && topic.userAdoptState"><i class="weui_icon_success_no_circle"></i> 采纳</span>
+             <span class="tips-zf"  data-ng-if="contextType==4"><i>{{topic.integral}}</i> 积分</span>
+             <span class="tips-time"><img src="../../images/m/icon-pl.png">{{topic.replyCount}}</span></div>
+          </div>    
+        </a>
+
+  <div class="topic_edite_btn" ng-click="addTopic(0)">
+    <a href=""><img src="../../images/m/topic_edite_icon.png" alt="" >
+    </a></div>
+        
+      </div>
+
+</div>    
+
+<div class="weui_msg" ng-if="!topics || topics.length == 0">
+  <div class="weui_icon_area"><img src="images/m/no-text.png" width="150"></div>
+  <div class="weui_text_area">
+  <h2 class="weui_msg_title"></h2>
+  <p class="weui_msg_desc">暂时没有内容，去其他地方逛逛</p>
+  </div>
+</div>      
+  
+</div>
+

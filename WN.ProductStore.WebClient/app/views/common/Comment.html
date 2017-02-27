@@ -1,0 +1,57 @@
+<div class="pinglun-box">
+    <div class="pinglun-btn-box">
+        <div class="text-muted pull-left">
+            <a href="javascript:;" class="icon-btn-big" data-ng-class="{'active':praiseState}" title="赞"
+               data-ng-if="praiseCount" data-ng-click="setPraise()"><i
+                    class="icon icon-zan"></i>{{praiseCount}}</a>
+            <a href="javascript:;" class="icon-btn-big" data-ng-class="{'active':attentionState}" title="关注"
+               data-ng-if="attentionCount" data-ng-click="setAttention()"><i
+                    class="icon icon-gz"></i>{{attentionCount}}</a>
+            <a class="icon-btn-big" title="评论"><i class="icon icon-pl"></i>{{replyCount}}</a>
+        </div>
+        <a href="javascript:;" class="weui_btn weui_btn_plain_primary weui_btn_mini pull-right"
+           data-ng-if="enableReadonly==0" data-ng-click="write()">评论</a>
+        <div class="line"></div>
+    </div>
+    <div class="weui_panel weui_panel_access" style="margin-top: -1px;">
+        <div class="weui_panel_bd">
+            <a href="javascript:;" class="weui_media_box weui_media_appmsg box-line-3"
+               data-ng-repeat="item in dataList">
+                <div class="weui_media_hd" style="width:45px;height: 45px;">
+                    <fc-user-image-for-wx user-id="item.commentUserId"
+                                          user-image="item.commentUserPicId"></fc-user-image-for-wx>
+                </div>
+                <div class="weui_media_bd">
+                    <button class="weui_btn weui_btn_default weui_btn_mini pull-right"
+                            data-ng-if="enableAdopt==1 && !adoptState"
+                            data-ng-click="adopt(item.contextId,item.topicItemId)">采纳
+                    </button>
+                    <button class="weui_btn weui_btn_default weui_btn_mini pull-right"
+                            data-ng-if="enableReadonly==0 && userId==item.commentUserId && !item.adoptState && item.showStatus==0"
+                            data-ng-click="delete(item.topicItemId)">删除
+                    </button>
+                    <span class="tips-sure pull-right fs12" data-ng-if="item.adoptState"><i
+                            class="weui_icon_success_no_circle"></i> 采纳</span>
+                    <fc-user-image-for-wx user-id="item.commentUserId" user-name="item.commentUserName"
+                                          image-type="1"></fc-user-image-for-wx>
+                    <p class="weui_media_desc">{{item.commentDate | moment}}</p>
+                </div>
+                <p class="weui_media_desc text-main fs14"
+                   data-ng-click="reply(item.commentUserId,item.commentUserName,item.commentContent)">
+                    <span data-ng-if="item.replyUserName">回复 <span class="color-primary">
+                        <fc-user-image-for-wx user-id="item.replyUserId" user-name="item.replyUserName"
+                                              image-type="1"></fc-user-image-for-wx>
+                        </span>：</span>{{item.showStatus==1
+                    ? '该评论已删除' : item.commentContent}}
+                </p>
+            </a>
+        </div>
+    </div>
+    <div class="h60"></div>
+    <div class="pinglun-write" data-ng-if="enableReadonly==0">
+        <input type="text" class="pl-input" placeholder="{{reply.Placeholder}}" maxlength="200"
+               data-ng-model="reply.Content">
+        <!-- <input type="text" placeholder="回复李红：" class="pl-input"> -->
+        <button class="weui_btn weui_btn_default weui_btn_mini pull-right" data-ng-click="send()">发送</button>
+    </div>
+</div>

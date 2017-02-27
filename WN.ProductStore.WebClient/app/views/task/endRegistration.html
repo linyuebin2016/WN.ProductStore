@@ -1,0 +1,21 @@
+<div class="weui_cells_title">
+    往期任务</div>
+<div class="weui_cells weui_cells_access" ng-controller="EndRegistrationController">
+    <a class="weui_cell" href="javascript:;" ng-repeat="collect in collects">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p class="line-white"> {{collect.collectionName}}</p>
+            <div class="title-info-cell">
+                <div class="title-info-cell-fl"><span>{{collect.createUserOrgName}}</span></div>
+            </div>
+        </div>
+    </a>
+    <a class="weui_cell" href="javascript:;" ng-repeat="model in models">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p class="line-white" ng-click="goDetail(model)">{{model.taskName}}</p>
+            <div class="title-info-cell">
+                <div class="title-info-cell-fl"><span>{{model.createUserOrg}}</span></div>
+                <div class="title-info-cell-fr"><span class="tips-zf"><i>{{model.taskIntegral}}</i> 积分</span></div>
+            </div>
+        </div>
+    </a>
+</div>

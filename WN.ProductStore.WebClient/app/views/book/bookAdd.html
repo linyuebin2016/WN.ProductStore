@@ -1,0 +1,30 @@
+<div class="" data-ng-controller="BookEditController">
+<!-- articleBg -->
+    <div class="input-btn-box">
+        <input class="weui_input" ng-keyup="clearNan()" ng-model="ISBN" maxlength="13" placeholder="请输入图书ISBN编号"><button class="weui_btn weui_btn_default" data-ng-click="getBookInfoByIsbn()">获取图书信息</button>
+    </div>
+
+    <div class="weui_panel weui_panel_access" style="margin-top:30px;" ng-if="Book">
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_appmsg noClick">
+                <div class="weui_media_hd" style="width:60px;height: 80px;">
+                    <img class="weui_media_appmsg_thumb" src="{{Book.goodBookSmallPicId}}" alt="" style="width: 100%;height: 100%;">
+                </div>
+                <div class="weui_media_bd">
+                    <h4 class="weui_media_title">{{Book.goodBookName}}</h4>
+                    <p class="weui_media_desc" style="line-height: 1.8;">作者：{{Book.goodBookAuthor}}</p>
+                    <p class="weui_media_desc" style="line-height: 1.8;">出版社：{{Book.goodBookPress}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui_media_box weui_media_appmsg noClick">
+            <textarea class="weui_textarea" data-ng-model="Book.recommendReason" placeholder="请输入推荐理由" rows="10"></textarea>
+        </div>
+    </div>
+    <div class="h60"></div>
+    <footer class="footer-fixed">
+        <a href="javascript:;" id="show-confirm" class="weui_btn weui_btn_primary" data-ng-click="saveGoodBook()">发布</a>
+    </footer>
+</div>
+
