@@ -2,7 +2,7 @@ define(function (require) {
     var angular = require('angular');
     var app = require('../app.config');
     app.service('StockService', ['$http', function ($http) {
-        var requestUrl = "http://10.52.0.87/ProductStroe/api";
+        var requestUrl = "http://192.168.1.111/ProductStore/api";
         var pageSize = 10;
         return {
             getStockList: function () {

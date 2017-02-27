@@ -9,7 +9,7 @@ using System.Web;
 
 namespace WN.ProductStore.Models
 {
-    [Serializable]
+    //[Serializable]
     [Table("Product")]
     public class Product : BaseEntiy
     {

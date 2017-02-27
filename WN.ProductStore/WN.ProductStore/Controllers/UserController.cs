@@ -9,43 +9,39 @@ using WN.ProductStore.Repository;
 
 namespace WN.ProductStore.Controllers
 {
-    public class CustomerController : ApiController
+    public class UserController : ApiController
     {
         DBContext db = new DBContext();
         public object GetCustomerList(int pageIndex, int pageSize, string queryString)
         {
-            IQueryable<Customer> queryCustomer = db.Customer;
+            IQueryable<User> queryCustomer = db.User;
             if (!string.IsNullOrEmpty(queryString))
                 queryCustomer = queryCustomer.Where(p => p.Name.Contains(queryString) || p.Phone.Contains(queryString));
             var reslut = new
             {
                 TotalCount = queryCustomer.Count(),
-                ProductStockList = queryCustomer.OrderBy(p => p.Name).ToPage<Customer>(pageIndex, pageSize)
+                List = queryCustomer.OrderBy(p => p.Name).ToPage<User>(pageIndex, pageSize)
             };
             return reslut;
         }
         [HttpPost]
-        public void AddCustomer(Customer customer)
+        public void AddCustomer(User user)
         {
-            customer.Id = Guid.NewGuid();
-            db.Customer.Add(customer);
+            user.Id = Guid.NewGuid();
+            db.User.Add(user);
             db.SaveChanges();
         }
-
-        //[HttpDelete]
         [HttpGet]
-        public void DeleteCustomer(string id)
+        public void DeleteCustomer(Guid id)
         {
-          var   customer = db.Customer.FirstOrDefault(i => i.Id.ToString() == id);
-            db.Customer.Remove(customer);
-            db.SaveChanges();
+            var customer = db.User.FirstOrDefault(i => i.Id == id);
+            db.User.Remove(customer);
         }
-
         [HttpPost]
-        public void Update(Customer customer)
+        public void Update(User user)
         {
-            db.Entry(customer).State = System.Data.Entity.EntityState.Modified;
-            db.Customer.Attach(customer);
+            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            db.User.Attach(user);
             db.SaveChanges();
         }
     }
