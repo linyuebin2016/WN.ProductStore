@@ -23,7 +23,7 @@ define(function (require) {
 
             //获取商品详细信息
             getProductDetail : function(spid) {
-                return $http.get(requestUrl + "/Product/getproduct",{
+                return $http.get(requestUrl + "/Product/GetProduct",{
                     params: {
                         id: spid
                     }
@@ -39,7 +39,7 @@ define(function (require) {
                     headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                     transformRequest: transFn
                 };
-                return $http.post(requestUrl + "/Product/add", product, postCfg);
+                return $http.post(requestUrl + "/Product/Add", product, postCfg);
             },
 
             //上传图片
@@ -50,6 +50,15 @@ define(function (require) {
                     data:imgs,
                     headers: {'Content-Type': undefined},
                     transformRequest: angular.identity
+                })
+            },
+
+            //删除上传的图片
+            delUploadImg : function (img) {
+                return $http.get(requestUrl +'/Image/DeleteImage',{
+                    params: {
+                        url:img.imgDelSrc
+                    }
                 })
             }
         };

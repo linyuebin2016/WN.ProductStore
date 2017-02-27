@@ -73,6 +73,31 @@
                 </td>
             </tr>
             <tr>
+                <td class="td1">封面图片</td>
+                <td>
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <th>图片列表<font color="red">(最多上传4张封面图片)</font></th><th></th>
+                            <tr>
+                                <td class="panel-body gallery" ng-repeat="item in thumb">
+                                    <img ng-src="{{item.imgSrc}}" class="img-rounded" style="width: 140px;height: 140px">
+                                    <div class="clearfix">{{item.imgName}}</div>
+                                    <a ng-if="item.imgSrc" ng-click="img_del(item)">删除</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"></td>
+                <td>
+                    <label>
+                        <input type="file" id="one-input" accept="image/*" file-model="images" onchange="angular.element(this).scope().img_upload(this.files)"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
                 <td class="td1"></td>
                 <td>
                     <button data-ng-click="save()" class="vs-bt bt-primary mr20">发布</button>
@@ -81,30 +106,4 @@
             </tr>
         </table>
     </div>
-    <section>
-        <div>
-            <form ng-submit="submit_form()">
-                <div>
-                    <div class="col-sm-6 col-md-6">
-                        <div class="panel panel-default">
-                            <p class="panel-heading">封面图片</p>
-                            <div class="panel-body gallery" ng-repeat="item in thumb">
-                                <img ng-src="{{item.imgSrc}}" class="img-polaroid">
-                                <div class="clearfix"></div>
-                                <a ng-if="item.imgSrc" ng-click="img_del($index)">删除</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div ng-repeat="item in thumb_default">
-                        <!-- 这里之所以写个循环，是为了后期万一需要多个‘加号’框 -->
-                        <label>
-                            <input type="file" id="one-input" accept="image/*" file-model="images" onchange="angular.element(this).scope().img_upload(this.files)"/>
-                        </label>
-                    </div>
-                </div>
-                <p>(*^_^*)请详细描述您的需求，有助于我们快速定位并解决问题，希望我们的产品和服务能得到您的肯定。</p>
-                <input type="submit" name="" value="提 交" />
-            </form>
-        </div>
-    </section>
 </div>
