@@ -1,0 +1,50 @@
+<div class="articleBg" data-ng-controller="SuggestionDetailController">
+    <article class="weui_article">
+        <h1>{{suggestionDetail.topicTitle}}</h1>
+        <p class="fs12 text-muted" style="margin:0;">
+            <span class="mr10 color-primary">发送：{{suggestionDetail.toOrgName}}</span>
+            <span>{{suggestionDetail.createDate | date:'yyyy-MM-dd'}}</span>
+            <span ng-if="suggestionDetail.anonymous" class="no-name pull-right">匿名</span></p>
+    </article>
+    <article class="weui_article">
+        <section>
+            {{suggestionDetail.topicContent}}
+        </section>
+        <span ng-if="suggestionDetail.reviewState ==0 || suggestionDetail.reviewState ==1" class="tips-time text-muted">暂无回复</span>
+    </article>
+    <!-- 评论模板 -->
+    <div class="pinglun-box" ng-if="suggestionDetail.reviewState == 2 || suggestionDetail.reviewState == 3">
+        <div class="pinglun-btn-box">
+            <div class="line"></div>
+            <div ng-if="suggestionDetail.reviewState == 2" class="text-muted">审核意见：</div>
+            <div ng-if="suggestionDetail.reviewState == 3" class="text-muted">答复</div>
+        </div>
+        <div class="weui_panel weui_panel_access" ng-if="suggestionDetail.reviewState == 2" style="margin-top: -1px;">
+            <div class="weui_panel_bd">
+                <a href="javascript:;" class="weui_media_box weui_media_appmsg">
+                    <p class="weui_media_desc text-main fs14">
+                        {{suggestionDetail.reviewContent}}
+                    </p>
+                </a>
+
+            </div>
+        </div>
+        <div class="weui_panel weui_panel_access" ng-if="suggestionDetail.reviewState == 3" style="margin-top: -1px;">
+            <div class="weui_panel_bd">
+                <a href="javascript:;" class="weui_media_box weui_media_appmsg box-line-3">
+                    <div class="weui_media_hd" style="width:45px;height: 45px;">
+                        <img class="weui_media_appmsg_thumb" src="images/icon-ld.png" alt="">
+                    </div>
+                    <div class="weui_media_bd">
+                        <h4 class="weui_media_title color-primary fs16">{{suggestionDetail.toOrgName}}</h4>
+                        <p class="weui_media_desc">{{suggestionDetail.reviewDate | moment}}</p>
+
+                    </div>
+                    <p class="weui_media_desc text-main fs14">
+                        {{suggestionDetail.reviewContent}}
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

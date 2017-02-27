@@ -7,7 +7,7 @@ define(function (require) {
             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
         };
 
-        var requestUrl = "http://10.52.0.87/ProductStroe/api";
+        var requestUrl = "http://192.168.1.111/ProductStore/api";
 
         return {
             //获取商品列表

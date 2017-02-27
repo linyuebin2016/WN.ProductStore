@@ -1,0 +1,91 @@
+<div data-ng-controller="MyResponsibleDetailController" class="articleBg">
+    <article class="weui_article">
+        <h1>{{task.taskName}}</h1>
+        <p class="fs12 text-muted" style="margin:0;">
+            <span class="mr20"><a href="#" class="color-primary">{{task.createUserOrg}}</a></span>
+            <span class="mr10">
+                <fc-user-image-for-wx user-id="task.createUserId" user-name="task.createUserName"
+                                      image-type="1"></fc-user-image-for-wx>
+            </span>
+            <span>{{task.createDate | date:'yyyy-MM-dd'}}</span>
+        </p>
+    </article>
+
+    <div class="weui_cells fs14" style="margin-top: 0;">
+        <div ng-if="task.taskClockState != 2" class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>报名截止时间</p>
+            </div>
+            <div ng-if="!task.enrollEndState" class="weui_cell_ft">{{task.enrollEndDate | date:'yyyy-MM-dd'}}</div>
+            <div ng-if="task.enrollEndState" class="weui_cell_ft">报名已截止</div>
+        </div>
+        <div ng-if="task.clockState==1 && task.taskClockState == 2" class="weui_cells weui_cells_access"
+             style="margin-top: -1px;">
+            <a class="weui_cell" href="javascript:void(0);" ng-click="goUsersClock()">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>已打卡</p>
+                </div>
+                <div class="weui_cell_ft">{{task.taskClockUserCount}}人</div>
+            </a>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>奖励积分</p>
+            </div>
+            <div class="weui_cell_ft color-warning">{{task.taskIntegral}}积分</div>
+        </div>
+    </div>
+
+    <article class="weui_article">
+        <section>
+            <div data-ng-bind-html="task.taskContent"></div>
+        </section>
+        <h3 ng-if="task.attachment.length>0">附件</h3>
+        <p data-ng-repeat="attach in task.attachment">
+            <a href="" ng-click="downLoadAttach(attach.attachId,attach.attachName)" class="text-muted">{{attach.attachName}}</a>
+        </p>
+        <div ng-if="task.directorsName.length>0 || task.taskUsersName.length>0">
+            <div class="line"></div>
+            <h3 ng-if="task.directorsName.length>0">负责人（{{task.directorsName.length}}）：</h3>
+            <p ng-if="task.directorsName.length>0"><span data-ng-repeat="director in task.directorsName">{{director}}&nbsp;&nbsp;</span>
+            </p>
+            <h3 ng-if="task.taskUsersName.length>0">报名（{{task.taskUsersName.length}}）：</h3>
+            <p ng-if="task.taskUsersName.length>0"><span
+                    data-ng-repeat="tun in task.taskUsersName">{{tun}}&nbsp;&nbsp;</span></p>
+        </div>
+        <div ng-if="task.submitMaterialVo.length>0" class="line"></div>
+        <h3 ng-if="task.submitMaterialVo.length>0">已上传材料（{{task.submitMaterialVo.length}}）</h3>
+        <p data-ng-repeat="sbm in task.submitMaterialVo">
+            <a href="#" class="text-muted">{{sbm.materialName}}</a>
+        </p>
+
+
+        <div class="h20"></div>
+        <footer>
+            <a ng-if="task.taskState==0 && task.clockState == 1 && task.taskClockState == 0 || task.taskClockState == 2"
+               href="" ng-click="startClock(task.taskId)" class="weui_btn weui_btn_primary">开启打卡</a>
+            <a ng-if="task.taskState==0 && task.clockState == 1 && task.taskClockState == 1" href=""
+               ng-click="startClock(task.taskId)" class="weui_btn weui_btn_primary">正在打卡</a>
+            <a ng-if="task.taskState==1" href="javascript:;"
+               class="weui_btn weui_btn_disabled weui_btn_default">任务已结束</a>
+        </footer>
+        <fc-a-reward ng-if="task.directorsName.length>0" context-id="task.taskId" reward-user="task.directorsIds"
+                     context-type="3"></fc-a-reward>
+        <div>
+            <a href="" ng-click="taskPraise(task)"
+               ng-class="{true:'icon-btn-big active',false:'icon-btn-big'}[task.praiseState]" title="赞">
+                <i class="icon icon-zan"></i>{{task.praiseCount}}
+            </a>
+            <a href="" ng-click="attentionTask(task)"
+               ng-class="{true:'icon-btn-big active',false:'icon-btn-big'}[task.attentionState]" title="关注">
+                <i class="icon icon-gz"></i>{{task.attentionCount}}
+            </a>
+        </div>
+    </article>
+    <fc-comment-for-wx ng-if="task.taskId" context-id="task.taskId" context-type="3"
+                       context-create-user-id="task.createUserId" enable-adopt="0"
+                       enable-readonly="0" praise-count="task.praiseCount" praise-state="task.praiseState"
+                       attention-count="task.attentionCount"
+                       attention-state="task.attentionState"></fc-comment-for-wx>
+
+</div>

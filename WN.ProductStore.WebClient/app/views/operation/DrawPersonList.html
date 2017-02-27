@@ -1,0 +1,19 @@
+<div data-ng-controller="DrawPersonListController">
+    <div ng-repeat="data in drawPerson">
+        <div class="weui_cells_title">第{{data.round}}轮抽奖中奖名单&nbsp;&nbsp;<span>{{data.awardUser.length}}</span>&nbsp;人
+        </div>
+        <div class="weui_cells">
+            <div class="weui_cell" ng-repeat="person in data.awardUser">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <span>{{person.userName}}</span><span class="pull-right tips-msg tips-success"
+                                                          data-ng-if="person.exchangeState==2">已兑换</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <article class="weui_article" data-ng-if="directorState=='true'">
+        <footer>
+            <a href="javascript:;" class="weui_btn weui_btn_primary"  data-ng-click="scan()">扫码兑奖</a>
+        </footer>
+    </article>
+</div>

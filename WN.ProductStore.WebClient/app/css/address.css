@@ -1,0 +1,310 @@
+.address-group-sidebar .search-control {
+    margin-top: 5px;
+}
+
+.address-content {
+    border-left: 1px solid #eee;
+    width: 1024px;
+    min-height: 400px;
+    margin-left: 240px;
+    padding-left: 16px;
+}
+
+
+.address-list {
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: all .28s cubic-bezier(.4,0, .2,1);
+    background: #fafafa;
+    position: relative;
+}
+
+.chat-list:hover {
+    /* overflow-y: auto; */
+}
+
+.address-list-item {
+	padding: 12px 16px;
+    height: 64px;
+    margin: 0;
+}
+
+.address-list-item .user-icon {
+    width: 42px;
+    height: 42px;
+}
+
+.address .icon {
+    display: block;
+}
+
+.address .icon span {
+    vertical-align: bottom;
+}
+
+.address .dashed-icon {
+    border: 1px dashed;
+}
+
+.address .solid-icon {
+    border: 1px solid;
+}
+
+.address .title-icon {
+    border: 1px solid #000;
+    background: #d3d3d3;
+    padding: 4px 1px 8px 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.address .float-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border-left: 1px solid #999;
+    border-left: 1px solid rgba(0, 0, 0, .2);
+}
+
+.address .panel-footer {
+    height: 66px;
+    background-color: #d8dcdf;
+    padding-bottom: -10px;
+}
+
+.address .title {
+    overflow: hidden;
+}
+
+.address .title-text {
+    display: inline-block;
+    max-width: 66%;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.address .list {
+    background-color: #ffffff;
+    height: 500px;
+    overflow: auto;
+}
+
+.address .content {
+    overflow: inherit;
+}
+
+.address .text-content, .address .img-content {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 2px 5px;
+}
+
+.address .text-content {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 2px 5px;
+}
+
+.address .img-content {
+    max-width: 100%;
+}
+
+.address .close-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #a94442;
+}
+
+.address .close-icon:hover {
+    color: #a94442;
+}
+
+.address .top-title {
+    font-family: "微软雅黑";
+    font-size: 18px;
+    color: #333333;
+}
+
+.address .btn-title {
+    background-image: url("../images/icon/group_n.png");
+    display: inline-block;
+    width: 30px;
+    height: 25px;
+    margin-right: 17px;
+}
+
+.address .btn-title:hover, .address .btn-title:focus, .address .btn-title:active, .address .btn-title.active {
+    background-image: url("../images/icon/group_p.png");
+}
+
+.address .top-headr {
+    background-color: #e5e5e5;
+}
+
+.address .conv-panel {
+    background-color: #ffffff;
+    margin-bottom: -1px;
+    width: 800px;
+}
+
+.address .modal-dialog .modal-content {
+    width: 800px;
+    right: 150px;
+}
+
+.address .btn-ok {
+    color: #ffffff;
+    background-color: #a9d49f;
+    height: 32px;
+    font-size: 12px;
+    border-color: #a9d49f;
+}
+
+.address .content-others {
+    background-color: #e5e5e5;
+    padding: 6px 6px 6px 6px;
+    float: left;
+}
+
+.address .content-myself {
+    background-color: #30aded;
+    padding: 6px 6px 6px 6px;
+    float: right;
+}
+
+.panel-title .user-title {
+    font-family: "宋体";
+    font-size: 12px;
+    color: #333333;
+
+}
+
+.address .users {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+.address-group-add {
+	padding-top:15px;
+	padding-left:15px;
+}
+
+.address-users ul {
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+}
+
+.address-sidebar {
+    background-color: #fafafa;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 60px;
+    width: 240px;
+    padding: 0;
+}
+
+.address-user-list{
+	height:100%;
+	margin-left: 242px;
+	/* padding-top:42px; */
+}
+.notice-tab-on {
+	color: #008cee;
+	font-size: 12px;
+	font-family: "宋体";
+}
+.notice-tab-leave {
+	color: rgba(0, 0, 0, 0.7);
+	font-size: 12px;
+	font-family: "宋体";
+}
+.tab-org-on {
+	background: url(../images/address/icon_midtab_org_focus.png) center no-repeat;
+}
+.tab-org-leave {
+	background: url(../images/address/icon_midtab_org_nomal.png) center no-repeat;
+}
+.tab-group-on {
+	background: url(../images/address/icon_midtab_gorup_focus.png) center no-repeat;
+}
+.tab-group-leave {
+	background: url(../images/address/icon_midtab_gorup_nomal.png) center no-repeat;
+}
+
+.address-group-sideBar{
+    background-color: #fafafa;
+    position: fixed;
+    top: 72px;
+    bottom: 0;
+    width: 240px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.address-sideBar{
+    position: fixed;
+    top: 108px;
+    bottom: 0;
+    width: 240px;
+    overflow-y: auto;
+}
+
+
+.address-top-bar{
+    /* padding: 8px; */
+    background-color: #ffffff;
+    border-bottom: 1px solid transparent;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.b_bottom {
+	border-bottom:thick dotted #ff0000;
+}
+
+.address-item-card {
+	height: 88px;
+	width: 272px;
+	display: inline-block;
+	margin-right: 12px;
+	margin-bottom: 12px;
+	vertical-align: bottom;
+	border-radius: 2px;
+}
+
+.address-user-card-image {
+	width: 88px;
+	height: 88px;
+	float:left;
+	border-top-left-radius:2px;
+	border-bottom-left-radius:2px;
+}
+.adress-menu1-bg {
+	background-color:#fafafa;
+}
+.address-card-title {
+	margin-top:32px;
+	margin-bottom:8px;
+	width:184px;
+	text-align: center;
+	align:center;
+	text-overflow:ellipsis
+	-moz-transition: all 0.7s ease-in-out;
+    -webkit-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+}
+.address-card-style{
+	margin-top:32px;
+	margin-bottom:8px;
+	width:180px;
+	max-height: 180px;
+	text-align: left;
+}

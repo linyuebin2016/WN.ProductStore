@@ -1,0 +1,40 @@
+<div class="pager-top-fixed" ng-controller="HomeController">
+    <div ui-view></div>
+
+    <!--app底部导航栏 begin-->
+    <div class="h55" ng-if="isAppMain()"></div>
+    <div class="weui_tabbar weui_tabbar_bottom" ng-if="isAppMain()">
+        <a href="javascript:;" class="weui_tabbar_item" ng-class="{'weui_bar_item_on': stateIs('task')}" ng-click="goto('task')">
+            <div class="weui_tabbar_icon">
+                <img class="img1" src="images/m/nav1.png" alt="">
+                <img class="img2" src="images/m/nav1-active.png" alt="">
+            </div>
+            <p class="weui_tabbar_label">首页</p>
+        </a>
+        <a href="javascript:;" class="weui_tabbar_item" ng-class="{'weui_bar_item_on': stateIs('communication')}" ng-click="goto('communication')">
+            <div class="weui_tabbar_icon">
+                <img class="img1" src="images/m/nav2.png" alt="">
+                <img class="img2" src="images/m/nav2-active.png" alt="">
+            </div>
+            <p class="weui_tabbar_label">交流</p>
+        </a>
+        <a href="javascript:;" class="weui_tabbar_item" ng-class="{'weui_bar_item_on': stateIs('discover')}" ng-click="goto('discover')">
+            <div class="weui_tabbar_icon">
+                <img class="img1" src="images/m/nav3.png" alt="">
+                <img class="img2" src="images/m/nav3-active.png" alt="">
+            </div>
+            <p class="weui_tabbar_label">发现</p>
+        </a>
+        <a href="javascript:;" class="weui_tabbar_item" ng-class="{'weui_bar_item_on': stateIs('myself')}" ng-click="goto('myself')">
+            <div class="weui_tabbar_icon">
+                <img class="img1" src="images/m/nav4.png" alt="">
+                <img class="img2" src="images/m/nav4-active.png" alt="">
+            </div>
+            <p class="weui_tabbar_label">我</p>
+        </a>
+    </div>
+    <!--app底部导航栏 end-->
+
+    <div fc-loading></div>
+    <div fc-open-redpack></div>
+</div>

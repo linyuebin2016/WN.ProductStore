@@ -1,0 +1,80 @@
+<div class="articleBg" data-ng-controller="DrawDetailController">
+
+    <article class="weui_article">
+        <h1>{{draw.title}}</h1>
+        <p class="fs12 text-muted" style="margin:0;">
+            <span class="mr20"><a href="#" class="color-primary">{{draw.orgName}}</a></span>
+            <span class="mr10">{{draw.createUserName}}</span><span>{{draw.createDate|date:'yyyy-MM-dd'}}</span></p>
+    </article>
+
+    <div class="weui_cells fs14" style="margin-top: 0;">
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>报名截止时间</p>
+            </div>
+            <div class="weui_cell_ft">{{draw.endDate|date:'yyyy-MM-dd'}}</div>
+            <!-- <div class="weui_cell_ft">报名已截止</div> -->
+        </div>
+
+    </div>
+    <!-- weui_cells -->
+    <div class="weui_cells weui_cells_access" style="margin-top: -1px;" data-ng-click="toDrawPresonList()">
+        <a class="weui_cell" href="m-rw-text-A11.3-2.html">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>中奖名单</p>
+            </div>
+            <div class="weui_cell_ft">{{draw.drawCount}}人</div>
+        </a>
+    </div>
+
+    <article class="weui_article">
+        <section>
+            <h3>{{draw.title}}</h3>
+            <p>
+            <div data-ng-bind-html="draw.Content"></div>
+            </p>
+        </section>
+
+        <div class="lp-img-box" ng-repeat="data in draw.gifts">
+            <img ng-src="{{::baseUrl}}fileUploadController/showPic/{{data.picId}}">
+            <p>{{data.info}}</p>
+            <p>兑换积分：<span class="color-warning">{{data.fenshu}}</span></p>
+        </div>
+
+        <div class="line"></div>
+        <h3>报名（{{draw.baomingl.length}}）：</h3>
+        <p><span ng-repeat="person in draw.baoming">{{person.name}}&nbsp;&nbsp;</span></p>
+
+        <div class="line"></div>
+
+        <div class="h20"></div>
+        <footer>
+            <a href="javascript:;" id='' class="weui_btn weui_btn_primary">{{clockName}}</a>
+            <a href="javascript:;" id='show-confirm' class="weui_btn weui_btn_primary">第一轮抽奖（共3轮）</a>
+            <!-- <a href="javascript:;" id='' class="weui_btn weui_btn_disabled weui_btn_default">抽奖完成</a> -->
+            <!-- <a href="javascript:;" id='' class="weui_btn weui_btn_primary">开启打卡</a> -->
+            <!-- <a href="javascript:;" id='' class="weui_btn weui_btn_primary">正在打卡…</a> -->
+
+            <!-- <a href="javascript:;" id='' class="weui_btn weui_btn_primary">我要报名</a> -->
+            <!-- <a href="javascript:;" id='' class="weui_btn weui_btn_disabled weui_btn_primary">未开始打卡</a> -->
+            <!-- <a href="javascript:;" id='' class="weui_btn weui_btn_primary" style="background: #04be02;">打卡成功</a> -->
+        </footer>
+        <div class="h60"></div>
+
+        <!--<div>-->
+        <!--<a href="javascript:;" class="icon-btn-big " ng-class="{true:'active',false:''}[draw.praiseState]"-->
+        <!--title="赞"><i class="icon icon-zan"></i>{{draw.praiseCount}}</a>-->
+        <!--<a href="javascript:;" class="icon-btn-big" title="关注"-->
+        <!--ng-class="{true:'active',false:''}[draw.attentionState]"><i class="icon icon-gz"></i>{{draw.attentionCount}}</a>-->
+        <!--</div>-->
+    </article>
+
+    <fc-comment-for-wx ng-if="draw.activityId" context-id="draw.activityId" context-type="9"
+                       context-create-user-id="draw.createUserId" enable-adopt="0"
+                       enable-readonly="0"
+                       praise-count="draw.praiseCount" praise-state="draw.praiseState"
+                       attention-count="draw.attentionCount"
+                       attention-state="draw.attentionState"
+    ></fc-comment-for-wx>
+
+</div>

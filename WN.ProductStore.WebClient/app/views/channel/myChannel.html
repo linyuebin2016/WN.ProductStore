@@ -1,0 +1,58 @@
+<div data-ng-controller="MyChannelController">
+    <div class="publish_book_wrap header-tool">
+        <span class="top-btn top-btn-back" onclick="window.history.back()"></span>
+        <h3>我的资讯号</h3>
+        <!-- <span class="top-btn"></span> -->
+        <!-- 输入内容后，给 top-btn 这个追加active -->
+    </div>
+     <div class="weui_tab_bd" style="margin-top: 25px;">
+        <!-- tab1 -->
+
+            <div class="weui_panel weui_panel_access" ng-if="manageList.length>0">
+                <div class="weui_panel_bd">
+                    <div class="weui_media_box weui_media_text">
+                        <h4 class="weui_media_title">我管理的资讯号</h4>
+                        <div class="weui_media_desc">
+                            <ul class="show-gallery">
+                                <li ng-repeat="item in manageList" ng-click="goChannelItemList(item)">
+                                    <img ng-src="{{::baseUrl}}fileUploadController/showPic/{{item.picId}}" alt="">
+                                    <p class="gallery-title">{{item.groupName}}</p>
+                                    <div class="gallery-num">
+                                        <p>资讯：{{item.itemTotal}}</p>
+                                        <p>关注：{{item.contractUserTotal}}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- panel1 END-->
+            <!-- panel2 -->
+            <div class="weui_panel weui_panel_access">
+                <div class="weui_panel_bd">
+                    <div class="weui_media_box weui_media_text">
+                        <div class="weui_cell" style="padding: 0">
+                            <h4 class="gallery-title weui_media_title weui_cell_bd weui_cell_primary"><span class="">我关注的资讯号</span></h4>
+                            <a href="" class="weui_cell_ft gallery-more" ng-click="goChannelAttentionMore()">更多 ></a>
+                        </div>
+                        <div class="weui_media_desc" >
+                            <ul class="show-gallery">
+                                <li ng-repeat="attention in attentionList" ng-click="goChannelItemList(attention)">
+                                    <img ng-src="{{::baseUrl}}fileUploadController/showPic/{{attention.picId}}"  alt="">
+                                    <p class="gallery-title">{{attention.groupName}}</p>
+                                    <div class="gallery-num">
+                                        <p>资讯：{{attention.itemTotal}}</p>
+                                        <p>关注：{{attention.contractUserTotal}}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+
+    </div>
+
+</div>

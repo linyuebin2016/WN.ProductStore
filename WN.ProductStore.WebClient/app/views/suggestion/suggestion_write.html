@@ -1,0 +1,35 @@
+<div class="articleBg" data-ng-controller="SuggestionWriteController">
+    <div class="weui_cells_title">我的声音撰写</div>
+    <div class="weui_cells weui_cells_form">
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" ng-model="publishVo.topicTitle" type="text" placeholder="请输入标题">
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p ng-click="getSendOrg()" style="color: #a9a9a9;padding:3px 0;">{{zzName}}</p>
+                <input class="weui_input" type="text" ng-model="publishVo.orgId" ng-hide="true">
+                <input class="weui_input" type="text" ng-model="publishVo.orgName" ng-hide="true">
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                是否匿名
+            </div>
+            <div class="weui_cell_ft">
+                <input class="weui_switch" type="checkbox" ng-model="publishVo.anonymous" data-ng-true-value="true" data-ng-false-value="false" ng-click="checkAnony()">
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <textarea class="weui_textarea" ng-model="publishVo.topicContent" placeholder="请输入内容" rows="20"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="h60"></div>
+    <footer class="footer-fixed">
+        <a id="confirm_button" href="" ng-click="pubSuggestion()" class="weui_btn weui_btn_primary">确定</a>
+    </footer>
+</div>

@@ -1,0 +1,12 @@
+[{
+    "taskName": "任务名称",
+    "createDate": "1998-08-08",
+    "createUserOrg": "珠海市委",
+    "createUserName": "创建人名称",
+    "taskIntegral": 30,
+    "enrollEndDay": 1,
+    "enrollCount": 12,
+    "praiseCount": 100,
+    "commentCount":20
+
+}]

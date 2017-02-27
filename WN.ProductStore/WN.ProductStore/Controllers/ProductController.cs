@@ -22,16 +22,16 @@ namespace WN.ProductStore.Controllers
         public ProductListView GetProductList(int pageIndex, int pageSize, string name)
         {
             ProductListView list = new ProductListView();
-            List<Product> products = new List<Product>();
-            int startRow = (pageIndex - 1) * pageSize;
+            List<Product> products;
+            
             if (!string.IsNullOrEmpty(name))
             {
-                products= db.Product.Where(p => p.Name.Contains(name)).OrderBy(i => i.Id).Skip(startRow).Take(pageSize).ToList();
+                products= db.Product.Where(p => p.Name.Contains(name)).OrderBy(i => i.Id).ToPage<Product>(pageIndex, pageSize).ToList();
                 list.TotalCount = db.Product.Where(p => p.Name.Contains(name)).Count();
             }
             else
             {
-                products = db.Product.OrderBy(i => i.Id).Skip(startRow).Take(pageSize).ToList();
+                products = db.Product.OrderBy(i => i.Id).ToPage<Product>(pageIndex, pageSize).ToList();
                 list.TotalCount = db.Product.Count();
             }
 
@@ -49,10 +49,9 @@ namespace WN.ProductStore.Controllers
         public Product GetProduct(Guid id)
         {
             //var view = new ProductView();
-            //var images = db.ProductImage.Where(i => i.ProductId == id).ToList();
+            var images = db.ProductImage.Where(i => i.ProductId == id).ToList();
             var product = db.Product.FirstOrDefault(i => i.Id == id);
-            //view.Product = product;
-            //view.ProductImage = images;
+            //product.ProductImages = images;
             return product;
         }
 

@@ -1,0 +1,86 @@
+<div data-ng-controller="ChannelController">
+	<div class="top-bar">
+		<div class="pull-left application_title_bar_btn" data-toggle="modal" data-target="#infoModal">
+			<span class="head-img" data-ng-click="getChannel()"><img ng-src="{{::baseUrl}}fileUploadController/showPic/{{groupPic}}" ></span>
+		</div>
+		<h4 class="pull-left mb0">{{groupName}}</h4>
+		<p class="tips-num"><span>{{groupItem.count}}</span>篇资讯</p>
+		<!--<span data-ng-if="channelState==0" class="alert alert-info ml45">正常</span>-->
+		<span data-ng-if="channelState==1" class="alert alert-info ml45">审核中</span>
+		<!--<span data-ng-if="channelState==2" class="alert alert-info ml45">已关闭</span>-->
+		<!--<button data-ng-if="attentionState==1" class="btn btn-default ml45 application_title_bar_btn" ng-click="noAttention()">取消关注</button>-->
+	</div>
+	<!-- top-bar -->
+	<div class="container-fluid fancy-scrollbar" adaptive-height paddingtop=80>
+		<div class="input-group-search">
+			<input class="form-control" type="text" ng-model="groupModel.channelItemName" placeholder="请输入资讯标题">
+			<button class="btn btn-default" data-ng-click="getByName()">搜索</button>
+		</div>
+		<div class="" fc-infinite-scroll="scrollHandler">
+			<div data-ng-if="manage && channelState==0" id="addItem" class="zx-box">
+				<h4>发布新资讯</h4>
+				<div class="add-icon"><a href ng-click="newChannelItem()" class="a-add"><i class="fa fa-plus"></i></a></div>
+			</div>
+			<div ng-repeat="item in groupItem.channelItems" class="zx-box" id="{{item.topicItiemId}}">
+				<a href="" class="zx-a" data-ng-click="channelItemView(item)">
+					<h4>{{item.title}}</h4>
+					<p><span>{{item.createTime|date:'MM月dd日'}}</span> {{item.authorId}}</p>
+					<div class="img-show">
+						<img ng-src="{{::baseUrl}}fileUploadController/showPic/{{item.picId}}" class="hand">
+					</div>
+					<p>{{item.description.substr(0,18)}}...</p>
+				</a>
+				<div class="zx-bottom">
+					<a data-ng-if="manage" href ng-click="updChannelItem(item.groupId,item.topicItiemId)" class="mr10" title="编辑"><i class="fa fa-pencil"></i></a>
+					<a data-ng-if="manage" href ng-click="delChannelItem(item.topicItiemId)" class="mr10" title="删除"><i class="fa fa-trash-o"></i></a>
+					<a href class="mr10" data-ng-click="channelItemView(item)">阅读 {{item.readCount}}</a>
+					<div class="pull-right">
+						<a href="" ng-click="itemAssist(item)" ng-class="{1:'ico-btn active',0:'ico-btn'}[item.praiseFlag]" title="赞"><i class="ico ico-up"></i>{{item.praiseCount}}</a>
+						<a href="" class="ico-btn" title="评论" data-ng-click="channelItemView(item)"><i class="ico ico-comment"></i>{{item.commentCount}}</a>
+						<!-- 							<a href class="mr10" ng-click="itemAssist(item)"><i class="fa fa-thumbs-o-up thumbUp active" data-ng-class="{'current-color':item.praiseFlag}"></i>{{item.praiseCount}}</a>
+							<a href class="bottom-a"><span><i class="fa fa-comment-o active"></i>{{item.commentCount}}</span></a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- container-fluid -->
+	<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 500px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">{{groupName}}</h4>
+				</div>
+				<div class="modal-body">
+					<table class="" border="0" cellspacing="0" cellpadding="0" style="margin:0 auto;width:100%;">
+						<tr>
+							<td colspan="6" class="text-center"><img ng-src="{{::baseUrl}}fileUploadController/showPic/{{groupPic}}" class="head-img" style="width:100px;height:100px;"></td>
+						</tr>
+						<tr height="20"></tr>
+						<tr>
+							<td align="right">运营者：</td>
+							<td style="padding-right: 20px;">{{channelInfo.createUserName}}</td>
+							<td align="right">资讯文章：</td>
+							<td style="padding-right: 20px;">{{channelInfo.itemTotal}}</td>
+							<td align="right">关注用户：</td>
+							<td style="padding-right: 20px;">{{channelInfo.contractUserTotal}}</td>
+						</tr>
+						<tr>
+							<td align="right" valign="top" width="100" style="padding: 15px 0">简介：</td>
+							<td valign="top" colspan="5" style="padding: 15px 0">{{channelInfo.description}}</td>
+						</tr>
+						<tr >
+							<td colspan="6" class="text-center" ng-if="channelInfo.isManage==0">
+								<hr>
+								<a href="" data-ng-if="attentionState==1" class="vs-bt bt-default" ng-click="noAttention()">取消关注</a>
+								<a href="" data-ng-if="attentionState==0" class="vs-bt bt-primary" ng-click="addAttention()">加关注</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- contentRight -->

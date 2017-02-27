@@ -1,0 +1,54 @@
+<div class="articleBg" data-ng-controller="doctorTopicDetailController">
+    <div class="header-tool">
+        <span class="top-btn top-btn-back" onclick="window.history.back()"></span>
+        <!-- <span class="top-btn">返回</span> -->
+        <h3>互助详情</h3>
+        <span class="top-btn" style="line-height: 45px;"></span>
+    </div>
+
+    <h1 class="th-article">{{topic.topicTitle}}</h1>
+    <div class="weui_panel weui_panel_access weui_panel_noborder" style="margin-top: -1px;">
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_appmsg box-line-3">
+                <div class="weui_media_hd" style="width:45px;height: 45px;">
+                    <fc-user-image-for-wx user-id="topic.createUserId" user-image="topic.createUserPicId"></fc-user-image-for-wx>
+                </div>
+                <div class="weui_media_bd">
+                    <span class="tips-zf pull-right fs12" data-ng-if="contextType==4"><i>{{topic.integral}}</i> 积分</span>
+                    <span class="tips-sure pull-right fs12" data-ng-if="topic.adoptState"><i
+                            class="weui_icon_success_no_circle"></i>采纳</span>
+                    <fc-user-image-for-wx user-id="topic.createUserId" user-name="topic.createUserName" image-type="1"></fc-user-image-for-wx>
+                    <p class="weui_media_desc">{{topic.createDate | moment}}</p>
+                </div>
+                <article class="text-main fs14" style="margin-top: 15px;">
+                    <div data-ng-bind-html="topic.topicContent"></div>
+                </article>
+            </div>
+            <div class="weui_panel weui_panel_access weui_panel_noborder" style="margin-top: 30px;" data-ng-if="adoptItem.adoptState">
+                <div class="pinglun-good-tips">
+                    <img src="images/m/good-hf.png"><span>最佳回复</span>
+                </div>
+                <div class="weui_panel_bd">
+                    <a href="javascript:;" class="weui_media_box weui_media_appmsg box-line-3">
+                        <div class="weui_media_hd" style="width:45px;height: 45px;">
+                            <fc-user-image-for-wx user-id="adoptItem.commentUserId" user-image="adoptItem.commentUserPicId"></fc-user-image-for-wx>
+                        </div>
+                        <p class="weui_media_desc text-main fs14">
+                            <span data-ng-if="adoptItem.replyUserName">回复 <span class="color-primary">
+                        <fc-user-image-for-wx user-id="adoptItem.replyUserId" user-name="adoptItem.replyUserName"
+                                              image-type="1"></fc-user-image-for-wx>
+                        </span>：</span>{{adoptItem.showStatus==1 ? '该评论已删除' : adoptItem.commentContent}}
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <fc-a-reward ng-if="contextType==4 && topic.adoptState" context-id="topic.topicId" reward-user="topic.adoptUserId" context-type="4"></fc-a-reward>
+            <fc-comment-for-wx ng-if="contextType==4 && enableadopt && topic.topicId" context-id="topic.topicId" context-type="4" context-create-user-id="topic.createUserId"
+                enable-adopt="1" enable-readonly="0" on-adopt-success="selectAdopt($item)"></fc-comment-for-wx>
+            <fc-comment-for-wx ng-if="contextType==4 && !enableadopt && topic.topicId" context-id="topic.topicId" context-type="4" context-create-user-id="topic.createUserId"
+                enable-adopt="0" enable-readonly="0" on-adopt-success="selectAdopt($item)"></fc-comment-for-wx>
+            <fc-comment-for-wx ng-if="contextType==5 && topic.topicId" context-id="topic.topicId" context-type="5" context-create-user-id="topic.createUserId"
+                enable-adopt="0" enable-readonly="0"></fc-comment-for-wx>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div ng-controller="ChannelDetailController">
+    <div class="publish_book_wrap header-tool">
+        <span class="top-btn top-btn-back" onclick="window.history.back()"></span>
+        <h3>{{channel.groupName}}</h3>
+        <!-- <span class="top-btn"></span> -->
+        <!-- 输入内容后，给 top-btn 这个追加active -->
+    </div>
+    <div class="weui_media_box weui_media_appmsg" style="margin-top: 10px;">
+        <div class="weui_media_hd">
+            <img ng-src="{{::baseUrl}}fileUploadController/showPic/{{channel.picId}}" width="60" height="60">
+        </div>
+        <div class="weui_media_bd">
+            <h4 class="weui_media_title">{{channel.groupName}}</h4>
+        </div>
+    </div>
+    <div class="weui_panel weui_panel_access">
+        <div class="weui_media_box weui_media_appmsg" style="padding: 10px 15px;">
+            <div class="weui_media_hd">
+                <h4>简介</h4>
+            </div>
+            <div class="weui_media_bd">
+                <p class="weui_media_desc">{{channel.description}}</p>
+            </div>
+        </div>
+        <div class="weui_media_box weui_media_box_lr">
+            <div class="weui_cells_2">
+                <div class="weui_cell_2">
+                    <div class="weui_cell_l">
+                        <h4>运营人 <span>{{channel.createUserName}}</span></h4>
+                    </div>
+                    <div class="weui_cell_c">
+                        <h4 class="text-center">资讯<span>{{channel.itemTotal}}</span></h4>
+                    </div>
+                    <div class="weui_cell_r">
+                        <h4>关注<span>{{channel.contractUserTotal}}</span></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui_panel weui_panel_access" ng-click="goChannelItemList()">
+        <a class="weui_panel_ft" href="">查看历史信息</a>
+    </div>
+    <div ng-if="channel.isManage==0">
+        <a ng-if="channel.isSubscribe==0" ng-click="subscribeChannel()" href="javascript:;" class="weui_btn weui_btn_focusOn mr1em">关注</a>
+        <a ng-if="channel.isSubscribe==1" ng-click="cancelSubscribeChannel()" href="javascript:;" class="weui_btn weui_btn_default"
+            style="margin-top:12px;width:94%">取消关注</a>
+    </div>
+</div>

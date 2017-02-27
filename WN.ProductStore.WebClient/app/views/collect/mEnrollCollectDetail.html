@@ -1,0 +1,67 @@
+<div data-ng-controller="mEnrollCollectDetailController" class="articleBg">
+    <article class="weui_article">
+        <h1>{{collection.collectionName}}</h1>
+        <p class="fs12 text-muted" style="margin:0;"><span class="mr20"><a href="" class="color-primary">{{collection.collectionRelease}}</a></span><span>{{collection.createDate | date:'yyyy-MM-dd'}}</span>
+        </p>
+    </article>
+    <div class="weui_cells fs14" style="margin-top: 0;">
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>任务截止时间</p>
+            </div>
+            <div data-ng-if="!(collection.collectionEndDay<0)" class="weui_cell_ft">{{collection.collectionEndDate |
+                date:'yyyy-MM-dd'}}
+            </div>
+            <div data-ng-if="collection.collectionEndDay<0" class="weui_cell_ft">任务已截止</div>
+        </div>
+    </div>
+    <!-- weui_cells -->
+
+    <article class="weui_article">
+        <section>
+            <div data-ng-bind-html="collection.collectionContent"></div>
+        </section>
+        <h3 data-ng-if="collection.attachList.length>0">附件</h3>
+        <p ng-repeat="attach in collection.attachList">
+            <a href="" class="text-muted" ng-click="attachView(attach.attachId,attach.attachName,attach.attachType)">{{attach.attachName}}</a>
+        </p>
+
+        <div class="line"></div>
+        <h3 data-ng-if="collection.directorsName.length>0">负责人（{{collection.directorsName.length}}）</h3>
+        <p><span ng-repeat="attach in collection.directorsName track by $index"> {{attach}} </span></p>
+
+        <h3 data-ng-if="collection.participantsName.length>0">报名（{{collection.participantsName.length}}）</h3>
+        <p><span ng-repeat="attach in collection.participantsName track by $index"> {{attach}} </span></p>
+
+        <div data-ng-if="collection.selfSubmitMaterialVo.length>0" class="line"></div>
+        <h3 data-ng-if="collection.selfSubmitMaterialVo.length>0">已上传材料</h3>
+        <p ng-repeat="attach in collection.selfSubmitMaterialVo">
+            <a href="" class="text-muted" ng-click="attachView(attach.attachId,attach.attachName,attach.attachType)">{{attach.attachName}}</a>
+        </p>
+
+
+        <div class="h20"></div>
+        <footer>
+            <a data-ng-if="collection.collectionEndDay<0" href=""
+               class="weui_btn weui_btn_disabled weui_btn_default">任务已截止</a>
+        </footer>
+        <div class="h60"></div>
+
+        <!--<div>-->
+            <!--<a href="" class={{collection.praiseClass}} title="点赞" ng-click="collectionPraise()"><i-->
+                    <!--class="icon icon-zan"></i>{{collection.praiseCount}}</a>-->
+            <!--<a href="" class={{collection.attentionClass}} title="关注" ng-click="collectionAttention()"><i-->
+                    <!--class="icon icon-gz"></i>{{collection.attentionCount}}</a>-->
+        <!--</div>-->
+    </article>
+    <fc-comment-for-wx ng-if="collection.collectionId" context-id="collection.collectionId" context-type="1"
+                       context-create-user-id="collection.createUserId" enable-adopt="0"
+                       enable-readonly="0" praise-count="collection.praiseCount" praise-state="collection.praiseState"
+                       attention-count="collection.attentionCount"
+                       attention-state="collection.attentionState"></fc-comment-for-wx>
+
+
+</div>
+
+
+

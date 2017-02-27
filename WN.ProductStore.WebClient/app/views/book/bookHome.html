@@ -1,0 +1,58 @@
+<div>
+    <div class="weui_panel weui_panel_access">
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_text">
+                <div class="weui_cell" style="padding: 0">
+                    <h4 class="gallery-title weui_media_title weui_cell_bd weui_cell_primary"><span class="">最新推荐</span></h4>
+                    <a href="" class="weui_cell_ft gallery-more" ng-click="queryMore()">更多 ></a>
+                </div>
+                <div class="weui_media_desc" >
+                    <ul class="show-gallery">
+                        <li ng-repeat="book in BookList" data-ng-click="queryItemById(book)">
+                            <p class="good_book_img">
+                                <img class="weui_media_appmsg_thumb" ng-src="{{::baseUrl}}fileUploadController/showPic/{{book.goodBookSmallPicId}}" alt="" style="width: 60px;height: 80px;">
+                            </p>
+                            <h3 class="good_book_title">{{book.goodBookName}}</h3>
+                            <p class="good_book_recommendby">{{book.createUserName}} 推荐</p>
+                            <div class="good_book_tips">
+                                <span>
+                                    <img ng-if="!book.userPraiseState" src="images/m/icon-zan.png">
+                                    <img ng-if="book.userPraiseState" src="images/m/icon-zan-active.png">{{book.praiseCount}}
+                                </span>
+                                <span><img src="images/m/icon-pl.png">{{book.replyCount}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui_panel weui_panel_access">
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_text">
+                <div class="weui_cell" style="padding: 0">
+                    <h4 class="gallery-title weui_media_title weui_cell_bd weui_cell_primary"><span class="">最受欢迎</span></h4>
+                    <a href="" class="weui_cell_ft gallery-more" ng-click="queryMore()">更多 ></a>
+                </div>
+                <div class="weui_media_desc" >
+                    <ul class="show-gallery">
+                        <li ng-repeat="book in GoodBookList" data-ng-click="queryItemById(book)">
+                            <p class="good_book_img">
+                                <img class="weui_media_appmsg_thumb" ng-src="{{::baseUrl}}fileUploadController/showPic/{{book.goodBookSmallPicId}}" alt="" style="width: 60px;height: 80px;">
+                            </p>
+                            <h3 class="good_book_title">{{book.goodBookName}}</h3>
+                            <p class="good_book_recommendby">{{book.createUserName}} 推荐</p>
+                            <div class="good_book_tips">
+                                <span>
+                                    <img ng-if="!book.userPraiseState" src="images/m/icon-zan.png">
+                                    <img ng-if="book.userPraiseState" src="images/m/icon-zan-active.png">{{book.praiseCount}}
+                                </span>
+                                <span><i class="ico ico-heart"></i>{{book.replyCount}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

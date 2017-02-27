@@ -1,0 +1,90 @@
+<div data-ng-controller="MyResponsibleCollectDetailController" class="articleBg">
+    <article class="weui_article">
+        <h1>{{collection.collectionName}}</h1>
+        <p class="fs12 text-muted" style="margin:0;">
+            <span class="mr20"><a href="#" class="color-primary">{{collection.createUserOrgName}}</a></span>
+            <span>{{collection.createDate | date:'yyyy-MM-dd'}}</span>
+        </p>
+    </article>
+
+    <div class="weui_cells" style="margin-top: 0;">
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>报名截止时间</p>
+            </div>
+            <div ng-if="collection.enrolEndDay>0" class="weui_cell_ft">{{collection.enrolEndDate | date:'yyyy-MM-dd'}}
+            </div>
+            <div ng-if="collection.enrolEndDay<=0" class="weui_cell_ft">报名已截止</div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>任务截止时间</p>
+            </div>
+            <div ng-if="collection.collectionEndDay>0" class="weui_cell_ft">{{collection.collectionEndDate |
+                date:'yyyy-MM-dd'}}
+            </div>
+            <div ng-if="collection.collectionEndDay<=0" class="weui_cell_ft">任务已截止</div>
+        </div>
+    </div>
+
+    <article class="weui_article">
+        <section>
+            <div data-ng-bind-html="collection.collectionContent"></div>
+        </section>
+
+        <h3 ng-if="collection.attachList.length>0">附件</h3>
+        <p data-ng-repeat="attach in collection.attachList">
+            <a href="" ng-click="downLoadAttach(attach.attachId,attach.attachName)" class="text-muted">{{attach.attachName}}</a>
+        </p>
+        <div ng-if="collection.directorsName.length > 0 || collection.participantsName.length >0">
+            <div class="line"></div>
+            <h3 ng-if="collection.directorsName.length > 0">负责人（{{collection.directorsName.length}}）：</h3>
+            <p ng-if="collection.directorsName.length > 0"><span data-ng-repeat="director in collection.directorsName">{{director}}&nbsp;&nbsp;</span>
+            </p>
+            <h3 ng-if="collection.participantsName.length > 0">报名（{{collection.participantsName.length}}）：</h3>
+            <p ng-if="collection.participantsName.length > 0"><span
+                    data-ng-repeat="part in collection.participantsName">{{part}}&nbsp;&nbsp;</span></p>
+        </div>
+        <p ng-if="collection.auditState == 0 && collection.collectionState == 0">
+            <a href="" ng-click="urgeCollection(collection)" class="weui_btn weui_btn_mini weui_btn_primary_2">催办</a>
+        </p>
+        <div ng-if="collection.collectionSubmitted.length > 0">
+            <div class="line"></div>
+            <h3>已上传材料（{{collection.collectionSubmitted.length}}）</h3>
+            <p data-ng-repeat="cs in collection.collectionSubmitted">
+                <a href="" ng-click="downLoadAttach(cs.attachId,cs.attachName)" class="text-muted">{{cs.attachName}}</a>
+            </p>
+        </div>
+
+
+        <div class="h20"></div>
+        <footer>
+            <a ng-if="collection.collectionState == 0 && collection.collectionEndDay > 0 && collection.auditState == 0"
+               ng-click="submitWfzdczyz(collection)" href="" id='show-confirm'
+               class="weui_btn weui_btn_primary">提交征集</a>
+            <a ng-if="collection.collectionState == 0 && collection.collectionEndDay > 0 && collection.auditState != 0"
+               href="javascript:;" class="weui_btn weui_btn_disabled weui_btn_default">已提交征集</a>
+            <a ng-if="collection.collectionState == 0 && collection.collectionEndDay <= 0" href="javascript:;"
+               class="weui_btn weui_btn_disabled weui_btn_default">任务已截止</a>
+            <a ng-if="collection.collectionState != 0" href="javascript:;"
+               class="weui_btn weui_btn_disabled weui_btn_default">任务已结束</a>
+        </footer>
+        <div class="h60"></div>
+        <div>
+            <!--<a href="" ng-click="taskPraise(collection)"-->
+               <!--ng-class="{true:'icon-btn-big active',false:'icon-btn-big'}[collection.praiseState]" title="赞">-->
+                <!--<i class="icon icon-zan"></i>{{collection.praiseCount}}-->
+            <!--</a>-->
+            <!--<a href="" ng-click="attentionTask(collection)"-->
+               <!--ng-class="{true:'icon-btn-big active',false:'icon-btn-big'}[collection.attentionState]" title="关注">-->
+                <!--<i class="icon icon-gz"></i>{{collection.attentionCount}}-->
+            <!--</a>-->
+        </div>
+    </article>
+    <fc-comment-for-wx ng-if="collection.collectionId" context-id="collection.collectionId" context-type="1"
+                       context-create-user-id="collection.createUserId" enable-adopt="0"
+                       enable-readonly="0" praise-count="collection.praiseCount" praise-state="collection.praiseState"
+                       attention-count="collection.attentionCount"
+                       attention-state="collection.attentionState"></fc-comment-for-wx>
+
+</div>

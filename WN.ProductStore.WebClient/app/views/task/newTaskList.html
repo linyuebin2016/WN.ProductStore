@@ -1,0 +1,92 @@
+<!-- create by JonXiao on 2016.11.14 -->
+<div data-ng-controller="NewTaskListController" fc-infinite-scroll="scrollHandler" target="window">
+    <div class="swiper-container" style="width:100%;" data-ng-if="advertisementList.length>0">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="pic in advertisementList" fc-repeat-finish="bannerPlay()" data-ng-click="goDetailPage(pic.activityId,pic.type)">
+                <img ng-src="{{pic.imgUrl}}" style="width:100%;">
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <!-- swiper-container -->
+    <div class="weui_cells weui_cells_access weui_cells_top_no" style="margin-top:0px;">
+        <a class="weui_cell" href="javascript:;" data-ng-click="goMyTaskList()" style="padding:14px 15px;">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>火速报名</p>
+            </div>
+            <div class="weui_cell_ft fs14">我的任务</div>
+        </a>
+    </div>
+
+    <div class="weui_panel weui_panel_access" style="margin-top:-1px;">
+        <div class="weui_panel_bd">
+            <a href="" class="weui_media_box weui_media_appmsg" ng-repeat="data in collectList"  data-ng-click="goCollectDetailPage(data.collectionId)">
+                <div class="weui_media_hd">
+                    <img class="weui_media_appmsg_thumb" src="images/m/tips-czyz.png" alt="">
+                </div>
+                <div class="weui_media_bd">
+                    <h4 class="weui_media_title">{{data.collectionName}}</h4>
+                    <div class="title-info-cell">
+                        <div class="title-info-cell-fl"><span>{{data.createDate | moment}}发布</span></div>
+                        <div class="title-info-cell-fr">
+                            <span class="tips-time" data-ng-if="data.enroleEndDays>0">还有 {{data.enroleEndDays}}天</span>
+                            <span class="tips-time tips-time-hot" data-ng-if="data.enroleEndDays==0">今天截止</span>
+                            <span class="tips-time" data-ng-if="data.enroleEndDays<0">报名截止</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a ng-repeat="task in taskList" href="javascript:void(0);" class="weui_media_box weui_media_appmsg" data-ng-click="goNewTaskDetail(task.taskId)">
+                <div class="weui_media_hd">
+                    <img class="weui_media_appmsg_thumb" src="images/m/tips-sw.png" alt="">
+                </div>
+                <div class="weui_media_bd">
+                    <h4 class="weui_media_title">{{task.taskName}}</h4>
+                    <div class="title-info-cell">
+                        <div class="title-info-cell-fl"><span>{{task.createDate | moment}}发布</span></div>
+                        <div class="title-info-cell-fr">
+                            <span class="tips-zf"><i>{{task.taskIntegral}}</i> 积分</span>
+                            <span class="tips-time" data-ng-if="task.enrollEndDay>0">还有 {{task.enrollEndDay}}天</span>
+                            <span class="tips-time tips-time-hot" data-ng-if="task.enrollEndDay==0">今天截止</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!--<a ng-repeat="draw in drawList" href="javascript:void(0);" class="weui_media_box weui_media_appmsg" data-ng-click="goDrawDetail(draw.id)">-->
+                <!--<div class="weui_media_hd">-->
+                    <!--<img class="weui_media_appmsg_thumb" src="images/m/tips-sw.png" alt="">-->
+                <!--</div>-->
+                <!--<div class="weui_media_bd">-->
+                    <!--<h4 class="weui_media_title">{{draw.name}}</h4>-->
+                <!--</div>-->
+            <!--</a>-->
+        </div>
+        <a class="weui_panel_ft" href="javascript:void(0);" ng-click="goEndRegistration()">查看往期任务</a>
+    </div>
+
+<div class="weui_cells weui_cells_access weui_cells_top_no">
+  <div class="weui_cell" style="padding:14px 15px;">
+    <div class="weui_cell_bd weui_cell_primary">
+      <p>近期动态</p>
+    </div>
+  </div>
+</div>
+
+    <div class="weui_cells weui_cells_access" style="margin-top:-1px;">
+
+        <a class="weui_cell" href="javascript:;" data-ng-repeat="d in dynamicList"  data-ng-click="goDynamicTaskDetail(d.taskId)">
+            <div class="weui_cell_hd" style="margin-top:-23px;">
+                <img data-ng-if="d.praiseCount>=100" src="images/m/icon-fire.png" alt="" width="25">
+                <img data-ng-if="d.praiseCount<100" src="images/m/icon-top.png" alt="" width="25">
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p class="line-white" style="padding-top: 11px">{{d.taskName}}</p>
+                <div class="title-info-cell">
+                    <div class="title-info-cell-fl"><span>{{d.createUserName}}</span></div>
+                    <div class="title-info-cell-fr"><span class="tips-time"><img src="images/m/icon-ren.png">{{d.enrollCount}}</span><span class="tips-time"><img src="images/m/icon-zan.png">{{d.praiseCount}}</span><span class="tips-time"><img src="images/m/icon-pl.png">{{d.commentCount}}</span></div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

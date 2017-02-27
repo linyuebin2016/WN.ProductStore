@@ -1,0 +1,28 @@
+<!-- weui_panel -->
+<div class="pager-top-fixed" ng-controller="MyDoctorTopicListController">
+  <div class="header-tool">
+    <span class="top-btn top-btn-back" onclick="window.history.back()"></span>
+    <h3>{{title}}</h3>
+    <!-- <span class="top-btn"></span> -->
+    <!-- 输入内容后，给 top-btn 这个追加active -->
+  </div>
+  <div class="my_help my_bg">
+    <div class="weui_tab page-ptr-navbar ">
+      <div class="publish_book_wrap tab_nav_second">
+        <div class="weui_navbar" style="position: relative;">
+          <a href="" class="weui_navbar_item weui_bar_item_on" ng-click="gotoTopic(1)">
+              我发布的
+            </a>
+          <a href="" class="weui_navbar_item " ng-click="gotoTopic(2)">
+              我回复的
+            </a>
+
+        </div>
+      </div>
+      <div class="weui_tab_bd" style="padding: 20px 0 0;">
+        <div ui-view></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

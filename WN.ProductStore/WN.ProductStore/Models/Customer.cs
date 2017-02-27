@@ -11,7 +11,6 @@ namespace WN.ProductStore.Models
     public class Customer:BaseEntiy
     {
         public string Name { get; set; }
-        public int Phone1 { get; set; }
         [MaxLength(20)]
         public string Phone { get; set; }
     }

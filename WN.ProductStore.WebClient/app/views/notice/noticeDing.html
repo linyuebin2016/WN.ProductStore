@@ -1,0 +1,9 @@
+<div class="top_notice_eara">
+    <!-- 有消息时显示样式 -->
+     <div data-ng-if="noticeNum>0" data-ng-click="goNotice()"><span >{{noticeNum}}</span><img src="images/m/has_notice_icon.png" alt=""> </div>
+    <!-- 有消息时显示样式  END-->
+
+    <!-- 无消息时显示样式 -->
+    <div data-ng-if="noticeNum<=0" data-ng-click="goNotice()"><img src="images/m/notice_icon.png" alt="" ></div>
+    <!-- 无消息时显示样式 END-->
+</div>

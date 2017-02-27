@@ -9,7 +9,7 @@ using System.Web;
 
 namespace WN.ProductStore.Models
 {
-
+    //[Serializable]
     [Table("Product")]
     public class Product : BaseEntiy
     {
@@ -44,12 +44,15 @@ namespace WN.ProductStore.Models
         public string Color { get; set; }
         [MaxLength(20)]
         public string Size { get; set; }
- 
-        public List<ProductImage> ProductImages { get; set; }
+
+        public  virtual List<ProductImage> ProductImages { get; set; }
         /// <summary>
         /// 产品内容
         /// </summary>
         public string Content { get; set; }
+
+        [MaxLength(250)]
+        public string ImageUrl { get; set; }
 
     }
 }
