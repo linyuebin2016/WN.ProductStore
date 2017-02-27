@@ -34,13 +34,6 @@ define(function (require) {
                 controller: 'ProductAMController',
                 dependencies: ['core/ProductService']
             }).
-            state('stockList', {
-                url: '/stockList',
-                templateUrl: 'views/stock/stock-List.html',
-                controllerUrl: 'controller/StockListController',
-                controller: 'StockListController',
-                dependencies: ['core/StockService']
-            }).
             state('stockIn', {
                 url: '/stockIn',
                 templateUrl: 'views/stock/stockIn.html',
