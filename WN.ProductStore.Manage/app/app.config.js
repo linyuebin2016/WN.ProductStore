@@ -6,7 +6,9 @@ define(function (require, exports, module) {
 
     var app = angular.module('app', ['ui.router']);
 
-    asyncLoader.configure(app);
+    /**基本api路径 */
+    app.value('baseUrl', 'http://10.52.0.87/ProductStore/api');
 
+    asyncLoader.configure(app);
     module.exports = app;
 });
