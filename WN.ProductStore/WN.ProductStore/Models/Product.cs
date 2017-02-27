@@ -45,11 +45,14 @@ namespace WN.ProductStore.Models
         [MaxLength(20)]
         public string Size { get; set; }
 
-        public  List<ProductImage> ProductImages { get; set; }
+        public  virtual List<ProductImage> ProductImages { get; set; }
         /// <summary>
         /// 产品内容
         /// </summary>
         public string Content { get; set; }
+
+        [MaxLength(250)]
+        public string ImageUrl { get; set; }
 
     }
 }
