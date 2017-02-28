@@ -1,0 +1,53 @@
+{
+  "userId": "1065897",
+  "loginName": "13726204142",
+  "userName": "章庆元",
+  "password": "e10adc3949ba59abbe56e057f20f883e",
+  "sex": 0,
+  "userType": 2,
+  "mobile": "13726204142",
+  "userPicId": "5847f85884aed8bd9e08991e",
+  "userOrg": [
+    {
+      "orgId": "1001797",
+      "orgName": "珠海市第九支社",
+      "subOrg": false,
+      "orgType": 0,
+      "orderNo": 0,
+      "nums": 0,
+      "openPermissionFlag": 0,
+      "select": false
+    }
+  ],
+  "errorCode": 0,
+  "userDataType": 0,
+  "updateDate": 1412006400000,
+  "userEmailState": 0,
+  "createTask": false,
+  "createChannel": false,
+  "createGroup": false,
+  "manageChannel": false,
+  "createSpace": false,
+  "manageDimCode": false,
+  "auditItemSchedule": false,
+  "isOnline": 1,
+  "currentCompanyCode": "jsxs",
+  "companyCodeVos": [
+    {
+      "companyCode": "jsxs",
+      "companyName": "九三学社中央委员会",
+      "isUserPermission": true
+    }
+  ],
+  "pwdSecRemind": false,
+  "hasUserPic": 1,
+  "currentIntegral": 182,
+  "manager": false,
+  "stop": false,
+  "partner": false,
+  "spaceManager": false,
+  "editInfo": true,
+  "needLoginCode": false,
+  "authenticated": true,
+  "userOrgs": "珠海市第九支社"
+}
