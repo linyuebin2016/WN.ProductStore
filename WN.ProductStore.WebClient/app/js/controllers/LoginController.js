@@ -31,6 +31,9 @@ define(["app",
 
     function controller($scope, $timeout, $stateParams, $state, $rootScope, UserResource, SessionStorageService, LocalStorageService, UserService, RsaService) {
 
+        // 是否响应后退键
+        $rootScope.setBackButton = false;
+
         var loginStep = $stateParams.loginStep;
         $scope.loginStep = loginStep || LocalStorageService.getItem("login_step") || LOGINSTEP.INITPHONE;
 
@@ -107,10 +110,7 @@ define(["app",
                 LocalStorageService.setItem("auto_login", $scope.loginVo.autoLogin);
                 LocalStorageService.setItem("save_password", $scope.loginVo.saveUser);
                 LocalStorageService.setItem("login_step", LOGINSTEP.LOGIN);
-
-                $scope.currentUser = user;
-
-                $state.go("home.task");
+                $state.go("home.homePage");
             } else {
                 $scope.loginVo.autoLogin = false;
                 $.toast(user.errorMessage);

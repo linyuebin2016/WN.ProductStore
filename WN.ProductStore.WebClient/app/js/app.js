@@ -1,5 +1,5 @@
 define(["angular",
-    "route-config-app",
+    "route-config",
     "postal",
     "angularLocale",
     "uiRoute",

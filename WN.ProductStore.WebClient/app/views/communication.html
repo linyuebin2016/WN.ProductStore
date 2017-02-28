@@ -1,41 +1,41 @@
 <div class="weui_tab" data-ng-controller="CommunicationController">
-
-    <!-- weui_panel -->
-    <div class="pager-top-fixed">
-
-        <div class="weui_tab page-ptr-navbar">
-            <div class="top-fixed">
-                <div class="publish_book_wrap header-tool">
-
-                    <div class="top_notice_eara">
-                        <!-- 有消息时显示样式 -->
-                        <!-- <span>23</span><img src="../../images/m/has_notice_icon.png" alt=""> -->
-                        <!-- 有消息时显示样式  END-->
-                        <!-- 无消息时显示样式 -->
-                        <img src="../../images/m/notice_icon.png" alt="">
-                        <!-- 无消息时显示样式 END-->
-                    </div>
-                    <!-- 有通知时显示下面这个
-            <div class="publish_btn"><img src="../../images/m/has_notice_icon.png" alt=""></div> -->
-                    <div class="weui_navbar" style="position: relative;margin:0 50px;">
-                        <a href="#tab1" class="weui_navbar_item weui_bar_item_on" ui-sref=".doctorTopicList({contextType:4,listType:0})">
-                互助
-              </a>
-                        <a href="#tab2" class="weui_navbar_item" ui-sref=".doctorTopicList({contextType:5,listType:0})">
-                话题
-              </a>
-                    </div>
-                    <span class="top-btn"></span>
-                </div>
-            </div>
-
-            <div class="weui_tab_bd" style="padding-bottom: 0">
-                <!--<div ui-view></div>-->
-                <!--contextType="4" listType="0" -->
-                <!--<div fc-doctortopiclist></div>-->
-                <fc-boook-home></fc-boook-home>
-            </div>
-
-        </div>
+    <div class="weui_navbar top-fixed">
+        <a href="" id="contexttype4" class="weui_navbar_item weui_bar_item_on" ui-sref=".doctorTopicList({contextType:4,listType:0})">
+            互助
+        </a>
+        <a href="" id="contexttype5" class="weui_navbar_item" ui-sref=".doctorTopicList({contextType:5,listType:0})">
+            话题
+        </a>
+        <a href="" id="contexttype6" class="weui_navbar_item" ui-sref=".suggestionList({contextType:6,listType:0})">
+            我的声音
+        </a>
     </div>
+
+    <div class="weui_tab_bd">
+        <div ui-view></div>
+    </div>
+
+<div id="dtdiv45" class="h60" style="display: none"></div>
+<footer id="dtfoot45" class="footer-fixed" style="display: none">
+<div class="weui_tabbar">
+  <a href="" class="weui_tabbar_item" >
+    <p class="weui_tabbar_label" ng-click="gotoTopic(0)">发布新的</p>
+  </a>
+  <a href="" class="weui_tabbar_item">
+    <i id="newRelease" class="weui-badge"  style="display: none"></i>
+    <p class="weui_tabbar_label"  ng-click="gotoTopic(1)">我发布的</p>
+  </a>
+  <a href="" class="weui_tabbar_item">
+    <i id="newReply" class="weui-badge"  style="display: none"></i>
+    <p class="weui_tabbar_label"  ng-click="gotoTopic(2)">我回复的</p>
+  </a>
 </div>
+</footer>
+
+    <!-- 我的声音 -->
+    <footer id="zhuanxie_btm" class="footer-fixed" style="display: none">
+     <a href="" ng-click="publishSuggestion()" class="weui_btn weui_btn_primary">撰写</a>
+    </footer>
+
+</div>
+

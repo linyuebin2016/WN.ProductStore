@@ -1,8 +1,7 @@
 define(["app",
     "jquery",
     "services/BaseService",
-    "services/SessionStorageService",
-    "directives/BoookHome"
+    "services/SessionStorageService"
 ], function (app, $) {
 
     "use strict";
@@ -12,7 +11,7 @@ define(["app",
 
     function controller($scope, $state, $stateParams, BaseService, SessionStorageService, $cookieStore) {
 
-        // $scope.codeLogin().then(function () {
+        $scope.codeLogin().then(function () {
             $scope.baseUrl = BaseService.restfulUrl;
             $scope.runInBrowser = runInBrowser();
             $scope.currentUser = SessionStorageService.getItem("user");
@@ -25,11 +24,11 @@ define(["app",
             $scope.goDoctorTopic = function (contextType, listType) {
                 $state.go("home.communication.doctorTopicList", {contextType: contextType, listType: listType});
             };
-            // 缺省显示求医问药
-            // if ($stateParams.contextType == undefined) {
-            //     $scope.contextType = 4;
-            //     $scope.goDoctorTopic(4, 0);
-            // }
+            //缺省显示求医问药
+            if ($stateParams.contextType == undefined) {
+                $scope.contextType = 4;
+                $scope.goDoctorTopic(4, 0);
+            }
 
             //转到新发布，我发布的，我回复的
             $scope.gotoTopic = function gotoTopic(type) {
@@ -75,7 +74,7 @@ define(["app",
                     $(".weui_tab_bd .weui_tab_bd_item").eq(index).siblings(".weui_tab_bd .weui_tab_bd_item").removeClass("weui_tab_bd_item_active").end().addClass("weui_tab_bd_item_active");
                 });
             }
-        // })
+        })
 
     }
 

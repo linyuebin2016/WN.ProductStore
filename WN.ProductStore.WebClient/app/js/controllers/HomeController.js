@@ -4,50 +4,25 @@ define(["app",
     "services/WebsocketService",
     "services/BaseService",
     "services/MenuService",
-    "services/UserService",
+    "services/SessionStorageService",
+    "services/LocalStorageService",
+    "services/WebAppService",
     "resources/UserResource"
 ], function (app) {
 
     "use strict";
 
-    var deps = ["$scope", "$q", "$state", "$interval", "$rootScope", "MenuService", "UserResource", "WebsocketService", "BaseService", 'UserService'];
+    var deps = ["$scope", "$q", "$state", "$interval", "$rootScope", "$timeout", "MenuService", "UserResource", "WebsocketService", "BaseService", 'SessionStorageService', 'LocalStorageService', 'WebAppService'];
     var config;
 
-    function controller($scope, $q, $state, $interval, $rootScope, MenuService, UserResource, WebsocketService, BaseService, UserService) {
-
-        /* 公用属性 */
+    function controller($scope, $q, $state, $interval, $rootScope, $timeout, MenuService, UserResource, WebsocketService, BaseService, SessionStorageService, LocalStorageService, WebAppService) {
 
         $scope.baseUrl = BaseService.restfulUrl;
-        // 是否运行在浏览器
         $scope.runInBrowser = runInBrowser();
-        // 当前用户
-        $scope.currentUser = UserService.getCurrentUser() || {};
-        // 跳转
-        $scope.goto = function (path) {
-            path = 'home.' + path
-            $state.go(path);
-        }
-        $scope.goback = function () {
-            window.history.back();
-        }
-        // 判断当前路由
-        $scope.stateIs = function (path) {
-            return $state.is('home.' + path);
-        }
-        // 是否app主界面
-        $scope.isAppMain = function () {
-            switch ($state.current.name) {
-                case"home.task":// 首页/任务
-                case"home.communication":// 交流
-                case"home.discover":// 发现
-                case"home.myself":// 我
-                    return true;
-                    break;
-                default:
-                    return false;
-                    break;
-            }
-        };
+        $scope.currentUser;
+
+        var href = window.location.href;
+        var code = href.replace(/^.*?code=([\w]*?)&.*?$/, "$1");
 
         // android响应实体后退键
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -61,18 +36,61 @@ define(["app",
         }
 
         function eventBackButton() {
-            switch ($state.current.name) {
-                // 不响应后退
-                case"home.login":// 登录
-                case"home.task":// 首页/任务
-                case"home.communication":// 交流
-                case"home.discover":// 发现
-                case"home.myself":// 我
-                    break;
-                default:
-                    window.history.back();
-                    break;
+            if ($rootScope.setBackButton) {
+                window.history.back();
             }
+        }
+
+        $scope.goBack = function () {
+            window.history.back();
+        }
+
+        // 应用入口必须调用【微信登陆】
+        $scope.codeLogin = function () {
+            var defer = $q.defer();
+            var temp = SessionStorageService.getItem("user");
+            if (temp != null) {
+                $scope.currentUser = temp;
+                WebsocketService.open();
+                LocalStorageService.setItem("user", temp);
+                defer.resolve(temp);
+            } else {
+                console.log(code);
+
+                // 区别app/微信登录
+
+                if (WebAppService.isWebApp()) {
+                    // app登录
+                    $state.go("home.login");
+                }
+                else {
+                    // wx登录
+                    UserResource.codeLogin({
+                        "code": code,
+                        "loginType": 1
+                    }, function (user) {
+                        if (user.authenticated) {
+                            WebsocketService.open();
+                            $scope.currentUser = user;
+                            SessionStorageService.setItem("user", user);
+                            LocalStorageService.setItem("user", user);
+                            queryRedPack();// 查询红包，登陆的时候查一次，返回的时候不用，否则会调用两次
+                            defer.resolve(user);
+                        }
+                        else {
+                            alert("登录失败");
+                        }
+                    }, function () {
+                        alert("登录失败");
+                    });
+                }
+            }
+            return defer.promise;
+        }
+
+        $scope.goto = function (path) {
+            path = 'home.' + path
+            $state.go(path);
         }
 
         $scope.$on("$destroy", function destroyHome() {
@@ -84,7 +102,6 @@ define(["app",
             WebsocketService.send('HBT1');
         }, 60 * 1000);
 
-        // 红包
         function showRedPack(ContextType) {
             if ($scope.currentUser && $scope.currentUser.userOrg && $scope.currentUser.userOrg.length > 0) {
                 ContextType += (ContextType.length == 0 ? "" : ",") + $scope.currentUser.userOrg[0].orgId
@@ -111,7 +128,6 @@ define(["app",
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             if (toState) {
-                // TODO:待完成后进行路由调整为app
                 ContextType = MenuService.queryContextTypeByLocationURLforWX(toState, toParams);
                 if (ContextType != null) {
                     showRedPack(ContextType);
@@ -120,7 +136,6 @@ define(["app",
         })
 
         function queryRedPack() {
-            // TODO:待完成后进行路由调整为app
             ContextType = MenuService.queryContextTypeByLocationURLforWX({
                 templateUrl: window.location.hash
             });
