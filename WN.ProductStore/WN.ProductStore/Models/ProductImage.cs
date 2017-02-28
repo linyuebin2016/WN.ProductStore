@@ -10,7 +10,7 @@ namespace WN.ProductStore.Models
 {
 
     [Table("ProductImage")]
-    public class ProductImage:BaseEntiy
+    public class ProductImage:BaseEntity
     {
         public ProductImage()
         {

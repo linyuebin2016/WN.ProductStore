@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WN.ProductStore.Models
 {
-    public class User:BaseEntiy
+    public class User:BaseEntity
     {
         public string Name { get; set; }
         public string Account { get; set; }

@@ -7,7 +7,7 @@ using System.Web;
 namespace WN.ProductStore.Models
 {
     [Table("OrderDetail")]
-    public class OrderDetail:BaseEntiy
+    public class OrderDetail:BaseEntity
     {
         public Guid ProductId { get; set; }
         /// <summary>

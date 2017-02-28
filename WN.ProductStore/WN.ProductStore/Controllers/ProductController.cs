@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.Common;
-using System.Data.Entity.Core.EntityClient;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using WN.ProductStore.Models;
@@ -18,6 +13,7 @@ namespace WN.ProductStore.Controllers
     public class ProductController : ApiController
     {
         DBContext db = new DBContext();
+        ProductDal dal = new ProductDal();
         // GET api/<controller>
         public ProductListView GetProductList(int pageIndex, int pageSize, string name)
         {
@@ -66,13 +62,13 @@ namespace WN.ProductStore.Controllers
         }
 
         [HttpPost]
-        public void Update(Product product)
+        public bool Update(Product product)
         {
-            db.Entry(product).State = System.Data.Entity.EntityState.Modified;
-            db.Product.Attach(product);
-            db.SaveChanges();
+            dal.Update(product);
+            return true;
         }
 
+        [HttpGet]
         // DELETE api/<controller>/5
         public void Delete(Guid id)
         {

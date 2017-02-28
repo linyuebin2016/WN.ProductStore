@@ -9,7 +9,7 @@ namespace WN.ProductStore.Models
     /// <summary>
     /// 库存历史记录
     /// </summary>
-    public class StockHistroy:BaseEntiy
+    public class StockHistroy:BaseEntity
     {
         public StockHistroy()
         {

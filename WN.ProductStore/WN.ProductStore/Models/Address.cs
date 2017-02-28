@@ -7,7 +7,7 @@ using System.Web;
 namespace WN.ProductStore.Models
 {
     [Table("Address")]
-    public class Address:BaseEntiy
+    public class Address:BaseEntity
     {
         public Guid CustomerId { get; set; }
         public string AddressName { get; set; }

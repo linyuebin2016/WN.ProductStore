@@ -8,7 +8,7 @@ using System.Web;
 namespace WN.ProductStore.Models
 {
     [Table("Customer")]
-    public class Customer:BaseEntiy
+    public class Customer:BaseEntity
     {
         public string Name { get; set; }
         [MaxLength(20)]

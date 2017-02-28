@@ -8,7 +8,7 @@ using System.Web;
 namespace WN.ProductStore.Models
 {
 
-    public class BaseEntiy
+    public class BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
