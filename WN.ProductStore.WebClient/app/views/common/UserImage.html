@@ -1,6 +1,0 @@
-<div style="display: inline-block;">
-    <!--<img class="weui_media_appmsg_thumb" ng-src="{{::baseUrl}}fileUploadController/showPic/{{ userImage }}" alt="">-->
-    <img ng-if="user.userPicId && imageType==0" width="45" height="45" data-ng-src="{{::baseUrl}}fileUploadController/showPic/{{ userImage }}"  ng-click="gotoUserCard()">
-    <img ng-if="!user.userPicId && imageType==0" width="45" height="45" data-ng-src="{{::baseUrl}}userimage/{{ userId }}"  ng-click="gotoUserCard()">
-    <h4 ng-if="imageType==1" class="color-primary" ng-click="gotoUserCard()">{{userName}}</h4>
-</div>

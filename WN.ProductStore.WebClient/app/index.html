@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta content="telephone=no" name="format-detection" />
+    <title>ProductStore 1.0</title>
+    <link rel="icon" href="images/logo32.ico" type="image/x-icon" />
+    <!--css-start-->
+    <link type="text/css" rel="stylesheet" href="css/weui.min.css">
+    <!--css-end-->
+</head>
+
+<body>
+    <div data-ui-view></div>
+    <script type="text/javascript">
+        window.requireNode = window.require;
+        window.require = undefined;
+    </script>
+    <!--<script type="text/javascript" src="cordova.js"></script>-->
+    <!--chenweizhi 2017-02-09 此注释用来app端启用cordova，勿删-->
+    <script type="text/javascript" src="js/lib/require/require.js" data-main="js/main.js"></script>
+</body>
+
+</html>
