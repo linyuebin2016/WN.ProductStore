@@ -45,9 +45,9 @@
                                     <a ng-if="item.imgSrc" ng-click="img_del(item)">删除</a>
                                 </td>
                             </tr>-->
-                            <tr>
+                            <tr ng-if="productDetail.ImageUrl!=undefine">
                                 <td class="panel-body gallery">
-                                    <img ng-src="{{baseImgServer}}{{productDetail.ImageUrl}}" class="img-rounded" style="width: 140px;height: 140px">
+                                    <img  ng-src="{{baseImgServer}}{{productDetail.ImageUrl}}" class="img-rounded" style="width: 140px;height: 140px">
                                     <div class="clearfix">{{item.imgName}}</div>
                                     <a ng-if="item.imgSrc" ng-click="img_del(item)">删除</a>
                                 </td>
