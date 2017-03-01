@@ -2,6 +2,10 @@
     <div>
         <div class="header">
             <h1>{{title}}</h1>
+            <ul class="breadcrumb">
+                <li><a href="" onclick="window.history.back()">商品列表</a> </li>
+                <li class="active">商品详细</li>
+            </ul>
         </div>
         <table class="admin-table" border="0" cellspacing="0" cellpadding="0">
             <!--<tr>
@@ -78,7 +82,7 @@
             <tr>
                 <td class="td1"></td>
                 <td>
- 
+
                     <button onclick="window.history.back()" class="vs-bt bt-default">确定</button>
                 </td>
             </tr>
