@@ -34,6 +34,13 @@ define(function (require) {
                 controller: 'ProductAMController',
                 dependencies: ['core/ProductService']
             }).
+            state('productDetail', {
+                url: '/productDetail/:spid',
+                templateUrl: 'views/product/productDetail.html',
+                controllerUrl: 'controller/ProductDetailController',
+                controller: 'ProductDetailController',
+                dependencies: ['core/ProductService']
+            }).
             state('stockIn', {
                 url: '/stockIn',
                 templateUrl: 'views/stock/stockIn.html',
@@ -55,17 +62,17 @@ define(function (require) {
             state('customerList', {
                 url: '/customerList',
                 templateUrl: 'views/customer/customerList.html',
-               controllerUrl: 'controller/CustomerController',
-               controller: 'CustomerController',
+                controllerUrl: 'controller/CustomerController',
+                controller: 'CustomerController',
                 dependencies: ['core/CustomerService']
             }).
             state('customerAdd', {
                 url: '/customerAdd',
                 templateUrl: 'views/customer/customer-add-modify.html',
-               controllerUrl: 'controller/CustomerAddController',
-               controller: 'CustomerAddController',
+                controllerUrl: 'controller/CustomerAddController',
+                controller: 'CustomerAddController',
                 dependencies: ['core/CustomerService']
-            })  ;
+            });
         }
     ]);
 });

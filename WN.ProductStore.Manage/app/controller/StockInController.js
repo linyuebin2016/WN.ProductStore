@@ -8,11 +8,11 @@ define(function (require) {
         function ($scope, StockService, $state) {
             $scope.queryString = "";
             $scope.pageIndex = 1;
-            $scope.pageList = [];
+
             StockService.GetProductStockList($scope.pageIndex, $scope.queryString).success(function (response) {
                 $scope.Stocks = response.ProductStockList;
-                $scope.pageCount = Math.ceil(response.TotalCount / 10);
 
+                $scope.pageCount = Math.ceil(response.TotalCount / 10);
                 for (var i = 0; i < $scope.pageCount; i++) {
                     $scope.pageList.push(i + 1);
                 }
@@ -30,6 +30,9 @@ define(function (require) {
                     $scope.Stocks = response.ProductStockList;
                 });
             }
+
+            /**分页信息 */
+            $scope.pageList = [];
 
             $scope.selectPage = function (page) {
                 if (Number.isNaN(page) || page < 0) {
@@ -50,7 +53,6 @@ define(function (require) {
             $scope.Next = function () {
                 $scope.selectPage($scope.selPage + 1);
             };
-
 
         }
     ]);

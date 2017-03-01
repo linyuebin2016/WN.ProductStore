@@ -17,14 +17,15 @@
         <div id="blog-posts">
 
           <div class="row padding-bottom" ng-repeat="p in productList">
-            <div class="col-md-4">
+            <div class="col-md-4" ng-click="goDetail(p.Id)">
               <a href=""><img ng-src="{{baseImgServer}}{{p.ImageUrl}}" class="img-rounded"></a>
 
             </div>
             <div class="col-md-8">
               <div class="post-summary">
-                <h3 style="margin-top: 0px;"><a href="premium-blog-item.html">{{p.Name}}</a></h3>
+                <h3 style="margin-top: 0px;" ng-click="goDetail(p.Id)"><a href="">{{p.Name}}</a></h3>
                 <p class="text-sm">{{p.CreateTime | date:'yyyy-MM-dd'}}</p>
+                <p>产品编号:{{p.ProductNo}}</p>
                 <p class="sp-text" ng-if="p.Introduction != null">
                   {{p.Introduction}}
                 </p>
@@ -41,14 +42,12 @@
         </div>
 
         <div style="text-align: center;">
-          <ul class="fancy pagination">
-            <li><a href="#">上一页</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">下一页</a></li>
+          <ul class="pagination">
+            <li><a href="" ng-click="Previous()">上一页</a></li>
+            <li ng-repeat="page in pageList">
+              <a href="" ng-click="selectPage(page)">{{page}}</a>
+            </li>
+            <li><a href="" ng-click="Next()">下一页</a></li>
           </ul>
           <div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">

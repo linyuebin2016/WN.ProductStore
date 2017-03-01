@@ -1,0 +1,87 @@
+<div class="content">
+    <div>
+        <div class="header">
+            <h1>{{title}}</h1>
+        </div>
+        <table class="admin-table" border="0" cellspacing="0" cellpadding="0">
+            <!--<tr>
+                <td class="td1"><em class="red">*</em>商品分类</td>
+                <td>
+                  
+                </td>
+            </tr>-->
+            <tr ng-if="isEdit">
+                <td class="td1"><em class="red">*</em>商品编号</td>
+                <td>
+                    {{productDetail.ProductNo}}
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><em class="red">*</em>商品名称</td>
+                <td>
+                    {{productDetail.Name}}
+                </td>
+            </tr>
+            <tr>
+                <td class="td1">封面图片</td>
+                <td>
+                    <div class="panel panel-default">
+                        <img ng-src="{{baseImgServer}}{{productDetail.ImageUrl}}" class="img-rounded" style="width: 140px;height: 140px">
+
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="td1"><em class="red">*</em>商品尺寸</td>
+                <td>
+                    {{productDetail.Size}}
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><em class="red">*</em>商品颜色</td>
+                <td>
+                    {{productDetail.Color}}
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><em class="red">*</em>商品简介</td>
+                <td>
+                    {{productDetail.Introduction}}
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><em class="red">*</em>正文</td>
+                <td>
+                    <div ng-bind-html="productDetail.Content"></div>
+                </td>
+            </tr>
+            <!--<tr>
+                <td class="td1"><em class="red">*</em>正文</td>
+                <td>
+                    <div ng-bind-html="productDetail.Content"></div>
+                </td>
+            </tr>-->
+            <!--<tr>
+                <td class="td1"><em class="red">*</em>商品有效日期</td>
+                <td>
+                    <div class="input-group">
+                        <input type="text" class="form-control form_datetime" data-date-format="yyyy-mm-dd" placeholder=""/>
+                        <span class="input-group-addon" id="basic-addon2">
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        </span>
+                    </div>
+                </td>
+            </tr>-->
+
+            <tr>
+                <td class="td1"></td>
+                <td>
+ 
+                    <button onclick="window.history.back()" class="vs-bt bt-default">确定</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
