@@ -59,6 +59,7 @@ define(function (require) {
                     stockId: null
                 }
             }).
+            //客户管理
             state('customerList', {
                 url: '/customerList',
                 templateUrl: 'views/customer/customerList.html',
@@ -72,7 +73,16 @@ define(function (require) {
                 controllerUrl: 'controller/CustomerAddController',
                 controller: 'CustomerAddController',
                 dependencies: ['core/CustomerService']
+            }).
+            //订单管理
+            state('orderList', {
+                url: '/orderList',
+                templateUrl: 'views/order/orderList.html',
+                controllerUrl: 'controller/order/OrderListController',
+                controller: 'OrderListController',
+                dependencies: ['core/OrderService']
             });
+
         }
     ]);
 });

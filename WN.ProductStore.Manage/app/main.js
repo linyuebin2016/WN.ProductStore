@@ -60,6 +60,7 @@ require.config({
     },
     deps:['moment','datetimepicker-cn','ueditor-cn','angular-sanitize']
 });
+
 require(['angular', './app-routes'], function (angular) {
     angular.element(document).ready(function () {
         angular.bootstrap(document, ['app']);

@@ -51,6 +51,18 @@
   </div>
   <div class="sidebar-nav">
     <ul>
+      <!--订单管理-->
+      <li>
+        <a href="#" data-target=".order-menu" class="nav-header" data-toggle="collapse">
+          <i class="fa fa-fw fa-dashboard"></i> 订单管理<i class="fa fa-collapse"></i>
+        </a>
+      </li>
+      <li>
+        <ul class="order-menu nav nav-list collapse in">
+          <li><a ui-sref="orderList"><span class="fa fa-caret-right"></span> 订单列表</a></li>
+        </ul>
+      </li>
+      <!--商品管理-->
       <li>
         <a href="#" data-target=".dashboard-menu" class="nav-header" data-toggle="collapse">
           <i class="fa fa-fw fa-dashboard"></i> 商品管理<i class="fa fa-collapse"></i>
