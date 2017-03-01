@@ -7,7 +7,9 @@ define(function (require) {
     app.controller('ProductListController', ['$scope', '$state', 'ProductService', 'baseImgServer',
         function ($scope, $state, ProductService, baseImgServer) {
             $scope.baseImgServer = baseImgServer;
-
+            $scope.pageIndex = 1;
+            $scope.pageSize = 10;
+            $scope.queryString = "";
             getList();
 
             //修改商品
@@ -34,7 +36,7 @@ define(function (require) {
             }
 
             function getList() {
-                ProductService.getProductList().success(function (response) {
+                ProductService.getProductList($scope.pageIndex, $scope.pageSize, $scope.queryString).success(function (response) {
                     $scope.productList = response.Products;
 
                     $scope.pageCount = Math.ceil(response.TotalCount / 10);
@@ -44,6 +46,10 @@ define(function (require) {
                 });
             }
 
+            /**搜索 */
+            $scope.seach = function () {
+                getList();
+            }
 
             /**分页信息 */
             $scope.pageList = [];

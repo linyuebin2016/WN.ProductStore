@@ -9,12 +9,12 @@ define(function (require) {
 
         return {
             //获取商品列表
-            getProductList: function () {
+            getProductList: function (pageIndex,pageSize,queryString) {
                 return $http.get(baseUrl + '/Product/GetProductList', {
                     params: {
                         pageIndex: 1,
                         pageSize: 10,
-                        name: ''
+                        queryString: queryString
                     }
                 })
             },

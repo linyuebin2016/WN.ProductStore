@@ -15,15 +15,16 @@ namespace WN.ProductStore.Controllers
         DBContext db = new DBContext();
         ProductDal dal = new ProductDal();
         // GET api/<controller>
-        public ProductListView GetProductList(int pageIndex, int pageSize, string name)
+        public ProductListView GetProductList(int pageIndex, int pageSize, string queryString)
         {
             ProductListView list = new ProductListView();
             List<Product> products;
             
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(queryString))
             {
-                products= db.Product.Where(p => p.Name.Contains(name)).OrderBy(i => i.Id).ToPage<Product>(pageIndex, pageSize).ToList();
-                list.TotalCount = db.Product.Where(p => p.Name.Contains(name)).Count();
+                var query = db.Product.Where(p => p.Name.Contains(queryString)||p.ProductNo.Contains(queryString));
+                products = query.OrderBy(i => i.Id).ToPage<Product>(pageIndex, pageSize).ToList();
+                list.TotalCount = query.Count();
             }
             else
             {
