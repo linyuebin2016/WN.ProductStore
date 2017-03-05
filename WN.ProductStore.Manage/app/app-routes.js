@@ -33,7 +33,7 @@ define(function (require) {
                 controllerUrl: 'controller/ProductAMController',
                 controller: 'ProductAMController',
                 dependencies: ['core/ProductService']
-            }).
+            }). 
             state('stockList', {
                 url: '/stockList',
                 templateUrl: 'views/stock/stock-List.html',
@@ -71,7 +71,10 @@ define(function (require) {
                 templateUrl: 'views/customer/customer-add-modify.html',
                controllerUrl: 'controller/CustomerAddController',
                controller: 'CustomerAddController',
-                dependencies: ['core/CustomerService']
+                dependencies: ['core/CustomerService'],
+                 params: {
+                    customerid: null
+                }
             })  ;
         }
     ]);

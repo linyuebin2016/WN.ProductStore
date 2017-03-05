@@ -1,5 +1,5 @@
 define(function (require) {
-    var angular = require('angular');    var app = require('../app.config');
+    var angular = require('angular'); var app = require('../app.config');
     app.service('CustomerService', ['$http', function ($http) {
         var requestUrl = "http://192.168.1.111/ProductStore/api";
         var pageSize = 10;
@@ -36,7 +36,27 @@ define(function (require) {
                 })
 
             },
+            //获取客户
+            GetDetail: function (id) {
+                return $http.get(requestUrl + "/customer/GetCustomer", {
+                    params: {
+                        id: id
+                    }
+                })
 
+            },
+            //更新客户
+            
+            UpdateCustomer: function (customer) {
+                var transFn = function (customer) {
+                    return $.param(customer);
+                };
+                var postCfg = {
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                    transformRequest: transFn
+                };
+                return $http.post(requestUrl + "/customer/Update", customer, postCfg);
+            },
 
 
         };
