@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -12,6 +13,7 @@ namespace WN.ProductStore.Controllers
     public class CustomerController : ApiController
     {
         DBContext db = new DBContext();
+        [HttpGet]
         public object GetCustomerList(int pageIndex, int pageSize, string queryString)
         {
             IQueryable<Customer> queryCustomer = db.Customer;
@@ -28,6 +30,9 @@ namespace WN.ProductStore.Controllers
         public void AddCustomer(Customer customer)
         {
             customer.Id = Guid.NewGuid();
+
+
+
             db.Customer.Add(customer);
             db.SaveChanges();
         }
@@ -44,8 +49,12 @@ namespace WN.ProductStore.Controllers
         [HttpPost]
         public void Update(Customer customer)
         {
-            db.Entry(customer).State = System.Data.Entity.EntityState.Modified;
-            db.Customer.Attach(customer);
+            //db.Entry(customer).State = System.Data.Entity.EntityState.Modified;
+            //db.Customer.Attach(customer);
+            //db.SaveChanges();
+
+            db.Set<Customer>().Attach(customer);
+            db.Entry(customer).State = EntityState.Modified;
             db.SaveChanges();
         }
 
