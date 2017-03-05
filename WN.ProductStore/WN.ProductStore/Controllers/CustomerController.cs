@@ -48,5 +48,12 @@ namespace WN.ProductStore.Controllers
             db.Customer.Attach(customer);
             db.SaveChanges();
         }
+
+        [HttpGet]
+        public Customer GetCustomer(Guid id)
+        {
+           return db.Customer.FirstOrDefault(i => i.Id == id);
+
+        }
     }
 }
