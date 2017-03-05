@@ -4,14 +4,15 @@
 define(function (require) {
     var app = require('../app.config');
 
-    app.controller('ProductAMController', ['$scope','$http','$sce','$state','$stateParams','ProductService',
-        function ($scope,$http,$sce,$state,$stateParams,ProductService) {
+    app.controller('ProductAMController', ['$scope', '$http', '$sce', '$state', '$stateParams', 'ProductService', 'baseImgServer',
+        function ($scope, $http, $sce, $state, $stateParams, ProductService, baseImgServer) {
+            $scope.baseImgServer = baseImgServer;
 
             $('.form_datetime').datetimepicker({
                 minView: "month", //选择日期后，不会再跳转去选择时分秒
-                language:  'zh-CN',
+                language: 'zh-CN',
                 format: 'yyyy-mm-dd',
-                todayBtn:  1,
+                todayBtn: 1,
                 autoclose: 1
             });
 
@@ -19,31 +20,37 @@ define(function (require) {
                 height: 300,
                 lang: 'zh-CN',
                 placeholder: '请输入内容...',
-                disableDragAndDrop:true,
-                //callbacks: {
-                //    onImageUpload: function(files, editor, $editable) {
-                //        sendFile(files);
-                //    }
-                //}
+                disableDragAndDrop: true,
             });
 
             $scope.productDetail = {};
+            $scope.productImages = [];
+            $scope.productImage = {
+                url: null,
+                ProductId: null
+            };
             var spid = $stateParams.spid;
-
-            if (spid !=null && spid !="") {
+            $scope.isEdit = false;
+            $scope.title = "新增商品";
+            if (spid != null && spid != "") {
                 getProductDetail(spid);
+                $scope.isEdit = true;
+                $scope.title = "商品更新";
             }
 
             function getProductDetail(spid) {
                 ProductService.getProductDetail(spid).success(function (response) {
-                    $scope.productDetail = response.Product;
-                    $('#summernote_sp').summernote('code',$scope.productDetail.Content);
+                    $scope.productDetail = response;
+                    $('#summernote_sp').summernote('code', $scope.productDetail.Content);
                     $scope.productDetail.Content = $sce.trustAsHtml($scope.productDetail.Content);
+                    $scope.productImage.ProductId = $scope.productDetail.Id;
+                    $scope.productImgUrl = $scope.productDetail.ImageUrl;
                 });
             }
 
-            $scope.save = function() {
+            $scope.save = function () {
                 $scope.productDetail.Content = $('#summernote_sp').summernote('code');
+                $scope.productDetail.ProductImages = $scope.productImages;
                 ProductService.saveProduct($scope.productDetail).success(function (resultJson) {
                     alert(resultJson + "新增成功");
                 }).error(function (e) {
@@ -51,70 +58,70 @@ define(function (require) {
                 });
             };
 
-            function sendFile(files) {
+            //上传的时候提交图片
+            $scope.thumb = [];
+            $scope.img_upload = function (files) {
                 var data = new FormData();
-                data.append("ajaxTaskFile", files[0]);
-                $.ajax({
-                    data : data,
-                    type : "POST",
-                    url : "http://10.52.0.87/ProductStroe/api/Image/ImgUpload",
-                    cache : false,
-                    contentType : false,
-                    processData : false,
-                    dataType : "json",
-                    success: function(data) {
-                        $('#summernote_sp').summernote('insertImage', data.data);
-                    },
-                    error:function(){
-                        alert("上传失败");
-                    }
-                });
-            }
-
-            $scope.reader = new FileReader();   //创建一个FileReader接口
-            $scope.form = {     //用于绑定提交内容，图片或其他数据
-                image:{}
-            };
-            $scope.thumb = {};      //用于存放图片的base64
-            $scope.thumb_default = {    //用于循环默认的‘加号’添加图片的框
-                1111:{}
-            };
-
-            $scope.img_upload = function(files) {       //单次提交图片的函数
-                $scope.guid = (new Date()).valueOf();   //通过时间戳创建一个随机数，作为键名使用
-                $scope.reader.readAsDataURL(files[0]);  //FileReader的方法，把图片转成base64
-                $scope.reader.onload = function(ev) {
-                    $scope.$apply(function(){
-                        $scope.thumb[$scope.guid] = {
-                            imgSrc : ev.target.result //接收base64
-                        }
-                    });
-                };
-                var data = new FormData();      //以下为像后台提交图片数据
                 data.append('image', files[0]);
-                data.append('guid',$scope.guid);
 
-                ProductService.uploadImg(data).success(function(resp) {
-                    if (resp.result_code == 'SUCCESS') {
-                        $scope.thumb[$scope.guid] = {
-                            imgSrc : "http://10.52.0.87/ProductStroe" + resp.imgUrl
-                        };
+                ProductService.uploadImg(data).success(function (resp) {
+                    if (resp.errmsg == '上传成功') {
+                        $scope.productDetail.ImageUrl = resp.imgUrl;
+                        $scope.productImgUrl = $scope.productDetail.ImageUrl;
+                        // $scope.productImage = {
+                        //     url:null,
+                        //     ProductId:$scope.productDetail.Id
+                        // };
+                        // $scope.img = {
+                        //     imgName:null,
+                        //     imgSrc:null,
+                        //     imgDelSrc:null
+                        // };
+                        // $scope.img.imgName = resp.imgUrl.split("/")[4];
+                        // $scope.img.imgSrc = "http://10.52.0.87/ProductStore" + resp.imgUrl;
+                        // $scope.img.imgDelSrc = resp.imgUrl;
+                        // $scope.productImage.url = resp.imgUrl;
+                        // $scope.productImages.push($scope.productImage);
+                        // $scope.thumb.push($scope.img);
                     }
-                    if(resp.result_code == 'FAIL'){
+                    if (resp.result_code == 'FAIL') {
                         console.log(resp)
                     }
                 })
             };
 
-            //删除，删除的时候thumb和form里面的图片数据都要删除，避免提交不必要的
-            $scope.img_del = function(key) {
-                var guidArr = [];
-                for(var p in $scope.thumb){
-                    guidArr.push(p);
-                }
-                delete $scope.thumb[guidArr[key]];
-                delete $scope.form.image[guidArr[key]];
+            //删除封面图片
+            $scope.img_del = function (img) {
+                ProductService.delUploadImg(img).success(function (resp) {
+                    if (resp) {
+                        $scope.thumbTemp = [];
+                        $scope.productImages = [];
+                        for (var i = 0; i < $scope.thumb.length; i++) {
+                            if ($scope.thumb[i].imgName != img.imgName) {
+                                $scope.productImage = {
+                                    url: null,
+                                    ProductId: $scope.productDetail.Id
+                                };
+                                $scope.productImage.url = $scope.thumb[i].imgDelSrc;
+                                $scope.productImages.push($scope.productImage);
+                                $scope.thumbTemp.push($scope.thumb[i]);
+                            }
+                        }
+                        $scope.thumb = $scope.thumbTemp;
+                    }
+                });
             };
+
+            //更新
+            $scope.update = function () {
+                $scope.productDetail.Content = $('#summernote_sp').summernote('code');
+                ProductService.update($scope.productDetail).success(function (resultJson) {
+                    alert("更新成功");
+                    window.history.back();
+                }).error(function (e) {
+                    console.log('系统异常');
+                });
+            }
 
         }
     ]);

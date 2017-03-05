@@ -241,3 +241,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /WN.ProductStore/WN.ProductStore/UpLoadFiles
+/WN.ProductStore.Manage/.vscode
+/WN.ProductStore.WebClient/.vscode

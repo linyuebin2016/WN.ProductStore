@@ -43,4 +43,22 @@ namespace WN.ProductStore.Enums
         /// </summary>
         Out
     }
+
+    //public static object GetEnumsSource()
+    //{
+    //    Type enumType = typeof(CostEnum); // 获取类型对象  
+    //    var enumFields = enumType.GetFields();    //获取字段信息对象集合  
+    //    List<object> list = new List<object>();
+    //    foreach (FieldInfo field in enumFields)
+    //    {
+    //        var e1 = new ee()
+    //        {
+    //            Name = field.Name,
+    //            Value = (int)field.GetRawConstantValue()
+    //        };
+    //        list.Add(e1); ;
+    //        ;
+    //    }
+    //    return list;
+    //}
 }

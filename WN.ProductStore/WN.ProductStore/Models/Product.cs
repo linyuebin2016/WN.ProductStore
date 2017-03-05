@@ -11,7 +11,7 @@ namespace WN.ProductStore.Models
 {
     //[Serializable]
     [Table("Product")]
-    public class Product : BaseEntiy
+    public class Product : BaseEntity
     {
         public Product()
         {
@@ -45,11 +45,14 @@ namespace WN.ProductStore.Models
         [MaxLength(20)]
         public string Size { get; set; }
 
-        public  List<ProductImage> ProductImages { get; set; }
+        //public List<ProductImage> ProductImages { get; set; }
         /// <summary>
         /// 产品内容
         /// </summary>
         public string Content { get; set; }
+
+        [MaxLength(250)]
+        public string ImageUrl { get; set; }
 
     }
 }

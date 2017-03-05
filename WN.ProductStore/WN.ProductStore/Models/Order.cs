@@ -8,7 +8,7 @@ using WN.ProductStore.Enums;
 namespace WN.ProductStore.Models
 {
     [Table("Order")]
-    public class Order:BaseEntiy
+    public class Order:BaseEntity
     {
         public Order()
         {

@@ -7,7 +7,7 @@ using System.Web;
 namespace WN.ProductStore.Models
 {
     [Table("Stock")]
-    public class Stock:BaseEntiy
+    public class Stock:BaseEntity
     {
         public Stock()
         {

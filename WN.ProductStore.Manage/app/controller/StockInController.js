@@ -8,11 +8,11 @@ define(function (require) {
         function ($scope, StockService, $state) {
             $scope.queryString = "";
             $scope.pageIndex = 1;
-            $scope.pageList = [];
+
             StockService.GetProductStockList($scope.pageIndex, $scope.queryString).success(function (response) {
                 $scope.Stocks = response.ProductStockList;
-                $scope.pageCount = Math.ceil(response.TotalCount / 10);
 
+                $scope.pageCount = Math.ceil(response.TotalCount / 10);
                 for (var i = 0; i < $scope.pageCount; i++) {
                     $scope.pageList.push(i + 1);
                 }
@@ -31,15 +31,20 @@ define(function (require) {
                 });
             }
 
-            $scope.selectPage = function (page) {
+            /**分页信息 */
+            $scope.pageList = [];
 
+            $scope.selectPage = function (page) {
+                if (Number.isNaN(page) || page < 0) {
+                    return;
+                }
                 //因为只显示5个页数，大于2页开始分页转换
                 $scope.Stocks = [];
                 StockService.GetProductStockList(page, $scope.queryString).success(function (response) {
                     $scope.Stocks = response.ProductStockList;
                 });
             };
-        
+
             //上一页
             $scope.Previous = function () {
                 $scope.selectPage($scope.selPage - 1);
@@ -48,7 +53,6 @@ define(function (require) {
             $scope.Next = function () {
                 $scope.selectPage($scope.selPage + 1);
             };
-
 
         }
     ]);

@@ -1,0 +1,14 @@
+<div ng-controller="HomeController">
+    <div ng-class="{'pager-top-fixed':setBackButton}">
+        <div class="header-tool" ng-if="setBackButton">
+            <span class="top-btn top-btn-back" data-ng-click="goBack()">返回</span>
+            <h3>社员之家</h3>
+             <span class="top-btn">&nbsp;&nbsp;</span>
+        </div>
+
+        <div ui-view></div>
+    </div>
+
+    <div fc-loading></div>
+    <div fc-open-redpack></div>
+</div>

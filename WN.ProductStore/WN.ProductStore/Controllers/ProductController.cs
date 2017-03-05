@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.Common;
-using System.Data.Entity.Core.EntityClient;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using WN.ProductStore.Models;
@@ -18,16 +13,18 @@ namespace WN.ProductStore.Controllers
     public class ProductController : ApiController
     {
         DBContext db = new DBContext();
+        ProductDal dal = new ProductDal();
         // GET api/<controller>
-        public ProductListView GetProductList(int pageIndex, int pageSize, string name)
+        public ProductListView GetProductList(int pageIndex, int pageSize, string queryString)
         {
             ProductListView list = new ProductListView();
             List<Product> products;
             
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(queryString))
             {
-                products= db.Product.Where(p => p.Name.Contains(name)).OrderBy(i => i.Id).ToPage<Product>(pageIndex, pageSize).ToList();
-                list.TotalCount = db.Product.Where(p => p.Name.Contains(name)).Count();
+                var query = db.Product.Where(p => p.Name.Contains(queryString)||p.ProductNo.Contains(queryString));
+                products = query.OrderBy(i => i.Id).ToPage<Product>(pageIndex, pageSize).ToList();
+                list.TotalCount = query.Count();
             }
             else
             {
@@ -66,13 +63,13 @@ namespace WN.ProductStore.Controllers
         }
 
         [HttpPost]
-        public void Update(Product product)
+        public bool Update(Product product)
         {
-            db.Entry(product).State = System.Data.Entity.EntityState.Modified;
-            db.Product.Attach(product);
-            db.SaveChanges();
+            dal.Update(product);
+            return true;
         }
 
+        [HttpGet]
         // DELETE api/<controller>/5
         public void Delete(Guid id)
         {
