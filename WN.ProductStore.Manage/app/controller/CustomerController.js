@@ -25,18 +25,19 @@ define(function (require) {
             $scope.seach = function () {
                 getCustomerList();
             }
-            $scope.goAdd = function (product, stockId) {
+             //修改客户
+            $scope.modifyCustomer = function (customerid) {
                 $state.go("customerAdd", {
-                    product: product,
-                    stockId: stockId
+                    customerid: customerid
                 });
-            }
+            };
 
+       
             $scope.selectPage = function (page) {
-
+debugger;
                 //因为只显示5个页数，大于2页开始分页转换
                 $scope.Stocks = [];
-                CustomerService.GetCustomerList(page, $scope.queryString).success(function (response) {
+                CustomerService.GetCustomerList(page, $scope.pageSize, $scope.queryString).success(function (response) {
                     $scope.customers = response.ProductStockList;
                 });
             };
@@ -55,6 +56,7 @@ define(function (require) {
             $scope.Delete = function (id) {
                 CustomerService.DeleteCustomer(id).success(function (resultJson) {
                     alert(resultJson + "删除成功");
+                     getCustomerList();
                 }).error(function (e) {
                     console.log('系统异常');
                 });

@@ -1,18 +1,7 @@
 <div class="content"  >
     <div>
         <table class="admin-table" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td class="td1"><em class="red">*</em>客户新增</td>
-                <td>
-                    <select class="form-control" style="width: 320px">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </td>
-            </tr>
+         
            
             <tr>
                 <td class="td1"><em class="red">*</em>客户名称</td>
@@ -32,7 +21,8 @@
             <tr>
                 <td class="td1"></td>
                 <td>
-                    <button data-ng-click="save()" class="vs-bt bt-primary mr20">发布</button>
+                     <button ng-if="isEdit" data-ng-click="update()" class="vs-bt bt-primary mr20">修改</button>
+                    <button   ng-if="!isEdit" data-ng-click="save()" class="vs-bt bt-primary mr20">保存</button>
                     <button data-ng-click="cancel()" class="vs-bt bt-default">取消</button>
                 </td>
             </tr>
