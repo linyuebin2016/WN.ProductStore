@@ -82,6 +82,13 @@ define(function (require) {
                 params: {
                     customerid: null
                 }
+            }).
+            state('orderList', {
+                url: '/orderList',
+                templateUrl: 'views/order/orderList.html',
+                controllerUrl: 'controller/order/OrderListController',
+                controller: 'OrderListController',
+                dependencies: ['core/OrderService']
             });
         }
     ]);

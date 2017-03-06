@@ -1,7 +1,7 @@
 define(function (require) {
     var app = require('../app.config');
     app.service('OrderService', ['$http', 'baseUrl', function ($http, baseUrl) {
-        var baseUrl = "http://localhost/ProductStore/api";
+   
         var pageSize = 10;
         return {
             GetOrderList: function (pageIndex, pageSize, queryString) {

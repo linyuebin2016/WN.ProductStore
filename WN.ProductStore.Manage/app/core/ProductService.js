@@ -42,7 +42,7 @@ define(function (require) {
                 return $http.post(baseUrl + "/Product/Add", product, postCfg);
             },
 
-            //新增商品信息
+            //更新商品信息
             update: function (product) {
                 var transFn = function (product) {
                     return $.param(product);

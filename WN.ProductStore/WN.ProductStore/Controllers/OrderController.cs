@@ -13,8 +13,9 @@ namespace WN.ProductStore.Controllers
     public class OrderController : ApiController
     {
         DBContext db = new DBContext(); 
+        [HttpGet]
         // GET: api/Order
-        public OrderListView GetOrderList(int pageIndex, int pageSize)
+        public OrderListView GetOrderList(int pageIndex, int pageSize, string queryString)
         {
             OrderListView view = new OrderListView();
             view.Orders = db.Order.OrderByDescending(o => o.CreateTime).ToPage(pageIndex, pageSize).ToList();
@@ -48,7 +49,7 @@ namespace WN.ProductStore.Controllers
         /// 下订单
         /// </summary>
         /// <param name="order"></param>
-        public void PlaceOrder(Order order)
+        public void AddOrder(Order order)
         {
             db.Order.Add(order);
             db.SaveChanges();

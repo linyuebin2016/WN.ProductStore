@@ -48,9 +48,19 @@ namespace WN.ProductStore.Controllers
             var view = new ProductView();
             var images = db.ProductImage.Where(i => i.ProductId == id).ToList();
             view.Product = db.Product.FirstOrDefault(i => i.Id == id);
-            view.ProductImage = images;
+            view.ProductImages = images;
             return view;
         }
+
+        // PUT api/<controller>/5
+        //[HttpPost]
+        //public void Add(Product product)
+        //{
+        //    product.Id = Guid.NewGuid();
+        //    product.ProductNo = DateTime.Now.ToString("yyMMddss");
+        //    db.Product.Add(product);
+        //    db.SaveChanges();
+        //}
 
         // PUT api/<controller>/5
         [HttpPost]
@@ -59,24 +69,17 @@ namespace WN.ProductStore.Controllers
             product.Id = Guid.NewGuid();
             product.ProductNo = DateTime.Now.ToString("yyMMddss");
             db.Product.Add(product);
-            db.SaveChanges();
-        }
-
-        // PUT api/<controller>/5
-        [HttpPost]
-        public void Add(Product product,List<string> imageUrls)
-        {
-            product.Id = Guid.NewGuid();
-            product.ProductNo = DateTime.Now.ToString("yyMMddss");
-            db.Product.Add(product);
-
-            foreach (var item in imageUrls)
+            if (product.ProductImages != null)
             {
-                var image = new ProductImage();
-                image.Url = item;
-                image.ProductId = product.Id;
-                db.ProductImage.Add(image);
+                foreach (var item in product.ProductImages)
+                {
+                    var image = new ProductImage();
+                    image.Url = item;
+                    image.ProductId = product.Id;
+                    db.ProductImage.Add(image);
+                }
             }
+   
 
             db.SaveChanges();
         }

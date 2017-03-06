@@ -22,6 +22,8 @@ namespace WN.ProductStore.Models
         public decimal Total { get; set; }
         public OrderState OrderState { get; set; }
         public Guid CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
+
+        public virtual List<OrderDetail> OrderDetails { get; set; }
     }
 }

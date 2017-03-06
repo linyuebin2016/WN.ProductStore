@@ -49,10 +49,11 @@ define(function (require) {
                 });
             }
 
+						//保存图片
             $scope.save = function () {
                 $scope.productDetail.Content = $('#summernote_sp').summernote('code');
-                $scope.productDetail.ProductImages = $scope.productImages;
                 $scope.productDetail.ImageUrl = $scope.productImgUrl;
+                $scope.productDetail.ProductImages = $scope.productImages;
                 ProductService.saveProduct($scope.productDetail).success(function (resultJson) {
                     alert(resultJson + "新增成功");
                 }).error(function (e) {
@@ -81,10 +82,6 @@ define(function (require) {
                 data.append('image', files[0]);
                 ProductService.uploadImg(data).success(function (resp) {
                     if (resp.errmsg == '上传成功') {
-                         $scope.productImage = {
-                             url:null,
-                             ProductId:$scope.productDetail.Id
-                         };
                          $scope.img = {
                              imgName:null,
                              imgSrc:null,
@@ -93,8 +90,7 @@ define(function (require) {
                          $scope.img.imgName = resp.imgUrl.split("/")[4];
                          $scope.img.imgSrc = baseImgServer + resp.imgUrl;
                          $scope.img.imgDelSrc = resp.imgUrl;
-                         $scope.productImage.url = resp.imgUrl;
-                         $scope.productImages.push($scope.productImage);
+                         $scope.productImages.push(resp.imgUrl);
                          $scope.thumb.push($scope.img);
                     }
                     if (resp.result_code == 'FAIL') {
@@ -104,24 +100,32 @@ define(function (require) {
             };
 
             //删除封面图片
-            $scope.img_del = function (imgUrl) {
-                ProductService.delUploadImg(imgUrl).success(function (resp) {
+            $scope.img_del = function (img,type) {
+            		if(type == 1){
+            			$scope.imgUrl = img;
+            		} else {
+            			$scope.imgUrl = img.imgDelSrc
+            		}
+                ProductService.delUploadImg($scope.imgUrl).success(function (resp) {
                     if (resp) {
-                        $scope.productImgUrl = null;
-                        $scope.thumbTemp = [];
-                        $scope.productImages = [];
-                        for (var i = 0; i < $scope.thumb.length; i++) {
-                            if ($scope.thumb[i].imgName != img.imgName) {
-                                $scope.productImage = {
-                                    url: null,
-                                    ProductId: $scope.productDetail.Id
-                                };
-                                $scope.productImage.url = $scope.thumb[i].imgDelSrc;
-                                $scope.productImages.push($scope.productImage);
-                                $scope.thumbTemp.push($scope.thumb[i]);
+                    	if(type == 1){
+                    			$scope.productImgUrl = null;
+                    	}else {
+                    		$scope.thumbTemp = [];
+                            $scope.productImages = [];
+                            for (var i = 0; i < $scope.thumb.length; i++) {
+                                if ($scope.thumb[i].imgName != img.imgName) {
+                                    $scope.productImage = {
+                                        url: null,
+                                        ProductId: $scope.productDetail.Id
+                                    };
+                                    $scope.productImage.url = $scope.thumb[i].imgDelSrc;
+                                    $scope.productImages.push($scope.productImage);
+                                    $scope.thumbTemp.push($scope.thumb[i]);
+                                }
                             }
-                        }
-                        $scope.thumb = $scope.thumbTemp;
+                            $scope.thumb = $scope.thumbTemp;
+                    	}
                     }
                 });
             };

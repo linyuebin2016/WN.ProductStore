@@ -24,18 +24,18 @@ namespace WN.ProductStore.Controllers
 
         public void AddProduct()
         {
-            Models.Product model = new Models.Product();
-            model.Introduction = "11111";
-            model.Name = "computer";
-            model.Price = 123;
+            //Models.Product model = new Models.Product();
+            //model.Introduction = "11111";
+            //model.Name = "computer";
+            //model.Price = 123;
 
-            List<ProductImage> listImg = new List<ProductImage>();
+            //List<ProductImage> listImg = new List<ProductImage>();
 
-            ProductImage img = new ProductImage();
-            img.Url = "111111";
-            listImg.Add(img);
-            //model.ProductImages = listImg;
-            p.Add(model);
+            //ProductImage img = new ProductImage();
+            //img.Url = "111111";
+            //listImg.Add(img);
+            ////model.ProductImages = listImg;
+            //p.Add(model);
         }
     }
 }

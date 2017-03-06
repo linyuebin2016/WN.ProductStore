@@ -37,11 +37,11 @@
                             <tr>
                                 <td style="color: red">(请选择1张封面图片)</td>
                             </tr>
-                            <tr ng-if="$scope.productImgUrl != null">
+                            <tr ng-if="productImgUrl != null">
                                 <td class="panel-body gallery">
-                                    <img  ng-src="{{baseImgServer}}{{$scope.productImgUrl}}" class="img-rounded" style="width: 140px;height: 140px">
+                                    <img  ng-src="{{baseImgServer}}{{productImgUrl}}" class="img-rounded" style="width: 140px;height: 140px">
                                     <div class="clearfix"></div>
-                                    <a ng-if="$scope.productImgUrl != null" ng-click="img_del($scope.productImgUrl)">删除</a>
+                                    <a ng-if="productImgUrl != null" ng-click="img_del(productImgUrl,1)">删除</a>
                                 </td>
                             </tr>
                         </table>
@@ -89,7 +89,7 @@
                                 <td class="panel-body gallery" ng-repeat="item in thumb">
                                     <img ng-src="{{item.imgSrc}}" class="img-rounded" style="width: 140px;height: 140px">
                                     <div class="clearfix"></div>
-                                    <a ng-if="item.imgSrc" ng-click="img_del(item.imgDelSrc)">删除</a>
+                                    <a ng-if="item.imgSrc" ng-click="img_del(item,2)">删除</a>
                                 </td>
                             </tr>
                         </table>
