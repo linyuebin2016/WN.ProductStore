@@ -22,18 +22,25 @@ define(function (require) {
                 }).
             state('product', {
                 url: '/product',
-                templateUrl: 'product/product-list.html',
+                templateUrl: 'views/product/product-list.html',
                 controllerUrl: 'controller/ProductListController',
                 controller: 'ProductListController',
                 dependencies: ['core/ProductService']
             }).
             state('productAM', {
                 url: '/productAM/:spid',
-                templateUrl: 'product/product-add-modify.html',
+                templateUrl: 'views/product/product-add-modify.html',
                 controllerUrl: 'controller/ProductAMController',
                 controller: 'ProductAMController',
                 dependencies: ['core/ProductService']
-            }). 
+            }).
+            state('productDetail', {
+                url: '/productDetail/:spid',
+                templateUrl: 'views/product/productDetail.html',
+                controllerUrl: 'controller/ProductDetailController',
+                controller: 'ProductDetailController',
+                dependencies: ['core/ProductService']
+            }).
             state('stockList', {
                 url: '/stockList',
                 templateUrl: 'views/stock/stock-List.html',
@@ -62,20 +69,20 @@ define(function (require) {
             state('customerList', {
                 url: '/customerList',
                 templateUrl: 'views/customer/customerList.html',
-               controllerUrl: 'controller/CustomerController',
-               controller: 'CustomerController',
+                controllerUrl: 'controller/CustomerController',
+                controller: 'CustomerController',
                 dependencies: ['core/CustomerService']
             }).
             state('customerAdd', {
                 url: '/customerAdd',
                 templateUrl: 'views/customer/customer-add-modify.html',
-               controllerUrl: 'controller/CustomerAddController',
-               controller: 'CustomerAddController',
+                controllerUrl: 'controller/CustomerAddController',
+                controller: 'CustomerAddController',
                 dependencies: ['core/CustomerService'],
-                 params: {
+                params: {
                     customerid: null
                 }
-            })  ;
+            });
         }
     ]);
 });

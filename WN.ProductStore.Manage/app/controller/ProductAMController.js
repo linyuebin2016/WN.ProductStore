@@ -7,7 +7,8 @@ define(function (require) {
     app.controller('ProductAMController', ['$scope', '$http', '$sce', '$state', '$stateParams', 'ProductService', 'baseImgServer',
         function ($scope, $http, $sce, $state, $stateParams, ProductService, baseImgServer) {
             $scope.baseImgServer = baseImgServer;
-
+            //商品封面图片URL
+            $scope.productImgUrl = null;
             $('.form_datetime').datetimepicker({
                 minView: "month", //选择日期后，不会再跳转去选择时分秒
                 language: 'zh-CN',
@@ -40,7 +41,7 @@ define(function (require) {
 
             function getProductDetail(spid) {
                 ProductService.getProductDetail(spid).success(function (response) {
-                    $scope.productDetail = response;
+                    $scope.productDetail = response.Product;
                     $('#summernote_sp').summernote('code', $scope.productDetail.Content);
                     $scope.productDetail.Content = $sce.trustAsHtml($scope.productDetail.Content);
                     $scope.productImage.ProductId = $scope.productDetail.Id;
@@ -51,6 +52,7 @@ define(function (require) {
             $scope.save = function () {
                 $scope.productDetail.Content = $('#summernote_sp').summernote('code');
                 $scope.productDetail.ProductImages = $scope.productImages;
+                $scope.productDetail.ImageUrl = $scope.productImgUrl;
                 ProductService.saveProduct($scope.productDetail).success(function (resultJson) {
                     alert(resultJson + "新增成功");
                 }).error(function (e) {
@@ -58,31 +60,42 @@ define(function (require) {
                 });
             };
 
-            //上传的时候提交图片
+            //封面图片上传
             $scope.thumb = [];
-            $scope.img_upload = function (files) {
+            $scope.fmImg_upload = function (files) {
                 var data = new FormData();
                 data.append('image', files[0]);
-
                 ProductService.uploadImg(data).success(function (resp) {
                     if (resp.errmsg == '上传成功') {
-                        $scope.productDetail.ImageUrl = resp.imgUrl;
-                        $scope.productImgUrl = $scope.productDetail.ImageUrl;
-                        // $scope.productImage = {
-                        //     url:null,
-                        //     ProductId:$scope.productDetail.Id
-                        // };
-                        // $scope.img = {
-                        //     imgName:null,
-                        //     imgSrc:null,
-                        //     imgDelSrc:null
-                        // };
-                        // $scope.img.imgName = resp.imgUrl.split("/")[4];
-                        // $scope.img.imgSrc = "http://10.52.0.87/ProductStore" + resp.imgUrl;
-                        // $scope.img.imgDelSrc = resp.imgUrl;
-                        // $scope.productImage.url = resp.imgUrl;
-                        // $scope.productImages.push($scope.productImage);
-                        // $scope.thumb.push($scope.img);
+                        $scope.productImgUrl = resp.imgUrl;
+                    }
+                    if (resp.result_code == 'FAIL') {
+                        console.log(resp)
+                    }
+                })
+            };
+
+            //轮播图片上传
+            $scope.lbImg_upload = function (files) {
+                var data = new FormData();
+                data.append('image', files[0]);
+                ProductService.uploadImg(data).success(function (resp) {
+                    if (resp.errmsg == '上传成功') {
+                         $scope.productImage = {
+                             url:null,
+                             ProductId:$scope.productDetail.Id
+                         };
+                         $scope.img = {
+                             imgName:null,
+                             imgSrc:null,
+                             imgDelSrc:null
+                         };
+                         $scope.img.imgName = resp.imgUrl.split("/")[4];
+                         $scope.img.imgSrc = baseImgServer + resp.imgUrl;
+                         $scope.img.imgDelSrc = resp.imgUrl;
+                         $scope.productImage.url = resp.imgUrl;
+                         $scope.productImages.push($scope.productImage);
+                         $scope.thumb.push($scope.img);
                     }
                     if (resp.result_code == 'FAIL') {
                         console.log(resp)
@@ -91,9 +104,10 @@ define(function (require) {
             };
 
             //删除封面图片
-            $scope.img_del = function (img) {
-                ProductService.delUploadImg(img).success(function (resp) {
+            $scope.img_del = function (imgUrl) {
+                ProductService.delUploadImg(imgUrl).success(function (resp) {
                     if (resp) {
+                        $scope.productImgUrl = null;
                         $scope.thumbTemp = [];
                         $scope.productImages = [];
                         for (var i = 0; i < $scope.thumb.length; i++) {

@@ -43,13 +43,13 @@ namespace WN.ProductStore.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public Product GetProduct(Guid id)
+        public ProductView GetProduct(Guid id)
         {
-            //var view = new ProductView();
+            var view = new ProductView();
             var images = db.ProductImage.Where(i => i.ProductId == id).ToList();
-            var product = db.Product.FirstOrDefault(i => i.Id == id);
-            //product.ProductImages = images;
-            return product;
+            view.Product = db.Product.FirstOrDefault(i => i.Id == id);
+            view.ProductImage = images;
+            return view;
         }
 
         // PUT api/<controller>/5
@@ -59,6 +59,25 @@ namespace WN.ProductStore.Controllers
             product.Id = Guid.NewGuid();
             product.ProductNo = DateTime.Now.ToString("yyMMddss");
             db.Product.Add(product);
+            db.SaveChanges();
+        }
+
+        // PUT api/<controller>/5
+        [HttpPost]
+        public void Add(Product product,List<string> imageUrls)
+        {
+            product.Id = Guid.NewGuid();
+            product.ProductNo = DateTime.Now.ToString("yyMMddss");
+            db.Product.Add(product);
+
+            foreach (var item in imageUrls)
+            {
+                var image = new ProductImage();
+                image.Url = item;
+                image.ProductId = product.Id;
+                db.ProductImage.Add(image);
+            }
+
             db.SaveChanges();
         }
 

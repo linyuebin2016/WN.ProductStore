@@ -13,9 +13,7 @@ require.config({
         'angular-async-loader': 'common/angular-async-loader/angular-async-loader.min',
         'angular-ui-router': 'common/angular-ui-route/angular-ui-router',
         'angular-animate': 'common/angular-animate/angular-animate',
-        'angular-sanitize': 'common/angular/angular-sanitize',
         'angular-resource': 'common/angular-resource/angular-resource',
-        'jquery-knob': 'common/jQuery-Knob/js/jquery.knob',
         'datetimepicker': 'common/datetimepicker/js/bootstrap-datetimepicker',
         'datetimepicker-cn':'common/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN',
         'ueditor':'common/ueditor/summernote.min',
@@ -27,14 +25,11 @@ require.config({
             exports: 'bootstrap'
         },
         'angular': {
-            deps: ['jquery','bootstrap','jquery-knob'],
+            deps: ['jquery','bootstrap'],
             exports: 'angular'
         },
         'angular-ui-router': {
             deps: ['angular']
-        },
-        'jquery-knob': {
-            deps: ['jquery']
         },
         'moment': {
             exports : "moment"
@@ -58,7 +53,7 @@ require.config({
             deps:['angular']
         }
     },
-    deps:['moment','datetimepicker-cn','ueditor-cn','angular-sanitize']
+    deps:['moment','datetimepicker-cn','ueditor-cn']
 });
 
 require(['angular', './app-routes'], function (angular) {

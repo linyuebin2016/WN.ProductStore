@@ -35,21 +35,13 @@
                     <div class="panel panel-default">
                         <table class="table">
                             <tr>
-                                <td color="red">(请选择1张封面图片)</td>
+                                <td style="color: red">(请选择1张封面图片)</td>
                             </tr>
-
-                            <!--<tr>
-                                <td class="panel-body gallery" ng-repeat="item in thumb">
-                                    <img ng-src="{{item.imgSrc}}" class="img-rounded" style="width: 140px;height: 140px">
-                                    <div class="clearfix">{{item.imgName}}</div>
-                                    <a ng-if="item.imgSrc" ng-click="img_del(item)">删除</a>
-                                </td>
-                            </tr>-->
-                            <tr ng-if="productDetail.ImageUrl!=undefine">
+                            <tr ng-if="$scope.productImgUrl != null">
                                 <td class="panel-body gallery">
-                                    <img  ng-src="{{baseImgServer}}{{productDetail.ImageUrl}}" class="img-rounded" style="width: 140px;height: 140px">
-                                    <div class="clearfix">{{item.imgName}}</div>
-                                    <a ng-if="item.imgSrc" ng-click="img_del(item)">删除</a>
+                                    <img  ng-src="{{baseImgServer}}{{$scope.productImgUrl}}" class="img-rounded" style="width: 140px;height: 140px">
+                                    <div class="clearfix"></div>
+                                    <a ng-if="$scope.productImgUrl != null" ng-click="img_del($scope.productImgUrl)">删除</a>
                                 </td>
                             </tr>
                         </table>
@@ -61,7 +53,7 @@
                 <td class="td1"></td>
                 <td>
                     <label>
-                        <input type="file" id="one-input" accept="image/*" file-model="images" onchange="angular.element(this).scope().img_upload(this.files)"/>
+                        <input type="file" id="one-input" accept="image/*" file-model="images" onchange="angular.element(this).scope().fmImg_upload(this.files)"/>
                     </label>
                 </td>
             </tr>
@@ -83,6 +75,33 @@
                 <td class="td1"><em class="red">*</em>商品简介</td>
                 <td>
                     <textarea class="form-control" ng-model="productDetail.Introduction" rows="3" style="resize: none; width: 320px"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1">轮播图片</td>
+                <td>
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <tr>
+                                <td style="color: red">(提示：最多选择4张封面图片)</td>
+                            </tr>
+                            <tr>
+                                <td class="panel-body gallery" ng-repeat="item in thumb">
+                                    <img ng-src="{{item.imgSrc}}" class="img-rounded" style="width: 140px;height: 140px">
+                                    <div class="clearfix"></div>
+                                    <a ng-if="item.imgSrc" ng-click="img_del(item.imgDelSrc)">删除</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"></td>
+                <td>
+                    <label>
+                        <input type="file" id="four-input" accept="image/*" file-model="images" onchange="angular.element(this).scope().lbImg_upload(this.files)"/>
+                    </label>
                 </td>
             </tr>
             <tr>

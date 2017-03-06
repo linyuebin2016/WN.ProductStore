@@ -20,9 +20,10 @@ define(function (require) {
                 $scope.title = "商品详细";
             }
 
+
             function getProductDetail(spid) {
                 ProductService.getProductDetail(spid).success(function (response) {
-                    $scope.productDetail = response;
+                    $scope.productDetail = response.Product;
                     $('#summernote_sp').summernote('code', $scope.productDetail.Content);
                     $scope.productDetail.Content = $sce.trustAsHtml($scope.productDetail.Content);
 

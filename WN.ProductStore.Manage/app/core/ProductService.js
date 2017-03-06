@@ -70,10 +70,10 @@ define(function (require) {
             },
 
             //删除上传的图片
-            delUploadImg: function (img) {
+            delUploadImg: function (imgUrl) {
                 return $http.get(baseUrl + '/Image/DeleteImage', {
                     params: {
-                        url: img.imgDelSrc
+                        url: imgUrl
                     }
                 })
             },
