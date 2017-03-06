@@ -17,7 +17,7 @@ namespace WN.ProductStore.Controllers
         public OrderListView GetOrderList(int pageIndex, int pageSize)
         {
             OrderListView view = new OrderListView();
-            view.Orders = db.Order.OrderByDescending(o=>o.CreateTime).Skip(pageIndex).Take(pageSize).ToList();
+            view.Orders = db.Order.OrderByDescending(o => o.CreateTime).ToPage(pageIndex, pageSize).ToList();
             view.TotalCount = db.Order.Count();
             return view;
         }
