@@ -19,17 +19,17 @@
     <table class="table table-bordered">
       <thead>
         <tr class="info">
-          <th>编号</th>
-          <th>名称</th>
-          <th>数量</th>
+          <th>日期</th>
+          <th>订单编号</th>
+
           <th style="width: 3.5em;">操作</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="stock in Stocks">
-          <td>{{stock.Product.ProductNo}}</td>
-          <td>{{stock.Product.Name}}</td>
-          <td>{{stock.Quantity}}</td>
+        <tr ng-repeat="order in orders">
+          <td>{{order.CreateTime|date:'yyyy-MM-dd'}}</td>
+          <td>{{order.OrderNo}}</td>
+      
           <td>
             <a href="" ng-click="goAdd(stock.Product,stock.StockId)"><i class="glyphicon glyphicon-plus-sign"></i></a>
           </td>

@@ -15,7 +15,7 @@ define(function (require) {
 
             function getOrderList() {
                 OrderService.GetOrderList($scope.pageIndex, $scope.pageSize, $scope.queryString).success(function (response) {
-                    $scope.orders = response;
+                    $scope.orders = response.Orders;
 
                 });
             }

@@ -24,6 +24,6 @@ namespace WN.ProductStore.Models
         public Guid CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
 
-        public virtual List<OrderDetail> OrderDetails { get; set; }
+        //public virtual List<OrderDetail> OrderDetails { get; set; }
     }
 }
