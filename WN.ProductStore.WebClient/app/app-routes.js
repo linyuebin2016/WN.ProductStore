@@ -39,7 +39,10 @@ define(function (require) {
                 templateUrl: 'views/product/productDetail.html',
                 controllerUrl: 'controller/ProductDetailController',
                 controller: 'ProductDetailController',
-                dependencies: ['core/ProductService']
+                dependencies: ['core/ProductService'],
+                params: {
+                    spid: null
+                }
             }).
             state('stockList', {
                 url: '/stockList',
