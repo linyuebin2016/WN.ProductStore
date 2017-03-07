@@ -1,0 +1,225 @@
+<header>
+  <div class="new-header">
+    <a href="javascript:pageBack();" class="new-a-back" id="backUrl"><span>返回</span></a>
+    <h2>商品列表</h2>
+    <a href="javascript:void(0)" id="btnJdkey" class="new-a-jd"><span>京东键</span></a>
+  </div>
+  <div class="new-jd-tab" style="display:none" id="jdkey">
+    <div class="new-tbl-type">
+      <a href="../index.html@sid=e0d0f025d6d3e8e8d7be5428c43ef911" class="new-tbl-cell">
+        <span class="icon">首页</span>
+        <p style="color:#6e6e6e;">首页</p>
+      </a>
+      <a href="../category/all.html@sid=e0d0f025d6d3e8e8d7be5428c43ef911" class="new-tbl-cell">
+        <span class="icon2">分类搜索</span>
+        <p style="color:#6e6e6e;">分类搜索</p>
+      </a>
+      <a href="javascript:void(0)" id="html5_cart" class="new-tbl-cell">
+        <span class="icon3">购物车</span>
+        <p style="color:#6e6e6e;">购物车</p>
+      </a>
+      <a href="../user/home.action@sid=e0d0f025d6d3e8e8d7be5428c43ef911" class="new-tbl-cell">
+        <span class="icon4">我的京东</span>
+        <p style="color:#6e6e6e;">我的京东</p>
+      </a>
+    </div>
+  </div>
+</header>
+<input type="hidden" id="page" value="1" />
+<input type="hidden" id="module" value="2" />
+
+<div class="new-ct">
+  <div class="new-search new-goods-lst">
+    <div class="new-goods-tab">
+      <span class="tit">玩具城<a href="" class="link-acition">产品列表</a></span>
+      <div class="new-goods-btn">
+        <a id="m2" href="1.html" class="new-g-tbn">列表图</a>
+        <a id="m1" href="2.html" class="new-g-tbn2">列表</a>
+        <a id="m3" href="3.html" class="new-g-tbn3">放大</a>
+      </div>
+    </div>
+
+    <!--<div class="new-goods-img-lst new-tbl-type">
+      <div class="new-tbl-cell" ng-repeat="product in productList">
+        <a href="" class="new-goods-section">
+          <div class="new-img-box">
+            <img imgsrc="" ng-src="{{baseImgServer}}{{product.ImageUrl}}"
+              onerror="this.src=''" width="130" height="130" alt="" class="new-goods-img">
+            <span class="new-goods-txt new-p-re">
+                                <strong class="new-txt">{{product.Name}}</strong>
+                                <span class="new-txt2" style="color:red">
+																	</span>
+            </span>
+          </div>
+        </a>
+      </div>
+   
+    </div>-->
+
+
+    <ul class="new-mu_l2w">
+      <li class="new-mu_l2" ng-repeat="product in productList">
+        <a href="../product/1.html" class="new-mu_l2a">
+          <span class="new-mu_tmb"><img ng-src="{{baseImgServer}}{{product.ImageUrl}}"   width="100" height="100"  alt=""/></span>
+          <span class="new-mu_l2cw">
+                  <strong class="new-mu_l2h">{{product.Name}} {{product.Size}}</strong>
+                    <span class="new-mu_l2h new-mu_l2h-v1"><span class="new-txt-rd2">{{product.Introduction}}</span></span>
+          <span class="new-mu_l2c new-p-re"><strong class="new-txt-rd2">&yen;{{product.Price}}</strong>
+						<span class="new-txt-price" style="color:red">
+    												</span>
+          </span>
+          </span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</div>
+
+
+<div class="new-paging">
+  <div class="new-tbl-type">
+    <div class="new-tbl-cell">
+      <span class="new-a-prve"><span>上一页</span></span>
+    </div>
+    <div class="new-tbl-cell new-p-re">
+      <div class="new-a-page">
+        <span class="new-open">1/5</span>
+      </div>
+      <select class="new-select" onChange="window.location.href=this.value">
+                                 </select>
+    </div>
+    <div class="new-tbl-cell">
+      <a class="new-a-next"><span>下一页</span></a>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    var m = $('#module').val();
+    $('#m' + m).addClass('on');
+  })
+</script>
+
+<script type="text/javascript">
+  $("#unsupport").hide();
+  if (!testLocalStorage()) { //not support html5
+    if (0 != 0 && !$clearCart && !$teamId) {
+      $("#html5_cart_num").text(0 > 0 > 0);
+    }
+  } else {
+    updateToolBar('');
+  }
+
+  $("#html5_cart").click(function () {
+    //	syncCart('e0d0f025d6d3e8e8d7be5428c43ef911',true);
+    location.href = '../cart/cart.action';
+  });
+
+  function reSearch() {
+    var depCity = window.sessionStorage.getItem("airline_depCityName");
+    if (testSessionStorage() && isNotBlank(depCity) && !/^\s*$/.test(depCity) && depCity != "") {
+      var airStr = '<form action="../airline/list.action" method="post" id="reseach">' +
+        '<input type="hidden" name="sid"  value="e0d0f025d6d3e8e8d7be5428c43ef911"/>' +
+        '<input type="hidden" name="depCity" value="' + window.sessionStorage.getItem("airline_depCityName") + '"/>' +
+        '<input type="hidden" name="arrCity" value="' + window.sessionStorage.getItem("airline_arrCityName") + '"/>' +
+        '<input type="hidden" name="depDate" value="' + window.sessionStorage.getItem("airline_depDate") + '"/>' +
+        '<input type="hidden" name="depTime" value="' + window.sessionStorage.getItem("airline_depTime") + '"/>' +
+        '<input type="hidden" name="classNo" value="' + window.sessionStorage.getItem("airline_classNo") + '"/>' +
+        '</form>';
+      $("body").append(airStr);
+      $("#reseach").submit();
+    } else {
+      window.location.href = '../airline/index.action@sid=e0d0f025d6d3e8e8d7be5428c43ef911';
+    }
+  }
+  //banner 关闭点击
+  $('.div_banner_close').click(function () {
+    $('#div_banner_header').unbind('click');
+    jQuery.post('../index/addClientCookieVal.json', function (d) {
+      $('#div_banner_header').slideUp(500);
+    });
+  });
+  //banner 下载点击
+  $('.div_banner_download').click(function () {
+    var downloadUrl = $(this).attr('url');
+    jQuery.post('../index/addClientCookieVal.json', function (d) {
+      window.location.href = downloadUrl;
+    });
+  });
+</script>
+
+<!--<div class="content" >
+  <div class="header">
+    <div class="input-group search pull-right hidden-sm hidden-xs">
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="queryString">
+        <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button" ng-click="seach()"><i class="fa fa-search "></i></button>
+              </span>
+      </div>
+    </div>
+    <h1>商品列表</h1>
+  </div>
+  <div class="main-content">
+    <div class="row">
+      <div class="col-sm-9 main-content">
+
+        <div id="blog-posts">
+
+          <div class="row padding-bottom" ng-repeat="p in productList">
+            <div class="col-md-4" ng-click="goDetail(p.Id)">
+              <a href=""><img ng-src="{{baseImgServer}}{{p.ImageUrl}}" class="img-rounded" style="width: 300px;height: 300px"></a>
+
+            </div>
+            <div class="col-md-8">
+              <div class="post-summary">
+                <h3 style="margin-top: 0px;" ng-click="goDetail(p.Id)"><a href="">{{p.Name}}</a></h3>
+                <p class="text-sm">{{p.CreateTime | date:'yyyy-MM-dd'}}</p>
+                <p>产品编号:{{p.ProductNo}}</p>
+                <p class="sp-text" ng-if="p.Introduction != null">
+                  {{p.Introduction}}
+                </p>
+                <p ng-if="p.Introduction == null">
+                  暂无介绍.
+                </p>
+                <p>
+                  <a href="" ng-click="modifyProduct(p.Id)"><i class="fa fa-pencil"></i>修改</a>
+                  <a href="" ng-click="delete(p.Id)" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i>删除</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <ul class="pagination">
+            <li><a href="" ng-click="Previous()">上一页</a></li>
+            <li ng-repeat="page in pageList">
+              <a href="" ng-click="selectPage(page)">{{page}}</a>
+            </li>
+            <li><a href="" ng-click="Next()">下一页</a></li>
+          </ul>
+          <div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h3 id="myModalLabel">Delete Confirmation</h3>
+                </div>
+                <div class="modal-body">
+                  <p class="error-text"><i class="fa fa-warning modal-icon"></i>Are you sure you want to delete the user?<br>This cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                  <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->

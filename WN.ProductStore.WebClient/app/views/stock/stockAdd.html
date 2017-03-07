@@ -1,0 +1,46 @@
+<div class="content">
+  <div class="header">
+     <h1 class="page-title">入库</h1>
+    <ul class="breadcrumb">
+      <li><a href="">库存管理</a> </li>
+      <li class="active">入库</li>
+    </ul>
+  </div>
+  <div class="main-content">
+
+    <div class="row">
+      <div class="col-md-4">
+        <br>
+        <div id="myTabContent" class="tab-content">
+        
+            <form id="tab">
+              <div class="form-group">
+                <label>产品编号</label>
+                <input type="text" value="{{product.ProductNo}}" class="form-control" disabled="disabled">
+              </div>
+              <div class="form-group">
+                <label>产品名称</label>
+                <input type="text" value="{{product.Name}}" class="form-control" disabled="disabled">
+              </div>
+              <div class="form-group">
+                <label>入库数量</label>
+                <input type="number"  class="form-control" ng-model="quantity">
+              </div>
+            </form>
+ 
+  
+        </div>
+        <div class="btn-toolbar list-toolbar">
+          <button class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i> 确定</button>
+          <a href=""  onclick="window.history.back()" class="btn btn-danger">取消</a>
+        </div>
+      </div>
+    </div>
+ 
+    <footer>
+      <hr>
+      <!-- Purchase a site license to remove this link from the footer: http://www.portnine.com/bootstrap-themes -->
+      <p class="pull-right">A <a href="http://www.portnine.com/bootstrap-themes" target="_blank">Free Bootstrap Theme</a> by <a href="http://www.portnine.com"
+          target="_blank">Portnine</a></p>
+      <p>© 2014 <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
+    </footer>

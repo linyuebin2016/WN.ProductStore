@@ -1,0 +1,123 @@
+body {
+  padding: 20px;
+}
+
+h1 {
+  border-bottom: 1px gray;
+  margin-top: 0;
+}
+
+.thumb {
+  float: left;
+  height: 100px;
+  margin: -0.5em 1em 1.5em 0;
+  padding-bottom: 1em;
+  width: 100px;
+}
+
+#line-chart {
+  height:300px;
+  width:800px;
+  margin: 0px auto;
+  margin-top: 1em;
+}
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
+  color: #fff;
+}
+
+.specs {
+  clear: both;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.specs dt {
+  font-weight: bold;
+}
+
+.specs > li {
+  display: inline-block;
+  vertical-align: top;
+  width: 200px;
+}
+
+.specs > li > span {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.sp-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.admin-table {
+  margin: 20px 50px;
+}
+.admin-table tr td {
+  padding: 8px 0;
+}
+.admin-table tr .td1 {
+  padding-right: 20px;
+  font-weight: bold;
+  text-align: right;
+  white-space: nowrap;
+}
+.red {
+  padding-right: 5px;
+  font-style: normal;
+  color: #f00;
+}
+
+/*view-page button*/
+.vs-bt{
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 0 13px;
+  font-size: 14px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.bt-default:hover{
+  background-color: #e6e6e6;
+  border-color: #adadad;
+  color: #333;
+}
+.bt-default.disabled, .bt-default[disabled]{
+  background-color: #eff1f1;
+}
+.vs-bt.disabled, .vs-bt[disabled],.ls-bt.disabled, .ls-bt[disabled] {
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: .65;
+}
+.bt-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.bt-primary {
+  color: #fff;
+  background-color: #3b475f;
+}
+
+.bt-primary:hover{
+  background-color: #364056;
+  color:#fff;
+}

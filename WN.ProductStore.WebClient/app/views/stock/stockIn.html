@@ -1,0 +1,64 @@
+<div class="content">
+  <div class="header">
+    <h1 class="page-title">入库</h1>
+    <ul class="breadcrumb">
+      <li><a href="">库存管理</a> </li>
+      <li class="active">库存列表</li>
+    </ul>
+  </div>
+  <div class="main-content">
+    <div class="btn-toolbar list-toolbar">
+      <!--<button class="btn btn-primary"><i class="fa fa-plus"></i> New User</button>
+    <button class="btn btn-default">Import</button>
+    <button class="btn btn-default">Export</button>-->
+      <div class="btn-group">
+        <input type="text" placeholder="产品编号、产品名称" ng-model="queryString" />
+        <button ng-click="seach()">查询</button>
+      </div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr class="info">
+          <th>编号</th>
+          <th>名称</th>
+          <th>数量</th>
+          <th style="width: 3.5em;">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="stock in Stocks">
+          <td>{{stock.Product.ProductNo}}</td>
+          <td>{{stock.Product.Name}}</td>
+          <td>{{stock.Quantity}}</td>
+          <td>
+            <a href="" ng-click="goAdd(stock.Product,stock.StockId)"><i class="glyphicon glyphicon-plus-sign"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ul class="pagination">
+      <li><a href=""  ng-click="Previous()">«</a></li>
+      <li ng-repeat="page in pageList">
+        <a href="" ng-click="selectPage(page)">{{page}}</a>
+      </li>
+      <li><a href="" ng-click="Next()">»</a></li>
+    </ul>
+    <div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Delete Confirmation</h3>
+          </div>
+          <div class="modal-body">
+            <p class="error-text"><i class="fa fa-warning modal-icon"></i>Are you sure you want to delete the user?<br>This cannot be undone.</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
