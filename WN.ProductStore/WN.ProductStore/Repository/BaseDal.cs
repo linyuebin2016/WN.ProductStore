@@ -7,7 +7,7 @@ using System.Text;
 using WN.ProductStore.Models;
 using WN.ProductStore.Repository;
 
-namespace Dal
+namespace WN.ProductStore.Repository
 {
     public abstract class BaseDal<T> where T : BaseEntity
     {

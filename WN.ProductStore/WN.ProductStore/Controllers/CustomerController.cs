@@ -77,8 +77,15 @@ namespace WN.ProductStore.Controllers
 
         public bool Login(string account,string password)
         {
-            
-            return true;
+           var customer= db.Customer.FirstOrDefault(i => i.Account == account && i.Password == password);
+            if (customer != null)
+            {
+                
+                return true;
+            }else
+            {
+                return false;
+            }
         }
     }
 }

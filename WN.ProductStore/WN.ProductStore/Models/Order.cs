@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -17,13 +18,14 @@ namespace WN.ProductStore.Models
         /// <summary>
         /// 订单编号
         /// </summary>
-        public int OrderNo { get; set; }
+        [MaxLength(50)]
+        public string OrderNo { get; set; }
         public DateTime CreateTime { get; set; }
         public decimal Total { get; set; }
         public OrderState OrderState { get; set; }
         public Guid CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
 
-        //public virtual List<OrderDetail> OrderDetails { get; set; }
+        public virtual List<OrderDetail> OrderDetails { get; set; }
     }
 }

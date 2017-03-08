@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WN.ProductStore.Enums;
 using WN.ProductStore.Models;
 using WN.ProductStore.Repository;
 using WN.ProductStore.ViewModel;
@@ -49,8 +50,15 @@ namespace WN.ProductStore.Controllers
         /// 下订单
         /// </summary>
         /// <param name="order"></param>
+        [HttpPost]
         public void AddOrder(Order order)
         {
+            order.Id = Guid.NewGuid();
+            order.CustomerId= db.Customer.FirstOrDefault().Id;
+            order.OrderNo = DateTime.Now.ToString("yyMMddss");
+            order.CreateTime = DateTime.Now;
+            order.OrderState = OrderState.Obligation;
+
             db.Order.Add(order);
             db.SaveChanges();
         }

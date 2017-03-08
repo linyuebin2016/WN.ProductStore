@@ -25,7 +25,7 @@ define(function (require) {
                     },
                     transformRequest: transFn
                 };
-                return $http.post(baseUrl + "/Order/Add", order, postCfg);
+                return $http.post(baseUrl + "/Order/AddOrder", order, postCfg);
             },
         };
     }]);
