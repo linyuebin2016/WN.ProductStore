@@ -30,9 +30,7 @@ namespace WN.ProductStore.Controllers
         public void AddCustomer(Customer customer)
         {
             customer.Id = Guid.NewGuid();
-
-
-
+ 
             db.Customer.Add(customer);
             db.SaveChanges();
         }

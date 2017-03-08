@@ -11,10 +11,10 @@ namespace WN.ProductStore.Repository
 {
     public abstract class BaseDal<T> where T : BaseEntity
     {
-        public DBContext db;
+        public DBContext dbContext;
         public BaseDal()
         {
-            db = new DBContext();
+            dbContext = new DBContext();
         }
 
         /// <summary>
@@ -23,8 +23,8 @@ namespace WN.ProductStore.Repository
         /// <param name="entity">实体</param>
         protected void Add(T entity)
         {
-            var query = db.Set<T>().Add(entity);
-            db.SaveChanges();
+            var query = dbContext.Set<T>().Add(entity);
+            dbContext.SaveChanges();
         }
 
         /// <summary>
@@ -33,9 +33,9 @@ namespace WN.ProductStore.Repository
         /// <param name="entity"></param>
         public void Update(T entity)
         {
-            db.Set<T>().Attach(entity);
-            db.Entry(entity).State = EntityState.Modified;
-            db.SaveChanges();
+            dbContext.Set<T>().Attach(entity);
+            dbContext.Entry(entity).State = EntityState.Modified;
+            dbContext.SaveChanges();
         }
 
         public void Save(T entity)
@@ -57,8 +57,8 @@ namespace WN.ProductStore.Repository
         /// <param name="entity"></param>
         public void Remove(T entity)
         {
-            db.Set<T>().Remove(entity);
-            db.SaveChanges();
+            dbContext.Set<T>().Remove(entity);
+            dbContext.SaveChanges();
         }
 
         /// <summary>
@@ -67,13 +67,13 @@ namespace WN.ProductStore.Repository
         /// <param name="id"></param>
         public T GetEntity(Guid id)
         {
-            var model = db.Set<T>().Find(id);
+            var model = dbContext.Set<T>().Find(id);
             return model;
         }
 
         public List<T> ToList()
         {
-            return db.Set<T>().ToList();
+            return dbContext.Set<T>().ToList();
         }
     }
 }

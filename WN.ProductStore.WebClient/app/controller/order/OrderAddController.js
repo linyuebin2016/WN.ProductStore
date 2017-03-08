@@ -13,6 +13,7 @@ define(function (require) {
                 ProductId: 'bbc1d532-ee6c-4284-b24a-24f9f443df21',
                 Quantity: ''
             }];
+            
             $scope.order.OrderDetails = $scope.orderDetails;
             $scope.submitOrder = function () {
                 OrderService.AddOrder($scope.order).success(function (response) {
