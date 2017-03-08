@@ -29,7 +29,7 @@
         <tr ng-repeat="order in orders">
           <td>{{order.CreateTime|date:'yyyy-MM-dd'}}</td>
           <td>{{order.OrderNo}}</td>
-      
+
           <td>
             <a href="" ng-click="goAdd(stock.Product,stock.StockId)"><i class="glyphicon glyphicon-plus-sign"></i></a>
           </td>
@@ -37,7 +37,7 @@
       </tbody>
     </table>
     <ul class="pagination">
-      <li><a href=""  ng-click="Previous()">«</a></li>
+      <li><a href="" ng-click="Previous()">«</a></li>
       <li ng-repeat="page in pageList">
         <a href="" ng-click="selectPage(page)">{{page}}</a>
       </li>

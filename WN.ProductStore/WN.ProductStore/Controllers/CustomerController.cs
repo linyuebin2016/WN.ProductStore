@@ -64,5 +64,21 @@ namespace WN.ProductStore.Controllers
            return db.Customer.FirstOrDefault(i => i.Id == id);
 
         }
+
+        /// <summary>
+        /// 获取当前登录客户
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public Customer GetCurrentCustomer()
+        {
+            return db.Customer.FirstOrDefault();
+        }
+
+        public bool Login(string account,string password)
+        {
+            
+            return true;
+        }
     }
 }

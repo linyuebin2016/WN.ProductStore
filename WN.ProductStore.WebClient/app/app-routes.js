@@ -92,6 +92,13 @@ define(function (require) {
                 controllerUrl: 'controller/order/OrderListController',
                 controller: 'OrderListController',
                 dependencies: ['core/OrderService']
+            }).
+            state('orderAdd', {
+                url: '/orderAdd',
+                templateUrl: 'views/order/orderAdd.html',
+                controllerUrl: 'controller/order/OrderAddController',
+                controller: 'OrderAddController',
+                dependencies: ['core/OrderService']
             });
         }
     ]);

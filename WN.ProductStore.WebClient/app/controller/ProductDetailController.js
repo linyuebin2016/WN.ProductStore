@@ -25,6 +25,10 @@ define(function (require) {
                     $scope.productImgUrl = $scope.productDetail.ImageUrl;
                 });
             }
+
+            $scope.goOrderAdd = function () {
+                $state.go("orderAdd");
+            }
         }
     ]);
 });
