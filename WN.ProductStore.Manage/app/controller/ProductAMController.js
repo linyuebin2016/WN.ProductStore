@@ -9,6 +9,9 @@ define(function (require) {
             $scope.baseImgServer = baseImgServer;
             //商品封面图片URL
             $scope.productImgUrl = null;
+            //封面图片上传
+            $scope.thumb = [];
+
             $('.form_datetime').datetimepicker({
                 minView: "month", //选择日期后，不会再跳转去选择时分秒
                 language: 'zh-CN',
@@ -46,6 +49,19 @@ define(function (require) {
                     $scope.productDetail.Content = $sce.trustAsHtml($scope.productDetail.Content);
                     $scope.productImage.ProductId = $scope.productDetail.Id;
                     $scope.productImgUrl = $scope.productDetail.ImageUrl;
+                    if(response.ProductImages.length>0){
+                        for(var i=0;i<response.ProductImages.length;i++){
+                            $scope.img = {
+                                imgName:null,
+                                imgSrc:null,
+                                imgDelSrc:null
+                            };
+                            $scope.img.imgName = response.ProductImages[i].Url.split("/")[4];
+                            $scope.img.imgSrc = baseImgServer + response.ProductImages[i].Url;
+                            $scope.img.imgDelSrc = response.ProductImages[i].Url;
+                            $scope.thumb.push($scope.img);
+                        }
+                    }
                 });
             }
 
@@ -61,8 +77,6 @@ define(function (require) {
                 });
             };
 
-            //封面图片上传
-            $scope.thumb = [];
             $scope.fmImg_upload = function (files) {
                 var data = new FormData();
                 data.append('image', files[0]);
