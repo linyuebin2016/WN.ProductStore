@@ -21,7 +21,7 @@ namespace WN.ProductStore.Repository
         /// 新增
         /// </summary>
         /// <param name="entity">实体</param>
-        protected void Add(T entity)
+        public void Add(T entity)
         {
             var query = dbContext.Set<T>().Add(entity);
             dbContext.SaveChanges();
@@ -50,6 +50,7 @@ namespace WN.ProductStore.Repository
                 this.Update(entity);
             }
         }
+ 
 
         /// <summary>
         /// 删除

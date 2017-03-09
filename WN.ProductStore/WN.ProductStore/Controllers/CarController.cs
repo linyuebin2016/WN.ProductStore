@@ -12,11 +12,23 @@ namespace WN.ProductStore.Controllers
     public class CarController : ApiController
     {
         CarDal db = new CarDal();
+        CustomerDal customerDb = new CustomerDal();
         [HttpPost]
         public bool Add(Car car)
         {
-        
-            db.Save(car);
+            car.Id = Guid.NewGuid();
+            car.CustomerId = customerDb.GetCurrentCustomer().Id;
+            var isEdit = db.dbContext.Car.FirstOrDefault(i => i.ProductId == car.ProductId && i.CustomerId == car.CustomerId);
+            if (isEdit!=null)
+            {
+                isEdit.Quantity++;
+                db.Save(isEdit);
+            }
+            else
+            {
+                db.Add(car);
+            }
+            
             return true;
         }
 
@@ -37,7 +49,7 @@ namespace WN.ProductStore.Controllers
             var reslut = new
             {
                 TotalCount = queryCustomer.Count(),
-                List = queryCustomer.OrderByDescending(p => p.CreateTime).ToPage<Car>(pageIndex, pageSize)
+                List = queryCustomer.OrderByDescending(p => p.CreateTime).ToPage<Car>(pageIndex, pageSize).ToList()
             };
             return reslut;
         }

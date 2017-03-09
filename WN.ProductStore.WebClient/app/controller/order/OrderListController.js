@@ -4,9 +4,9 @@
 define(function (require) {
     var app = require('../../app.config');
 
-    app.controller('OrderListController', ['$scope', 'OrderService', '$state',
-        function ($scope, OrderService, $state) {
-
+    app.controller('OrderListController', ['$scope', 'OrderService', '$state', 'baseImgServer',
+        function ($scope, OrderService, $state, baseImgServer) {
+            $scope.baseImgServer = baseImgServer;
             $scope.orders = [];
             $scope.pageIndex = 1;
             $scope.pageSize = 10;

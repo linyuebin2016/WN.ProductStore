@@ -18,6 +18,8 @@ define(function (require) {
             $scope.submitOrder = function () {
                 OrderService.AddOrder($scope.order).success(function (response) {
                     alert("提交成功！");
+
+                    $state.go("home.orderList")
                 });
             }
 

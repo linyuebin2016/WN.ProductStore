@@ -10,6 +10,7 @@ define(function (require, exports, module) {
     app.value('baseUrl', baseServer + '/ProductStore/api');
     app.value('baseImgServer', baseServer + '/ProductStore/');
 
+ 
     asyncLoader.configure(app);
     module.exports = app;
 });

@@ -20,6 +20,12 @@ define(function (require) {
                     controllerUrl: 'controller/HomeController',
                     controller: 'HomeController'
                 }).
+            state('home.homePage', {
+                url: '/homePage',
+                templateUrl: 'views/homePage/homePage.html',
+                controllerUrl: 'controller/homePage/HomePageController',
+                controller: 'HomePageController'
+            }).
             state('productList', {
                 url: '/productList',
                 templateUrl: 'views/product/product-list.html',
@@ -39,7 +45,7 @@ define(function (require) {
                 templateUrl: 'views/product/productDetail.html',
                 controllerUrl: 'controller/ProductDetailController',
                 controller: 'ProductDetailController',
-                dependencies: ['core/ProductService'],
+                dependencies: ['core/ProductService', 'core/CarService'],
                 params: {
                     spid: null
                 }
@@ -86,7 +92,8 @@ define(function (require) {
                     customerid: null
                 }
             }).
-            state('orderList', {
+            //订单
+            state('home.orderList', {
                 url: '/orderList',
                 templateUrl: 'views/order/orderList.html',
                 controllerUrl: 'controller/order/OrderListController',
@@ -99,6 +106,14 @@ define(function (require) {
                 controllerUrl: 'controller/order/OrderAddController',
                 controller: 'OrderAddController',
                 dependencies: ['core/OrderService']
+            }).
+            //购物车
+            state('home.carList', {
+                url: '/carList',
+                templateUrl: 'views/car/carList.html',
+                controllerUrl: 'controller/car/CarListController',
+                controller: 'CarListController',
+                dependencies: ['core/CarService']
             });
         }
     ]);

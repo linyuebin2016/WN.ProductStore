@@ -18,6 +18,8 @@ namespace WN.ProductStore.Models
 
         //public virtual Order Order { get; set; }
 
+        public virtual Product Product { get; set; }
+
         public OrderDetail()
         {
             this.Id = Guid.NewGuid();

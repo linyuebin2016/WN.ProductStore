@@ -4,8 +4,9 @@
 define(function (require) {
     var app = require('../app.config');
 
-    app.controller('ProductDetailController', ['$scope', '$http', '$sce', '$state', '$stateParams', 'ProductService', 'baseImgServer',
-        function ($scope, $http, $sce, $state, $stateParams, ProductService, baseImgServer) {
+    app.controller('ProductDetailController', 
+    ['$scope', '$http', '$sce', '$state', '$stateParams','ProductService','baseImgServer','CarService',
+        function ($scope, $http, $sce, $state, $stateParams, ProductService, baseImgServer, CarService) {
             $scope.baseImgServer = baseImgServer;
 
             $scope.productDetail = {};
@@ -28,6 +29,17 @@ define(function (require) {
 
             $scope.goOrderAdd = function () {
                 $state.go("orderAdd");
+            }
+
+            //添加购物车
+            $scope.addCar = function () {
+                var car = {
+                    ProductId: spid,
+                    Quantity: 1,
+                };
+                CarService.Add(car).success(function () {
+                    $state.go("carList");
+                });
             }
         }
     ]);
