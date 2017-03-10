@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -13,22 +14,27 @@ namespace WN.ProductStore.Enums
         /// <summary>
         /// 待付款
         /// </summary>
+        [Description("待付款")]
         Obligation,
         /// <summary>
         /// 待发货
         /// </summary>
+        [Description("待发货")]
         Delivery,
         /// <summary>
         /// 待收货
         /// </summary>
+        [Description("待收货")]
         Receiving,
         /// <summary>
         /// 待评价
         /// </summary>
+        [Description("待评价")]
         Pending,
         /// <summary>
         /// 退款/售后
         /// </summary>
+        [Description("退款/售后")]
         CustomerService
     }
 
@@ -61,4 +67,6 @@ namespace WN.ProductStore.Enums
     //    }
     //    return list;
     //}
+
+
 }

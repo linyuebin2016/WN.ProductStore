@@ -38,7 +38,7 @@
 					<div class="bd-promos">
 						<div class="bd-has-promo">已享优惠:<span class="bd-has-promo-content">省￥19.50</span>&nbsp;&nbsp;</div>
 						<div class="act-promo">
-							<a href="#" target="_blank">第二支半价，第三支免费<span class="gt">&gt;&gt;</span></a>
+							<a href="#" target="_blank">特价产品<span class="gt">&gt;&gt;</span></a>
 						</div>
 						<span class="list-change theme-login">编辑</span>
 					</div>
@@ -48,7 +48,7 @@
 					<ul class="item-content clearfix">
 						<li class="td td-chk">
 							<div class="cart-checkbox ">
-								<input class="check" id="J_CheckBox_170037950254" name="items[]" value="170037950254" type="checkbox">
+								<input ng-checked="isChecked(c.Id)" ng-click="updateSelection($event,c)"   type="checkbox">
 								<label for="J_CheckBox_170037950254"></label>
 							</div>
 						</li>
@@ -88,7 +88,7 @@
 								<div class="item-amount ">
 									<div class="sl">
 										<input class="min am-btn" name="" type="button" value="-" />
-										<input class="text_box" name="" type="text" value="3" style="width:30px;" />
+										<input class="text_box" name="" type="text" value="{{c.Quantity}}" style="width:30px;" />
 										<input class="add am-btn" name="" type="button" value="+" />
 									</div>
 								</div>

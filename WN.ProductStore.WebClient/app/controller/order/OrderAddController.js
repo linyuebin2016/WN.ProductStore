@@ -1,23 +1,23 @@
 /**
  * Created by linyuebin .
  */
-define(function (require) {
-    var app = require('../../app.config');
+define([
+    "app.config",
+    "jquery",
+    "jqueryWeUI"
+], function (app) {
 
-    app.controller('OrderAddController', ['$scope', 'OrderService', '$state',
-        function ($scope, OrderService, $state) {
+    app.controller('OrderAddController', ['$scope', 'OrderService', '$state', '$stateParams',
+
+        function ($scope, OrderService, $state, $stateParams) {
 
             $scope.order = {};
+            var cars = $stateParams.cars;
 
-            $scope.orderDetails = [{
-                ProductId: 'bbc1d532-ee6c-4284-b24a-24f9f443df21',
-                Quantity: ''
-            }];
-            
-            $scope.order.OrderDetails = $scope.orderDetails;
+            $scope.order.OrderDetails = cars;
             $scope.submitOrder = function () {
                 OrderService.AddOrder($scope.order).success(function (response) {
-                    alert("提交成功！");
+                    $.toast("发布成功!");
 
                     $state.go("home.orderList")
                 });

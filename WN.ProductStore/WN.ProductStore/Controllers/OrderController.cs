@@ -13,21 +13,35 @@ namespace WN.ProductStore.Controllers
 {
     public class OrderController : ApiController
     {
-        DBContext db = new DBContext(); 
+        DBContext db = new DBContext();
+        CarDal carDal = new CarDal();
         [HttpGet]
         // GET: api/Order
-        public OrderListView GetOrderList(int pageIndex, int pageSize, string queryString)
+        public object GetOrderList(int pageIndex, int pageSize, string queryString)
         {
-            OrderListView view = new OrderListView();
-            view.Orders = db.Order.OrderByDescending(o => o.CreateTime).ToPage(pageIndex, pageSize).ToList();
-            view.TotalCount = db.Order.Count();
-            return view;
+
+            var query = from o in db.Order.OrderByDescending(o => o.CreateTime).ToPage(pageIndex, pageSize).ToList()
+                        select new 
+                        {
+                            o.Id,
+                            o.OrderNo,
+                            o.Total,
+                            o.OrderDetails,
+                            o.CreateTime,
+                            OrderState = o.OrderState.DisplayName()
+                        };
+          
+
+            var Orders = query.ToList();
+
+            var TotalCount = db.Order.Count();
+            return new { Orders, TotalCount };
         }
 
         // GET: api/Order/5
         public Order GetOrderDetail(Guid id)
         {
-            var Order= db.Order.FirstOrDefault(i => i.Id == id);
+            var Order = db.Order.FirstOrDefault(i => i.Id == id);
             return Order;
         }
 
@@ -54,12 +68,16 @@ namespace WN.ProductStore.Controllers
         public void AddOrder(Order order)
         {
             order.Id = Guid.NewGuid();
-            order.CustomerId= db.Customer.FirstOrDefault().Id;
-            order.OrderNo = DateTime.Now.ToString("yyMMddss");
+            order.CustomerId = db.Customer.FirstOrDefault().Id;
+            order.OrderNo = DateTime.Now.ToString("yyMMddhhmmss");
             order.CreateTime = DateTime.Now;
             order.OrderState = OrderState.Obligation;
-
+            order.Total = order.OrderDetails.Sum(i => i.Product.Price * i.Quantity);
             db.Order.Add(order);
+
+            carDal.DeleteCars(order.OrderDetails.Select(i=>i.ProductId));
+
+
             db.SaveChanges();
         }
     }

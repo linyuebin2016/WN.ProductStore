@@ -105,7 +105,10 @@ define(function (require) {
                 templateUrl: 'views/order/orderAdd.html',
                 controllerUrl: 'controller/order/OrderAddController',
                 controller: 'OrderAddController',
-                dependencies: ['core/OrderService']
+                dependencies: ['core/OrderService'],
+                params: {
+                    cars: null
+                }
             }).
             //购物车
             state('home.carList', {

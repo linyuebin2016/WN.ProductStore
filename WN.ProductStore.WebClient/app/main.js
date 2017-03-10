@@ -4,7 +4,7 @@
 require.config({
     baseUrl: '',
     paths: {
-        'jquery': 'lib/jquery/dist/jquery-1.11.1.min',
+        'jquery': 'lib/jquery/dist/jquery-2.1.4',
         'bootstrap': 'lib/bootstrap/dist/js/bootstrap.min',
         'angular': 'lib/angular/angular.min',
         'router': 'lib/angular-route/angular-route',
@@ -15,7 +15,8 @@ require.config({
         'angular-animate': 'lib/angular-animate/angular-animate',
         'angular-resource': 'lib/angular-resource/angular-resource',
         'datetimepicker': 'lib/datetimepicker/js/bootstrap-datetimepicker',
-        'datetimepicker-cn':'lib/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN'
+        'datetimepicker-cn':'lib/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN',
+        'jqueryWeUI':'lib/jquery-weui/jquery-weui.min'
     },
     shim: {
         'bootstrap':{
