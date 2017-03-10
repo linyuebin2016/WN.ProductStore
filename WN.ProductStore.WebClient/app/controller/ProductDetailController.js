@@ -4,12 +4,11 @@
 define(function (require) {
     var app = require('../app.config');
 
-    app.controller('ProductDetailController', 
-    ['$scope', '$http', '$sce', '$state', '$stateParams','ProductService','baseImgServer','CarService',
+    app.controller('ProductDetailController', ['$scope', '$http', '$sce', '$state', '$stateParams', 'ProductService', 'baseImgServer', 'CarService',
         function ($scope, $http, $sce, $state, $stateParams, ProductService, baseImgServer, CarService) {
             $scope.baseImgServer = baseImgServer;
 
-            $scope.productDetail = {};
+            $scope.model = {};
 
             var spid = $stateParams.spid;
             $scope.isEdit = false;
@@ -22,13 +21,18 @@ define(function (require) {
 
             function getProductDetail(spid) {
                 ProductService.getProductDetail(spid).success(function (response) {
-                    $scope.productDetail = response.Product;
-                    $scope.productImgUrl = $scope.productDetail.ImageUrl;
+                    $scope.model = response.Product;
                 });
             }
 
-            $scope.goOrderAdd = function () {
-                $state.go("orderAdd");
+            $scope.goOrderAdd = function (ProductId) {
+                var cars = [{
+                    ProductId: ProductId,
+                    Quantity: 1
+                }];
+                $state.go("orderAdd", {
+                    cars: cars
+                });
             }
 
             //添加购物车
@@ -38,8 +42,14 @@ define(function (require) {
                     Quantity: 1,
                 };
                 CarService.Add(car).success(function () {
-                    $state.go("carList");
+                    // $state.go("carList");
+                    alert('添加成功！');
                 });
+            }
+
+
+            $scope.goTo = function (target) {
+                $state.go(target);
             }
         }
     ]);

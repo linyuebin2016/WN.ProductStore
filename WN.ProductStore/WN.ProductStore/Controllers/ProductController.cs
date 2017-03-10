@@ -23,12 +23,12 @@ namespace WN.ProductStore.Controllers
             if (!string.IsNullOrEmpty(queryString))
             {
                 var query = db.Product.Where(p => p.Name.Contains(queryString)||p.ProductNo.Contains(queryString));
-                products = query.OrderBy(i => i.Id).ToPage<Product>(pageIndex, pageSize).ToList();
+                products = query.OrderByDescending(i => i.CreateTime).ToPage<Product>(pageIndex, pageSize).ToList();
                 list.TotalCount = query.Count();
             }
             else
             {
-                products = db.Product.OrderBy(i => i.Id).ToPage<Product>(pageIndex, pageSize).ToList();
+                products = db.Product.OrderByDescending(i => i.CreateTime).ToPage<Product>(pageIndex, pageSize).ToList();
                 list.TotalCount = db.Product.Count();
             }
 
