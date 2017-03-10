@@ -58,7 +58,7 @@
 											<div class="order-status5" ng-repeat="o in orders">
 												<div class="order-title">
 													<div class="dd-num">订单编号：<a href="javascript:;">{{o.OrderNo}}</a></div>
-													<span>成交时间：2015-12-20</span>
+													<span>成交时间：{{o.CreateTime|date:'yyyy-MM-dd'}}</span>
 													<!--    <em>店铺：小桔灯</em>-->
 												</div>
 												<div class="order-content">
@@ -113,7 +113,7 @@
 																	<p class="order-info"><a href="logistics.html">查看物流</a></p>
 																</div>
 															</li>
-															<li class="td td-change">
+															<li class="td td-change" ng-click="deleteOrder(o.Id)">
 																<div class="am-btn am-btn-danger anniu">
 																	删除订单</div>
 															</li>

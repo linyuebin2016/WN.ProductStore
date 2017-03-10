@@ -47,6 +47,11 @@ define(function (require) {
                 }
             }
 
+            $scope.selectAll = function () {
+                // $scope.cars
+                
+            }
+
         }
     ]);
 });

@@ -2,7 +2,7 @@ define(function (require) {
     var app = require('../app.config');
     app.service('OrderService', ['$http', 'baseUrl', function ($http, baseUrl) {
 
- 
+
         return {
             GetOrderList: function (pageIndex, pageSize, queryString) {
                 return $http.get(baseUrl + "/order/GetOrderList", {
@@ -27,6 +27,16 @@ define(function (require) {
                 };
                 return $http.post(baseUrl + "/Order/AddOrder", order, postCfg);
             },
+
+            //删除订单
+            DeleteOrder: function (id) {
+                return $http.get(baseUrl + "/order/DeleteOrder", {
+                    params: {
+                        id: id
+                    }
+                })
+            },
+
         };
     }]);
 });

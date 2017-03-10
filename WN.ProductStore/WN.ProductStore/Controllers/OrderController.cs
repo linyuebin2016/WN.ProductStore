@@ -19,7 +19,6 @@ namespace WN.ProductStore.Controllers
         // GET: api/Order
         public object GetOrderList(int pageIndex, int pageSize, string queryString)
         {
-
             var query = from o in db.Order.OrderByDescending(o => o.CreateTime).ToPage(pageIndex, pageSize).ToList()
                         select new 
                         {
@@ -36,6 +35,28 @@ namespace WN.ProductStore.Controllers
 
             var TotalCount = db.Order.Count();
             return new { Orders, TotalCount };
+        }
+
+        public object GetOrderListByState(int pageIndex, int pageSize, string queryString,OrderState orderState)
+        {
+            var query = from o in db.Order.Where(i=>i.OrderState== orderState)
+                        .OrderByDescending(o => o.CreateTime).ToPage(pageIndex, pageSize).ToList()
+                        select new
+                        {
+                            o.Id,
+                            o.OrderNo,
+                            o.Total,
+                            o.OrderDetails,
+                            o.CreateTime,
+                            OrderState = o.OrderState.DisplayName()
+                        };
+
+
+            var Orders = query.ToList();
+
+            var TotalCount = db.Order.Count();
+            return new { Orders, TotalCount };
+
         }
 
         // GET: api/Order/5
@@ -56,8 +77,12 @@ namespace WN.ProductStore.Controllers
         }
 
         // DELETE: api/Order/5
-        public void Delete(int id)
+        [HttpGet]
+        public void DeleteOrder(Guid id)
         {
+           var order= db.Order.FirstOrDefault(i => i.Id == id);
+            db.Order.Remove(order);
+            db.SaveChanges();
         }
 
         /// <summary>

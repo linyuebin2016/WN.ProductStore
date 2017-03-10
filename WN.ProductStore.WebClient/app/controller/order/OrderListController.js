@@ -19,6 +19,14 @@ define(function (require) {
 
                 });
             }
+
+            //删除订单
+            $scope.deleteOrder = function (id) {
+                OrderService.DeleteOrder(id).success(function () {
+                    alert("删除成功！");
+                    getOrderList();
+                });
+            }
         }
     ]);
 });
