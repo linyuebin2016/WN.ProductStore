@@ -93,7 +93,7 @@ define(function (require) {
                 }
             }).
             //订单
-            state('home.orderList', {
+            state('orderList', {
                 url: '/orderList',
                 templateUrl: 'views/order/orderList.html',
                 controllerUrl: 'controller/order/OrderListController',

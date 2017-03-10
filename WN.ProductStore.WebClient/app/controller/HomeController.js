@@ -25,7 +25,7 @@ define([
         }
 
         $scope.goMyIndex = function () {
-            $state.go("home.orderList");
+            $state.go("orderList");
         }
     }]);
 });

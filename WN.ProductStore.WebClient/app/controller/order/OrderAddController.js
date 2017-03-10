@@ -19,7 +19,7 @@ define([
                 OrderService.AddOrder($scope.order).success(function (response) {
                     $.toast("发布成功!");
 
-                    $state.go("home.orderList")
+                    $state.go("orderList")
                 });
             }
 
