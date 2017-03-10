@@ -7,7 +7,7 @@ define([
 
     app.controller('HomeController', ['$scope', '$state', function ($scope, $state) {
 
-        $state.go("home.carList");
+        $state.go("home.homePage");
         $scope.goProductList = function () {
             $state.go("productList");
         }
