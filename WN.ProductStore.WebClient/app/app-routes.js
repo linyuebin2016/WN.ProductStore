@@ -26,7 +26,7 @@ define(function (require) {
                 controllerUrl: 'controller/homePage/HomePageController',
                 controller: 'HomePageController'
             }).
-            state('productList', {
+            state('home.productList', {
                 url: '/productList',
                 templateUrl: 'views/product/product-list.html',
                 controllerUrl: 'controller/ProductListController',
