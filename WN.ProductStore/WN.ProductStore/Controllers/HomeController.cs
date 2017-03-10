@@ -11,14 +11,15 @@ namespace WN.ProductStore.Controllers
     public class HomeController : Controller
     {
         ProductController p = new ProductController();
+        DBContext db = new DBContext();
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
             //var db = new DBContext();
             //var products = db.Product.ToList();
 
-           
-            var list= p.GetProductList(1, 10, "");
+            GetList();
+             //var list= p.GetProductList(1, 10, "");
             return View();
         }
 
@@ -36,6 +37,46 @@ namespace WN.ProductStore.Controllers
             //listImg.Add(img);
             ////model.ProductImages = listImg;
             //p.Add(model);
+        }
+
+        public void GetList()
+        {
+            //var q = (from p in db.Product
+            //         join o in db.OrderDetail on p.Id equals o.ProductId into oo
+            //         select new
+            //         {
+            //             p.Name,
+            //             SaleCount =(oo!=null? oo.Where(i => i.ProductId == p.Id).Sum(j => j.Quantity):0)
+            //         }).ToList();
+
+            //var q = (from p in db.Product
+            //         join o in db.OrderDetail on p.Id equals o.ProductId into oo
+            //         select new {
+            //             p,
+            //             oo
+            //         }
+            //         ).ToList();
+            var q = from o in db.OrderDetail
+                    group o by o.ProductId into oo
+
+
+
+
+                    select new
+                    {
+                        ProductId = oo.FirstOrDefault().ProductId,
+                      Count= oo.Sum(i=>i.Quantity)
+                    };
+            var qq = q.ToList();
+
+
+            var qqqqq = from pr in db.Product
+                         join o in db.OrderDetail on pr.Id equals o.ProductId
+                         group pr by pr.Id into ppp
+                         select new {
+                             ppp.FirstOrDefault().Name,
+                            
+                         };
         }
     }
 }

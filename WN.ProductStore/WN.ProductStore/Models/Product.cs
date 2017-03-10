@@ -28,10 +28,15 @@ namespace WN.ProductStore.Models
         /// </summary>
         [MaxLength(30)]
         public string ProductNo { get; set; }
+
         /// <summary>
-        /// 价格
+        /// 价格(现价)
         /// </summary>
         public decimal Price { get; set; }
+        /// <summary>
+        /// 原价
+        /// </summary>
+        public decimal OriginalPrice { get; set; }
 
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -53,6 +58,7 @@ namespace WN.ProductStore.Models
 
         [MaxLength(250)]
         public string ImageUrl { get; set; }
+
 
     }
 }
