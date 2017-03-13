@@ -1,9 +1,10 @@
 /**
  * Created by linyuebin .
  */
-define(function (require) {
-    var app = require('../../app.config');
-
+define([
+    "app.config"
+], function (app) {
+ 
     app.controller('CarListController', ['$scope', 'CarService', '$state', 'baseImgServer',
 
         function ($scope, CarService, $state, baseImgServer) {
@@ -49,7 +50,7 @@ define(function (require) {
 
             $scope.selectAll = function () {
                 // $scope.cars
-                
+
             }
 
         }

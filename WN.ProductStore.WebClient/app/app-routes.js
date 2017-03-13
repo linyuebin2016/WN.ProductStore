@@ -75,6 +75,7 @@ define(function (require) {
                     stockId: null
                 }
             }).
+            //客户
             state('customerList', {
                 url: '/customerList',
                 templateUrl: 'views/customer/customerList.html',
@@ -91,6 +92,13 @@ define(function (require) {
                 params: {
                     customerid: null
                 }
+            }).
+            state('home.customerHome', {
+                url: '/customerHome',
+                templateUrl: 'views/customer/customeHome.html',
+                controllerUrl: 'controller/customer/CustomerHomeController',
+                controller: 'CustomerHomeController',
+                dependencies: ['core/CustomerService']
             }).
             //订单
             state('orderList', {
