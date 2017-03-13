@@ -15,5 +15,9 @@ namespace WN.ProductStore.Models
         /// 默认
         /// </summary>
         public bool IsDefault { get; set; }
+        /// <summary>
+        /// 邮编
+        /// </summary>
+        public string ZipCode { get; set; }
     }
 }

@@ -97,7 +97,18 @@ namespace WN.ProductStore.Controllers
             order.OrderNo = DateTime.Now.ToString("yyMMddhhmmss");
             order.CreateTime = DateTime.Now;
             order.OrderState = OrderState.Obligation;
-            order.Total = order.OrderDetails.Sum(i => i.Product.Price * i.Quantity);
+
+
+            var query = from o in order.OrderDetails
+                    join p in db.Product on o.ProductId equals p.Id
+                    select new
+                    {
+                        o.ProductId,
+                        o.Quantity,
+                        p.Price,
+
+                    };
+            order.Total = query.Sum(i => i.Price * i.Quantity);
             db.Order.Add(order);
 
             carDal.DeleteCars(order.OrderDetails.Select(i=>i.ProductId));
