@@ -19,5 +19,6 @@ namespace WN.ProductStore.Models
         public string Account { get; set; }
         [MaxLength(120)]
         public string Password { get; set; }
+
     }
 }

@@ -11,5 +11,9 @@ namespace WN.ProductStore.Models
     {
         public Guid CustomerId { get; set; }
         public string AddressName { get; set; }
+        /// <summary>
+        /// 默认
+        /// </summary>
+        public bool IsDefault { get; set; }
     }
 }

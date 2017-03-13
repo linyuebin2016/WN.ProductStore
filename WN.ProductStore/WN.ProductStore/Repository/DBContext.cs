@@ -22,6 +22,7 @@ namespace WN.ProductStore.Repository
         public DbSet<User> User { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
         public DbSet<Car> Car { get; set; }
+        public DbSet<Address> Address { get; set; }
 
     }
 }
