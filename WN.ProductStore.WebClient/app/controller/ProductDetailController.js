@@ -42,8 +42,9 @@ define(function (require) {
                     Quantity: 1,
                 };
                 CarService.Add(car).success(function () {
-                    // $state.go("carList");
+
                     alert('添加成功！');
+                    $state.go("home.productList");
                 });
             }
 
