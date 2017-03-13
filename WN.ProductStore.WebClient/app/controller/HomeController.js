@@ -4,10 +4,14 @@
 define([
     "app.config"
 ], function (app) {
+    app.controller('HomeController', ['$scope', '$state', '$location', function ($scope, $state, $location) {
+ 
+        var path = $location.path();
 
-    app.controller('HomeController', ['$scope', '$state', function ($scope, $state) {
+        if (path == "/home") {
+            $state.go("home.homePage");
+        }
 
-        $state.go("home.homePage");
         $scope.goProductList = function () {
             $state.go("productList");
         }

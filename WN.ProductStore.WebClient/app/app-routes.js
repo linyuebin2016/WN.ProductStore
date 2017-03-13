@@ -95,7 +95,7 @@ define(function (require) {
             }).
             state('home.customerHome', {
                 url: '/customerHome',
-                templateUrl: 'views/customer/customeHome.html',
+                templateUrl: 'views/customer/customerHome.html',
                 controllerUrl: 'controller/customer/CustomerHomeController',
                 controller: 'CustomerHomeController',
                 dependencies: ['core/CustomerService']
