@@ -22,6 +22,7 @@ define(function (require) {
             function getProductDetail(spid) {
                 ProductService.getProductDetail(spid).success(function (response) {
                     $scope.model = response.Product;
+                    $scope.ProductImages = response.ProductImages;
                 });
             }
 

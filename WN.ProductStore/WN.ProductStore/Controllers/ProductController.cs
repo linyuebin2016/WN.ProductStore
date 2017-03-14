@@ -18,14 +18,14 @@ namespace WN.ProductStore.Controllers
         public object GetProductList(int pageIndex, int pageSize, string queryString)
         {
             var TotalCount = 0;
- 
+            
+              //关联销量
             var queryOrderDetail = from o in db.OrderDetail
                                    group o by o.ProductId into oo
                                    select new
                                    {
                                        ProductId = oo.Key,
                                        SaleValue = oo.Sum(i => i.Quantity)
-
                                    };
 
             var queryList = from p in db.Product
@@ -33,7 +33,7 @@ namespace WN.ProductStore.Controllers
                             from ppp in pp.DefaultIfEmpty()
                             select new
                             {
-                                //SaleValue = pp.FirstOrDefault() != null ? pp.FirstOrDefault().SaleValue : 0,
+                                p.Id,
                                 ppp.SaleValue,
                                 Content = p.Content,
                                 CreateTime = p.CreateTime,
@@ -42,11 +42,10 @@ namespace WN.ProductStore.Controllers
                                 Name = p.Name,
                                 OriginalPrice = p.OriginalPrice,
                                 Price = p.Price,
-                                //ProductImages = p.ProductImages,
                                 ProductNo = p.ProductNo,
                                 Size = p.Size,
                             };
-
+            //搜索
             if (!string.IsNullOrEmpty(queryString))
             {
                 queryList = queryList.Where(p => p.Name.Contains(queryString) || p.ProductNo.Contains(queryString));
@@ -76,11 +75,38 @@ namespace WN.ProductStore.Controllers
         [HttpGet]
         public object GetProduct(Guid id)
         {
-            //var view = new ProductView();
             var images = db.ProductImage.Where(i => i.ProductId == id).ToList();
+
+            var queryOrderDetail = from o in db.OrderDetail.Where(i=>i.ProductId==id)
+                                   //join dd in db.Order on o.OrderId equals dd.Id into dddd
+                                   group o by o.ProductId into oo
+                                   select new
+                                   {
+                                       ProductId = oo.Key,
+                                       SaleValue = oo.Sum(i => i.Quantity)
+                                   };
+
+            var queryProduct = from p in db.Product.Where(i => i.Id == id)
+                            join qo in queryOrderDetail on p.Id equals qo.ProductId into pp
+                            from ppp in pp.DefaultIfEmpty()
+                            select new
+                            {
+                                p.Id,
+                                ppp.SaleValue,
+                                Content = p.Content,
+                                CreateTime = p.CreateTime,
+                                ImageUrl = p.ImageUrl,
+                                Introduction = p.Introduction,
+                                Name = p.Name,
+                                OriginalPrice = p.OriginalPrice,
+                                Price = p.Price,
+                                ProductNo = p.ProductNo,
+                                Size = p.Size,
+                            };
+
             var result = new
             {
-                Product = db.Product.FirstOrDefault(i => i.Id == id),
+                Product = queryProduct.FirstOrDefault(),
                 ProductImages = images
             };
 
@@ -94,7 +120,7 @@ namespace WN.ProductStore.Controllers
         public void Add(Product product)
         {
             product.Id = Guid.NewGuid();
-            product.ProductNo = DateTime.Now.ToString("yyMMddss");
+            product.ProductNo = DateTime.Now.ToString("yyMMddhhmmss");
             db.Product.Add(product);
             //if (product.ProductImages != null)
             //{

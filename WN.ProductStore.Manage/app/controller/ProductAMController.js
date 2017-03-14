@@ -65,7 +65,7 @@ define(function (require) {
                 });
             }
 
-						//保存图片
+            //保存图片
             $scope.save = function () {
                 $scope.productDetail.Content = $('#summernote_sp').summernote('code');
                 $scope.productDetail.ImageUrl = $scope.productImgUrl;
@@ -147,6 +147,8 @@ define(function (require) {
             //更新
             $scope.update = function () {
                 $scope.productDetail.Content = $('#summernote_sp').summernote('code');
+                $scope.productDetail.ImageUrl = $scope.productImgUrl;
+                $scope.productDetail.ProductImages = $scope.productImages;
                 ProductService.update($scope.productDetail).success(function (resultJson) {
                     alert("更新成功");
                     window.history.back();

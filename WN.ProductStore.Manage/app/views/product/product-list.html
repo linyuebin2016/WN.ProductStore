@@ -25,7 +25,8 @@
               <div class="post-summary">
                 <h3 style="margin-top: 0px;" ng-click="goDetail(p.Id)"><a href="">{{p.Name}}</a></h3>
                 <p class="text-sm">{{p.CreateTime | date:'yyyy-MM-dd'}}</p>
-                <p>产品编号:{{p.ProductNo}}</p>
+                <p class="text-sm">编号:{{p.ProductNo}}</p>
+                <p class="text-sm" style="color: red">销量:{{p.SaleValue}}</p>
                 <p class="sp-text" ng-if="p.Introduction != null">
                   {{p.Introduction}}
                 </p>
