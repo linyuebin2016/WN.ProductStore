@@ -12,8 +12,8 @@
   <div class="search-bar pr">
     <a name="index_none_header_sysc" href="#"></a>
     <form>
-      <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-      <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+      <input ng-model="queryString" id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off" >
+      <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit" ng-click="seach()">
     </form>
   </div>
 </div>
@@ -68,14 +68,14 @@
           <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
             <li ng-repeat="product in productList" ng-click="goDetail(product.Id)">
               <div class="i-pic limit">
-                <img ng-src="{{baseImgServer}}{{product.ImageUrl}}" />
+                <img ng-src="{{baseImgServer}}{{product.ImageUrl}}" style="width: 170.5px;height: 170.5px;" />
                 <p class="title fl">{{product.Name}} {{product.Size}}</p>
                 <p class="price fl">
                   <b>¥</b>
                   <strong>{{product.Price}}</strong>
                 </p>
                 <p class="number fl">
-                  销量<span>1110</span>
+                  销量<span>{{product.SaleValue}}</span>
                 </p>
               </div>
             </li>
@@ -133,11 +133,8 @@
         <!--分页 -->
         <ul class="am-pagination am-pagination-right">
           <li class="am-disabled"><a href="#">&laquo;</a></li>
-          <li class="am-active"><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
+          <li class="am-active" ng-repeat="page in pageList"><a href="#" ng-click="selectPage(page)">{{page}}</a></li>
+
           <li><a href="#">&raquo;</a></li>
         </ul>
 

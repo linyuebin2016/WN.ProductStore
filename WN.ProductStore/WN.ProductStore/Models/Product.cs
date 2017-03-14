@@ -50,7 +50,7 @@ namespace WN.ProductStore.Models
         [MaxLength(20)]
         public string Size { get; set; }
 
-        public virtual List<string> ProductImages { get; set; }
+        //public virtual List<ProductImage> ProductImages { get; set; }
         /// <summary>
         /// 产品内容
         /// </summary>
@@ -59,6 +59,9 @@ namespace WN.ProductStore.Models
         [MaxLength(250)]
         public string ImageUrl { get; set; }
 
-
+        /// <summary>
+        /// 销量
+        /// </summary>
+        //public int SaleVale{get;set;}
     }
 }

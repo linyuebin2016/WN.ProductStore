@@ -13,6 +13,14 @@ define([
             $scope.goTo = function (path) {
                 $state.go(path);
             };
+            $scope.model = {};
+            getCustomer();
+
+            function getCustomer() {
+                CustomerService.getCurrentCustomer().success(function (data) {
+                    $scope.model = data;
+                });
+            }
         }
     ]);
 });

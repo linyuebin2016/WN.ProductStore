@@ -19,7 +19,7 @@ namespace WN.ProductStore.Controllers
             //var products = db.Product.ToList();
 
             GetList();
-             //var list= p.GetProductList(1, 10, "");
+
             return View();
         }
 
@@ -56,27 +56,7 @@ namespace WN.ProductStore.Controllers
             //             oo
             //         }
             //         ).ToList();
-            var q = from o in db.OrderDetail
-                    group o by o.ProductId into oo
-
-
-
-
-                    select new
-                    {
-                        ProductId = oo.FirstOrDefault().ProductId,
-                      Count= oo.Sum(i=>i.Quantity)
-                    };
-            var qq = q.ToList();
-
-
-            var qqqqq = from pr in db.Product
-                         join o in db.OrderDetail on pr.Id equals o.ProductId
-                         group pr by pr.Id into ppp
-                         select new {
-                             ppp.FirstOrDefault().Name,
-                            
-                         };
+            var list = p.GetProductList(1, 10, "");
         }
     }
 }

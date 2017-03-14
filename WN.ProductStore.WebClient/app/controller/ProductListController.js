@@ -10,6 +10,8 @@ define(function (require) {
             $scope.pageIndex = 1;
             $scope.pageSize = 10;
             $scope.queryString = "";
+            /**分页信息 */
+            $scope.pageList = [];
             getList();
 
             //修改商品
@@ -48,11 +50,11 @@ define(function (require) {
 
             /**搜索 */
             $scope.seach = function () {
+                $scope.pageList = [];
                 getList();
             }
 
-            /**分页信息 */
-            $scope.pageList = [];
+
 
             $scope.selectPage = function (page) {
                 if (Number.isNaN(page) || page < 0) {
