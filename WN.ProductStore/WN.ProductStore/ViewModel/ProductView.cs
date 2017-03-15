@@ -6,8 +6,9 @@ using WN.ProductStore.Models;
 
 namespace WN.ProductStore.ViewModel
 {
-    //public class ProductView:Product
-    //{
-    //    public int SaleValue { get; set; }
-    //}
+    public class ProductView 
+    {
+        public Product Product { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
+    }
 }

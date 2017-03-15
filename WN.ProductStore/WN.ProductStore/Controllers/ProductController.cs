@@ -17,7 +17,7 @@ namespace WN.ProductStore.Controllers
         // GET api/<controller>
         public object GetProductList(int pageIndex, int pageSize, string queryString)
         {
-            var TotalCount = 0;
+            var totalCount = 0;
             
               //关联销量
             var queryOrderDetail = from o in db.OrderDetail
@@ -49,11 +49,11 @@ namespace WN.ProductStore.Controllers
             if (!string.IsNullOrEmpty(queryString))
             {
                 queryList = queryList.Where(p => p.Name.Contains(queryString) || p.ProductNo.Contains(queryString));
-                TotalCount = queryList.Count();
+                totalCount = queryList.Count();
             }
             else
             {
-                TotalCount = db.Product.Count();
+                totalCount = db.Product.Count();
             }
             int startRow = (pageIndex - 1) * pageSize;
 
@@ -62,7 +62,7 @@ namespace WN.ProductStore.Controllers
             var result = new
             {
                 Products = products,
-                TotalCount = TotalCount
+                TotalCount = totalCount
             };
             return result;
         }
@@ -117,21 +117,21 @@ namespace WN.ProductStore.Controllers
 
         // PUT api/<controller>/5
         [HttpPost]
-        public void Add(Product product)
+        public void Add(ProductView view)
         {
-            product.Id = Guid.NewGuid();
-            product.ProductNo = DateTime.Now.ToString("yyMMddhhmmss");
-            db.Product.Add(product);
-            //if (product.ProductImages != null)
-            //{
-            //    foreach (var item in product.ProductImages)
-            //    {
-            //        var image = new ProductImage();
-            //        image.Url = item.Url;
-            //        image.ProductId = product.Id;
-            //        db.ProductImage.Add(image);
-            //    }
-            //}
+            view.Product.Id = Guid.NewGuid();
+            view.Product.ProductNo = DateTime.Now.ToString("yyMMddhhmmss");
+            db.Product.Add(view.Product);
+            if (view.ProductImages != null)
+            {
+                foreach (var item in view.ProductImages)
+                {
+                    var image = new ProductImage();
+                    image.Url = item.Url;
+                    image.ProductId = view.Product.Id;
+                    db.ProductImage.Add(image);
+                }
+            }
 
 
             db.SaveChanges();
