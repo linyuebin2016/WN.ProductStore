@@ -65,7 +65,7 @@ define(function (require) {
                 });
             }
 
-            //保存图片
+            //保存
             $scope.save = function () {
                 $scope.productDetail.Content = $('#summernote_sp').summernote('code');
                 $scope.productDetail.ImageUrl = $scope.productImgUrl;
@@ -77,7 +77,12 @@ define(function (require) {
                 });
             };
 
+            //封面图片上传
             $scope.fmImg_upload = function (files) {
+                if ($scope.productImgUrl && $scope.productImgUrl.length > 0){
+                    alert("只允许上传1张图片");
+                    return;
+                }
                 var data = new FormData();
                 data.append('image', files[0]);
                 ProductService.uploadImg(data).success(function (resp) {
@@ -92,6 +97,10 @@ define(function (require) {
 
             //轮播图片上传
             $scope.lbImg_upload = function (files) {
+                if ($scope.productImages.length == 4){
+                    alert("最多允许上传4张图片");
+                    return;
+                }
                 var data = new FormData();
                 data.append('image', files[0]);
                 ProductService.uploadImg(data).success(function (resp) {

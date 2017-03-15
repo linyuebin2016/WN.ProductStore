@@ -9,6 +9,7 @@ define(function (require) {
             $scope.baseImgServer = baseImgServer;
 
             $scope.model = {};
+            $scope.ProductImages = [];
 
             var spid = $stateParams.spid;
             $scope.isEdit = false;

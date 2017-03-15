@@ -10,6 +10,7 @@ define(function (require) {
 
 
             $scope.productDetail = {};
+            $scope.productImages = [];
 
             var spid = $stateParams.spid;
             $scope.isEdit = false;
@@ -26,8 +27,8 @@ define(function (require) {
                     $scope.productDetail = response.Product;
                     $('#summernote_sp').summernote('code', $scope.productDetail.Content);
                     $scope.productDetail.Content = $sce.trustAsHtml($scope.productDetail.Content);
-
                     $scope.productImgUrl = $scope.productDetail.ImageUrl;
+                    $scope.productImages = response.ProductImages;
                 });
             }
 
