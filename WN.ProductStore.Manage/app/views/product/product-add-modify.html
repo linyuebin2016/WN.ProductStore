@@ -140,8 +140,8 @@
             <tr>
                 <td class="td1"></td>
                 <td>
-                    <button ng-if="!isEdit" data-ng-click="save()" class="vs-bt bt-primary mr20">发布</button>
-                    <button ng-if="isEdit" data-ng-click="update()" class="vs-bt bt-primary mr20">更新</button>
+                    <button id="publish_btn" ng-if="!isEdit" data-ng-click="save()" class="vs-bt bt-primary mr20">发布</button>
+                    <button id="update_btn" ng-if="isEdit" data-ng-click="update()" class="vs-bt bt-primary mr20">更新</button>
                     <button onclick="window.history.back()" class="vs-bt bt-default">取消</button>
                 </td>
             </tr>

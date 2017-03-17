@@ -64,8 +64,8 @@ define(function (require) {
                                 ProductId:''
                             };
                             $scope.ProductImage.Url = response.ProductImages[i].Url;
-                            $scope.productImage.ProductId = $scope.productDetail.Id;
-                            $scope.ProductImages.push($scope.img);
+                            $scope.ProductImage.ProductId = $scope.productDetail.Id;
+                            $scope.ProductImages.push($scope.ProductImage);
                         }
                     }
                 });
@@ -79,6 +79,8 @@ define(function (require) {
                 $scope.ProductView.ProductImages = $scope.ProductImages;
                 ProductService.saveProduct($scope.ProductView).success(function (resultJson) {
                     alert(resultJson + "新增成功");
+                    document.getElementById('publish_btn').disabled = true;
+                    $state.go("product");
                 }).error(function (e) {
                     console.log('系统异常');
                 });
@@ -162,7 +164,8 @@ define(function (require) {
                 $scope.ProductView.ProductImages = $scope.ProductImages;
                 ProductService.update($scope.ProductView).success(function (resultJson) {
                     alert("更新成功");
-                    window.history.back();
+                    document.getElementById('update_btn').disabled = true;
+                    $state.go("product");
                 }).error(function (e) {
                     console.log('系统异常');
                 });

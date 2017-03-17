@@ -3,7 +3,7 @@
  */
 define([
     "app.config",
-    "directives/paginator"
+    'directives/InfiniteScroll'
 ], function (app) {
 
     app.controller('ProductListController', ['$scope', '$state', 'ProductService', 'baseImgServer',
@@ -45,8 +45,13 @@ define([
                     $scope.totalpage = Math.ceil(data.TotalCount / $scope.pageSize);
                 });
             }
+            $scope.scrollHandler = getList;
 
             $scope.getData();
+
+            function getList() {
+                $scope.getData();
+            }
 
             $scope.delete = function (id) {
                 ProductService.delete(id).success(function (response) {
