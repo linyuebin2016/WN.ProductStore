@@ -1,7 +1,7 @@
  define([
      "app.config"
  ], function (app) {
-     app.directive('paginator', ["$window", "$document", "$timeout", function ($window, $document, $timeout) {
+     app.directive('fcInfiniteScroll', ["$window", "$document", "$timeout", function ($window, $document, $timeout) {
          return {
              link: function ($scope, elem, attrs) {
 

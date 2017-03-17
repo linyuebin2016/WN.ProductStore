@@ -56,13 +56,14 @@
 
 /*搜索*/
 
-.productList .order {
+.productList .sort {
     font-size: 14px;
     color: #000;
-    background-color: antiquewhite;
+    background-color:antiquewhite;
+    width: 100%
 }
 
-.productList .order li {
+.productList .sort li {
     float: left;
     width: 33.33%;
     height: 35px;

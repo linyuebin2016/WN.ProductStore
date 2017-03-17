@@ -10,7 +10,7 @@ define([
         function ($scope, $state, ProductService, baseImgServer) {
             $scope.baseImgServer = baseImgServer;
             $scope.pageIndex = 1;
-            $scope.pageSize = 2;
+            $scope.pageSize =10;
             $scope.queryString = "";
             /**分页信息 */
             $scope.pageList = [];
@@ -36,13 +36,13 @@ define([
 
             $scope.getData = function () {
                 ProductService.getProductList($scope.pageIndex, $scope.pageSize, $scope.queryString).success(function (data) {
-                    $scope.productList = data.Products;
 
-                    // $scope.pageCount = Math.ceil(response.TotalCount / 10);
-                    // for (var i = 0; i < $scope.pageCount; i++) {
-                    //     $scope.pageList.push(i + 1);
-                    // }
-                    $scope.totalpage = Math.ceil(data.TotalCount / $scope.pageSize);
+                    if ($scope.pageIndex == 1) {
+                        $scope.productList = data.Products;
+                    } else {
+                        $scope.productList = $scope.productList.concat(data.Products);
+                    }
+                    $scope.pageIndex++;
                 });
             }
             $scope.scrollHandler = getList;
