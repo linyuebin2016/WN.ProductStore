@@ -67,7 +67,72 @@ namespace WN.ProductStore.Controllers
             };
             return result;
         }
+        // GET api/<controller>;
+        public object GetProductList(int pageIndex, int pageSize, string queryString,string sort)
+        {
+            var totalCount = 0;
 
+            //关联销量
+            var queryOrderDetail = from o in db.OrderDetail
+                                   group o by o.ProductId into oo
+                                   select new
+                                   {
+                                       ProductId = oo.Key,
+                                       SaleValue = oo.Sum(i => i.Quantity)
+                                   };
+
+            var queryList = from p in db.Product
+                            join qo in queryOrderDetail on p.Id equals qo.ProductId into pp
+                            from ppp in pp.DefaultIfEmpty()
+                            select new
+                            {
+                                p.Id,
+                                SaleValue = ppp == null ? 0 : ppp.SaleValue,
+                                Content = p.Content,
+                                CreateTime = p.CreateTime,
+                                ImageUrl = p.ImageUrl,
+                                Introduction = p.Introduction,
+                                Name = p.Name,
+                                OriginalPrice = p.OriginalPrice,
+                                Price = p.Price,
+                                ProductNo = p.ProductNo,
+                                Size = p.Size,
+                            };
+            //搜索
+            if (!string.IsNullOrEmpty(queryString))
+            {
+                queryList = queryList.Where(p => p.Name.Contains(queryString) || p.ProductNo.Contains(queryString));
+                totalCount = queryList.Count();
+            }
+            else
+            {
+                totalCount = db.Product.Count();
+            }
+            int startRow = (pageIndex - 1) * pageSize;
+
+
+
+            switch (sort)
+            {
+                case "SaleValue":
+                    queryList = queryList.OrderByDescending(i => i.SaleValue);
+                    break;
+                case "Price":
+                    queryList = queryList.OrderByDescending(i => i.Price);
+                    break;
+                default:
+                    queryList = queryList.OrderByDescending(i => i.CreateTime);
+                    break;
+            }
+
+            var products = queryList.Skip(startRow).Take(pageSize).ToList();
+            var result = new
+            {
+                Products = products,
+                TotalCount = totalCount
+            };
+            return result;
+        }
         /// <summary>
         /// 获取产品
         /// </summary>

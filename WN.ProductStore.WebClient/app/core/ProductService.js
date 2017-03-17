@@ -9,12 +9,13 @@ define(function (require) {
 
         return {
             //获取商品列表
-            getProductList: function (pageIndex, pageSize, queryString) {
+            getProductList: function (pageIndex, pageSize, queryString,sort) {
                 return $http.get(baseUrl + '/Product/GetProductList', {
                     params: {
                         pageIndex: pageIndex,
                         pageSize: pageSize,
-                        queryString: queryString
+                        queryString: queryString,
+                        sort:sort
                     }
                 })
             },
