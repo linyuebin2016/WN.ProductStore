@@ -9,8 +9,17 @@ define(function (require) {
             $scope.baseImgServer = baseImgServer;
             //商品封面图片URL
             $scope.productImgUrl = null;
-            //封面图片上传
-            $scope.thumb = [];
+            //商品view
+            $scope.ProductView = {
+                Product:{},
+                ProductImages:[]
+            };
+            //轮播图片对象、集合
+            $scope.ProductImages = [];
+            $scope.ProductImage = {
+                Url:'',
+                ProductId:''
+            };
 
             $('.form_datetime').datetimepicker({
                 minView: "month", //选择日期后，不会再跳转去选择时分秒
@@ -47,19 +56,16 @@ define(function (require) {
                     $scope.productDetail = response.Product;
                     $('#summernote_sp').summernote('code', $scope.productDetail.Content);
                     $scope.productDetail.Content = $sce.trustAsHtml($scope.productDetail.Content);
-                    $scope.productImage.ProductId = $scope.productDetail.Id;
                     $scope.productImgUrl = $scope.productDetail.ImageUrl;
                     if(response.ProductImages.length>0){
                         for(var i=0;i<response.ProductImages.length;i++){
-                            $scope.img = {
-                                imgName:null,
-                                imgSrc:null,
-                                imgDelSrc:null
+                            $scope.ProductImage = {
+                                Url:'',
+                                ProductId:''
                             };
-                            $scope.img.imgName = response.ProductImages[i].Url.split("/")[4];
-                            $scope.img.imgSrc = baseImgServer + response.ProductImages[i].Url;
-                            $scope.img.imgDelSrc = response.ProductImages[i].Url;
-                            $scope.thumb.push($scope.img);
+                            $scope.ProductImage.Url = response.ProductImages[i].Url;
+                            $scope.productImage.ProductId = $scope.productDetail.Id;
+                            $scope.ProductImages.push($scope.img);
                         }
                     }
                 });
@@ -69,8 +75,9 @@ define(function (require) {
             $scope.save = function () {
                 $scope.productDetail.Content = $('#summernote_sp').summernote('code');
                 $scope.productDetail.ImageUrl = $scope.productImgUrl;
-                $scope.productDetail.ProductImages = $scope.productImages;
-                ProductService.saveProduct($scope.productDetail).success(function (resultJson) {
+                $scope.ProductView.Product = $scope.productDetail
+                $scope.ProductView.ProductImages = $scope.ProductImages;
+                ProductService.saveProduct($scope.ProductView).success(function (resultJson) {
                     alert(resultJson + "新增成功");
                 }).error(function (e) {
                     console.log('系统异常');
@@ -105,16 +112,12 @@ define(function (require) {
                 data.append('image', files[0]);
                 ProductService.uploadImg(data).success(function (resp) {
                     if (resp.errmsg == '上传成功') {
-                         $scope.img = {
-                             imgName:null,
-                             imgSrc:null,
-                             imgDelSrc:null
+                         $scope.ProductImage = {
+                             Url:'',
+                             ProductId:''
                          };
-                         $scope.img.imgName = resp.imgUrl.split("/")[4];
-                         $scope.img.imgSrc = baseImgServer + resp.imgUrl;
-                         $scope.img.imgDelSrc = resp.imgUrl;
-                         $scope.productImages.push(resp.imgUrl);
-                         $scope.thumb.push($scope.img);
+                         $scope.ProductImage.Url = resp.imgUrl;
+                         $scope.ProductImages.push($scope.ProductImage);
                     }
                     if (resp.result_code == 'FAIL') {
                         console.log(resp)
@@ -127,7 +130,7 @@ define(function (require) {
             		if(type == 1){
             			$scope.imgUrl = img;
             		} else {
-            			$scope.imgUrl = img.imgDelSrc
+            			$scope.imgUrl = img.Url
             		}
                 ProductService.delUploadImg($scope.imgUrl).success(function (resp) {
                     if (resp) {
@@ -135,19 +138,17 @@ define(function (require) {
                     			$scope.productImgUrl = null;
                     	}else {
                     		$scope.thumbTemp = [];
-                            $scope.productImages = [];
-                            for (var i = 0; i < $scope.thumb.length; i++) {
-                                if ($scope.thumb[i].imgName != img.imgName) {
-                                    $scope.productImage = {
-                                        url: null,
+                            for (var i = 0; i < $scope.ProductImages.length; i++) {
+                                if ($scope.ProductImages[i].Url != img.Url) {
+                                    $scope.ProductImage = {
+                                        Url: null,
                                         ProductId: $scope.productDetail.Id
                                     };
-                                    $scope.productImage.url = $scope.thumb[i].imgDelSrc;
-                                    $scope.productImages.push($scope.productImage);
-                                    $scope.thumbTemp.push($scope.thumb[i]);
+                                    $scope.ProductImage.Url = $scope.ProductImages[i].Url;
+                                    $scope.thumbTemp.push($scope.ProductImages[i]);
                                 }
                             }
-                            $scope.thumb = $scope.thumbTemp;
+                            $scope.ProductImages = $scope.thumbTemp;
                     	}
                     }
                 });
@@ -157,8 +158,9 @@ define(function (require) {
             $scope.update = function () {
                 $scope.productDetail.Content = $('#summernote_sp').summernote('code');
                 $scope.productDetail.ImageUrl = $scope.productImgUrl;
-                $scope.productDetail.ProductImages = $scope.productImages;
-                ProductService.update($scope.productDetail).success(function (resultJson) {
+                $scope.ProductView.Product = $scope.productDetail
+                $scope.ProductView.ProductImages = $scope.ProductImages;
+                ProductService.update($scope.ProductView).success(function (resultJson) {
                     alert("更新成功");
                     window.history.back();
                 }).error(function (e) {

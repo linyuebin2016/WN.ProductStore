@@ -34,7 +34,6 @@ define(function (require) {
 
        
             $scope.selectPage = function (page) {
-debugger;
                 //因为只显示5个页数，大于2页开始分页转换
                 $scope.Stocks = [];
                 CustomerService.GetCustomerList(page, $scope.pageSize, $scope.queryString).success(function (response) {

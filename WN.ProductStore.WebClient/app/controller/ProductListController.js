@@ -1,18 +1,20 @@
 /**
- * Created by shengxiangyang on 2017-02-09.
+ * Created by linyuebin
  */
-define(function (require) {
-    var app = require('../app.config');
+define([
+    "app.config",
+    "directives/paginator"
+], function (app) {
 
     app.controller('ProductListController', ['$scope', '$state', 'ProductService', 'baseImgServer',
         function ($scope, $state, ProductService, baseImgServer) {
             $scope.baseImgServer = baseImgServer;
             $scope.pageIndex = 1;
-            $scope.pageSize = 10;
+            $scope.pageSize = 2;
             $scope.queryString = "";
             /**分页信息 */
             $scope.pageList = [];
-            getList();
+
 
             //修改商品
             $scope.modifyProduct = function (spid) {
@@ -30,28 +32,35 @@ define(function (require) {
             };
 
 
+            $scope.current_page = 1;
+
+            $scope.getData = function () {
+                ProductService.getProductList($scope.pageIndex, $scope.pageSize, $scope.queryString).success(function (data) {
+                    $scope.productList = data.Products;
+
+                    // $scope.pageCount = Math.ceil(response.TotalCount / 10);
+                    // for (var i = 0; i < $scope.pageCount; i++) {
+                    //     $scope.pageList.push(i + 1);
+                    // }
+                    $scope.totalpage = Math.ceil(data.TotalCount / $scope.pageSize);
+                });
+            }
+
+            $scope.getData();
+
             $scope.delete = function (id) {
                 ProductService.delete(id).success(function (response) {
                     alert("删除成功！");
-                    getList();
+                    $scope.getData();
                 });
             }
 
-            function getList() {
-                ProductService.getProductList($scope.pageIndex, $scope.pageSize, $scope.queryString).success(function (response) {
-                    $scope.productList = response.Products;
-
-                    $scope.pageCount = Math.ceil(response.TotalCount / 10);
-                    for (var i = 0; i < $scope.pageCount; i++) {
-                        $scope.pageList.push(i + 1);
-                    }
-                });
-            }
+            // $scope.list = Paginator(getList2, $scope.pageSize);
 
             /**搜索 */
             $scope.seach = function () {
                 $scope.pageList = [];
-                getList();
+                $scope.getData();
             }
 
 

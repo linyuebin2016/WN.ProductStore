@@ -1,7 +1,17 @@
 <!--购物车-->
 <link href="css/cartstyle.css" rel="stylesheet" type="text/css" />
 <link href="css/optstyle.css" rel="stylesheet" type="text/css" />
-<link href="basic/css/demo.css" rel="stylesheet" type="text/css" />
+ 
+<style>
+	
+.cart .info{
+    margin-left: 30px;
+}
+.cart .name{
+	margin-left: 95px;
+}
+</style>
+
 
 <div class="nav white">
   <div class="logo"><img src="images/logo.png" /></div>
@@ -62,7 +72,7 @@
 					</div>
 				</div>
 				<div class="clear"></div>
-				<div class="bundle-main">
+				<div class="cart bundle-main">
 					<ul class="item-content clearfix">
 						<li class="td td-chk">
 							<div class="cart-checkbox ">
@@ -75,13 +85,13 @@
 								<a href="#" target="_blank" class="J_MakePoint" data-point="tbcart.8.12">
 									<img ng-src="{{baseImgServer}}{{c.Product.ImageUrl}}" class="itempic J_ItemImg" style="height: 80px;width: 80px"></a>
 							</div>
-							<div class="item-info">
-								<div class="item-basic-info">
+							<div class="item-info name">
+								<div class="item-basic-info ">
 									<a href="#" target="_blank" class="item-title J_MakePoint" data-point="tbcart.8.11">{{c.Product.Name}}</a>
 								</div>
 							</div>
 						</li>
-						<li class="td td-info">
+						<li class="td td-info info">
 							<div class="item-props item-props-can">
 								<span class="sku-line">颜色：{{c.Product.Color}}</span>
 								<span class="sku-line">包装：裸装</span>
@@ -89,7 +99,7 @@
 								<i class="theme-login am-icon-sort-desc"></i>
 							</div>
 						</li>
-						<li class="td td-price">
+						<li class="td td-price info">
 							<div class="item-price price-promo-promo">
 								<div class="price-content">
 									<div class="price-line">

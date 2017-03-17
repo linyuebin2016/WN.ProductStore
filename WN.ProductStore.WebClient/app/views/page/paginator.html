@@ -1,0 +1,29 @@
+<div>
+
+    <link href="css/page.css" rel="stylesheet" type="text/css" />
+
+
+    <ul class="page clearfix">
+        <li ng-hide="currentPage <= 1">
+            <a href="" ng-click="firstPage()">
+                <i class="fa fa-step-backward"></i>首页
+            </a>
+            <a href="" ng-click="prePage()">
+                <i class="fa fa-play fa-flip-horizontal"></i>上一页
+            </a>
+        </li>
+        <li>
+            <span>页码</span>
+            <input type="text" ng-model="currentPage">/
+            <span ng-bind="totalPage"></span>
+        </li>
+        <li ng-hide="currentPage >= totalPage">
+            <a href="" ng-click="nextPage()">
+              下一页  <i class="fa fa-play"></i>
+            </a>
+            <a href="" ng-click="lastPage()">
+            最后一页    <i class="fa fa-step-forward"></i>
+            </a>
+        </li>
+    </ul>
+</div>

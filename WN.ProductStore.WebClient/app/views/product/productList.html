@@ -1,0 +1,40 @@
+<!--悬浮搜索框-->
+
+<div class="nav white">
+    <div class="logo"><img src="images/logo.png" /></div>
+    <div class="logoBig">
+        <li><img src="images/logobig.png" /></li>
+    </div>
+
+    <div class="search-bar pr">
+        <a name="index_none_header_sysc" href="#"></a>
+        <form>
+            <input ng-model="queryString" id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+            <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit" ng-click="seach()">
+        </form>
+    </div>
+</div>
+<div class="clear"></div>
+
+<div class="productList">
+    <ul class="order">
+        <li>销量</li>
+        <li>价格</li>
+    </ul>
+    <div class="clear"></div>
+    <ul>
+        <li ng-repeat="product in productList" ng-click="goDetail(product.Id)">
+            <div class="productList_div">
+                <span class="productList_span">  <img ng-src="{{baseImgServer}}{{product.ImageUrl}}" /></span>
+                <span class="productList_span2">
+                    <strong >{{product.Name}} {{product.Size}}</strong>
+                    <span>{{product.Introduction|limitTo:40}}</span>
+                  <span>销量：{{product.SaleValue}}</span>
+                <span class="price">
+                    <strong >￥ {{product.Price|number}}</strong>
+                    </span>
+                </span>
+            </div>
+        </li>
+    </ul>
+</div>

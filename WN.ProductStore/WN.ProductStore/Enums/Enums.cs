@@ -12,6 +12,11 @@ namespace WN.ProductStore.Enums
     public enum OrderState
     {
         /// <summary>
+        /// 全部订单
+        /// </summary>
+        [Description("全部订单")]
+        All,
+        /// <summary>
         /// 待付款
         /// </summary>
         [Description("待付款")]

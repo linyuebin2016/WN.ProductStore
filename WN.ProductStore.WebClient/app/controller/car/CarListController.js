@@ -4,7 +4,7 @@
 define([
     "app.config"
 ], function (app) {
- 
+
     app.controller('CarListController', ['$scope', 'CarService', '$state', 'baseImgServer',
 
         function ($scope, CarService, $state, baseImgServer) {

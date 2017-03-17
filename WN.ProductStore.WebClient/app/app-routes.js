@@ -30,7 +30,7 @@ define(function (require) {
             // 产品
             state('home.productList', {
                 url: '/productList',
-                templateUrl: 'views/product/product-list.html',
+                templateUrl: 'views/product/productList.html',
                 controllerUrl: 'controller/ProductListController',
                 controller: 'ProductListController',
                 dependencies: ['core/ProductService']

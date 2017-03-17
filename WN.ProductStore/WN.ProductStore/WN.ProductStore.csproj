@@ -292,6 +292,7 @@
     <Compile Include="Repository\CustomerDal.cs" />
     <Compile Include="Repository\DBContext.cs" />
     <Compile Include="Repository\ProductDal.cs" />
+    <Compile Include="Repository\ProductImageDal.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\OrderListView.cs" />

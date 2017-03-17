@@ -14,7 +14,8 @@ namespace WN.ProductStore.Controllers
     {
         DBContext db = new DBContext();
         ProductDal dal = new ProductDal();
-        // GET api/<controller>
+        ProductImageDal productImageDal = new ProductImageDal();
+        // GET api/<controller>;
         public object GetProductList(int pageIndex, int pageSize, string queryString)
         {
             var totalCount = 0;
@@ -34,7 +35,7 @@ namespace WN.ProductStore.Controllers
                             select new
                             {
                                 p.Id,
-                                ppp.SaleValue,
+                                SaleValue= ppp==null?0: ppp.SaleValue,
                                 Content = p.Content,
                                 CreateTime = p.CreateTime,
                                 ImageUrl = p.ImageUrl,
@@ -92,7 +93,7 @@ namespace WN.ProductStore.Controllers
                             select new
                             {
                                 p.Id,
-                                ppp.SaleValue,
+                                SaleValue=ppp==null?0 : ppp.SaleValue,
                                 Content = p.Content,
                                 CreateTime = p.CreateTime,
                                 ImageUrl = p.ImageUrl,
@@ -132,15 +133,20 @@ namespace WN.ProductStore.Controllers
                     db.ProductImage.Add(image);
                 }
             }
-
-
             db.SaveChanges();
         }
 
         [HttpPost]
-        public bool Update(Product product)
+        public bool Update(ProductView view)
         {
-            dal.Update(product);
+            dal.Update(view.Product);
+            if (view.ProductImages != null)
+            {
+                foreach (var item in view.ProductImages)
+                {
+                    productImageDal.Update(item);
+                }
+            }
             return true;
         }
 

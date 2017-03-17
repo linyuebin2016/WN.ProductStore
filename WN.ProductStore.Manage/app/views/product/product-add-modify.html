@@ -93,10 +93,10 @@
                                 <td style="color: red">(提示：最多选择4张封面图片)</td>
                             </tr>
                             <tr>
-                                <td class="panel-body gallery" ng-repeat="item in thumb">
-                                    <img ng-src="{{item.imgSrc}}" class="img-rounded" style="width: 140px;height: 140px">
+                                <td class="panel-body gallery" ng-repeat="item in ProductImages">
+                                    <img ng-src="{{baseImgServer}}{{item.Url}}" class="img-rounded" style="width: 140px;height: 140px">
                                     <div class="clearfix"></div>
-                                    <a ng-if="item.imgSrc" ng-click="img_del(item,2)">删除</a>
+                                    <a ng-if="item.Url" ng-click="img_del(item,2)">删除</a>
                                 </td>
                             </tr>
                         </table>

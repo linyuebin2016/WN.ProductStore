@@ -15,6 +15,7 @@ namespace WN.ProductStore.Controllers
     {
         DBContext db = new DBContext();
         CarDal carDal = new CarDal();
+        CustomerDal custDal = new CustomerDal();
         [HttpGet]
         // GET: api/Order
         public object GetOrderList(int pageIndex, int pageSize, string queryString)
@@ -39,7 +40,12 @@ namespace WN.ProductStore.Controllers
 
         public object GetOrderListByState(int pageIndex, int pageSize, string queryString,OrderState orderState)
         {
-            var query = from o in db.Order.Where(i=>i.OrderState== orderState)
+            IQueryable<Order> dbOrder=db.Order;
+            if (orderState == OrderState.All)
+            {
+                dbOrder = db.Order.Where(i => i.OrderState == orderState);
+            }
+            var query = from o in dbOrder
                         .OrderByDescending(o => o.CreateTime).ToPage(pageIndex, pageSize).ToList()
                         select new
                         {
@@ -115,6 +121,24 @@ namespace WN.ProductStore.Controllers
 
 
             db.SaveChanges();
+        }
+
+        /// <summary>
+        /// 订单状态数量
+        /// </summary>
+        /// <returns></returns>
+        public object GetOrderStateCount()
+        {
+            var customer = custDal.GetCurrentCustomer();
+            var query = from o in db.Order.Where(i => i.CustomerId == customer.Id)
+                        group o by o.OrderState into oo
+                        
+                        select new
+                        {
+                           OrderState= oo.FirstOrDefault().OrderState,
+                           Count=  oo.Count(),
+                        };
+            return query.ToList();
         }
     }
 }

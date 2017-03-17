@@ -29,9 +29,9 @@ define(function (require) {
             },
 
             //新增商品信息
-            saveProduct: function (product) {
-                var transFn = function (product) {
-                    return $.param(product);
+            saveProduct: function (ProductView) {
+                var transFn = function (ProductView) {
+                    return $.param(ProductView);
                 };
                 var postCfg = {
                     headers: {
@@ -39,13 +39,13 @@ define(function (require) {
                     },
                     transformRequest: transFn
                 };
-                return $http.post(baseUrl + "/Product/Add", product, postCfg);
+                return $http.post(baseUrl + "/Product/Add", ProductView, postCfg);
             },
 
             //更新商品信息
-            update: function (product) {
-                var transFn = function (product) {
-                    return $.param(product);
+            update: function (ProductView) {
+                var transFn = function (ProductView) {
+                    return $.param(ProductView);
                 };
                 var postCfg = {
                     headers: {
@@ -53,7 +53,7 @@ define(function (require) {
                     },
                     transformRequest: transFn
                 };
-                return $http.post(baseUrl + "/Product/Update", product, postCfg);
+                return $http.post(baseUrl + "/Product/Update", ProductView, postCfg);
             },
 
             //上传图片
