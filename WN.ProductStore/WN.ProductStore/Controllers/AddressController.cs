@@ -35,5 +35,19 @@ namespace WN.ProductStore.Controllers
             dal.Update(address);
             return true;
         }
+
+        public bool Add(Address address)
+        {
+            address.Id = Guid.NewGuid();
+            dal.Add(address);
+            return true;
+        }
+
+        public bool Delete(Guid id)
+        {
+            var model = dal.GetEntity(id);
+            dal.Remove(model);
+            return true;
+        }
     }
 }

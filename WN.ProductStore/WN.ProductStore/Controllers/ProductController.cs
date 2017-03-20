@@ -19,14 +19,25 @@ namespace WN.ProductStore.Controllers
         public object GetProductList(int pageIndex, int pageSize, string queryString)
         {
             var totalCount = 0;
-            
-              //关联销量
-            var queryOrderDetail = from o in db.OrderDetail
+
+            var qq = from o in db.Order
+                     join d in db.OrderDetail on o.Id equals d.OrderId
+                     select new
+                     {
+                         o.CreateTime,
+                         ProductId = d.ProductId,
+                         Quantity = d.Quantity,
+                     };
+
+            //关联销量
+            var queryOrderDetail = from o in qq
                                    group o by o.ProductId into oo
                                    select new
                                    {
                                        ProductId = oo.Key,
-                                       SaleValue = oo.Sum(i => i.Quantity)
+                                       SaleValue = oo.Sum(i => i.Quantity),// 总销量
+                                       MonthSaleValue = oo.Where(t => t.CreateTime.Month == DateTime.Now.Month && t.CreateTime.Year == DateTime.Now.Year).Sum(i => i.Quantity),// 月销量
+
                                    };
 
             var queryList = from p in db.Product
@@ -35,7 +46,7 @@ namespace WN.ProductStore.Controllers
                             select new
                             {
                                 p.Id,
-                                SaleValue= ppp==null?0: ppp.SaleValue,
+                                SaleValue = ppp == null ? 0 : ppp.SaleValue,
                                 Content = p.Content,
                                 CreateTime = p.CreateTime,
                                 ImageUrl = p.ImageUrl,
@@ -45,6 +56,7 @@ namespace WN.ProductStore.Controllers
                                 Price = p.Price,
                                 ProductNo = p.ProductNo,
                                 Size = p.Size,
+                                MonthSaleValue=ppp.MonthSaleValue
                             };
             //搜索
             if (!string.IsNullOrEmpty(queryString))
@@ -68,7 +80,7 @@ namespace WN.ProductStore.Controllers
             return result;
         }
         // GET api/<controller>;
-        public object GetProductList(int pageIndex, int pageSize, string queryString,string sort)
+        public object GetProductList(int pageIndex, int pageSize, string queryString, string sort)
         {
             var totalCount = 0;
 
@@ -142,33 +154,43 @@ namespace WN.ProductStore.Controllers
         public object GetProduct(Guid id)
         {
             var images = db.ProductImage.Where(i => i.ProductId == id).ToList();
+            var qq = from o in db.Order
+                     join d in db.OrderDetail on o.Id equals d.OrderId
+                     select new
+                     {
+                         o.CreateTime,
+                         ProductId = d.ProductId,
+                         Quantity = d.Quantity,
+                     };
 
-            var queryOrderDetail = from o in db.OrderDetail.Where(i=>i.ProductId==id)
-                                   //join dd in db.Order on o.OrderId equals dd.Id into dddd
+            var queryOrderDetail = from o in qq.Where(i => i.ProductId == id)
+                                       //join dd in db.Order on o.OrderId equals dd.Id into dddd
                                    group o by o.ProductId into oo
                                    select new
                                    {
                                        ProductId = oo.Key,
-                                       SaleValue = oo.Sum(i => i.Quantity)
+                                       SaleValue = oo.Sum(i => i.Quantity),
+                                       MonthSaleValue = oo.Where(t => t.CreateTime.Month == DateTime.Now.Month && t.CreateTime.Year == DateTime.Now.Year).Sum(i => i.Quantity),// 月销量
                                    };
 
             var queryProduct = from p in db.Product.Where(i => i.Id == id)
-                            join qo in queryOrderDetail on p.Id equals qo.ProductId into pp
-                            from ppp in pp.DefaultIfEmpty()
-                            select new
-                            {
-                                p.Id,
-                                SaleValue=ppp==null?0 : ppp.SaleValue,
-                                Content = p.Content,
-                                CreateTime = p.CreateTime,
-                                ImageUrl = p.ImageUrl,
-                                Introduction = p.Introduction,
-                                Name = p.Name,
-                                OriginalPrice = p.OriginalPrice,
-                                Price = p.Price,
-                                ProductNo = p.ProductNo,
-                                Size = p.Size,
-                            };
+                               join qo in queryOrderDetail on p.Id equals qo.ProductId into pp
+                               from ppp in pp.DefaultIfEmpty()
+                               select new
+                               {
+                                   p.Id,
+                                   SaleValue = ppp == null ? 0 : ppp.SaleValue,
+                                   Content = p.Content,
+                                   CreateTime = p.CreateTime,
+                                   ImageUrl = p.ImageUrl,
+                                   Introduction = p.Introduction,
+                                   Name = p.Name,
+                                   OriginalPrice = p.OriginalPrice,
+                                   Price = p.Price,
+                                   ProductNo = p.ProductNo,
+                                   Size = p.Size,
+                                   MonthSaleValue=ppp==null?0:  ppp.MonthSaleValue
+                               };
 
             var result = new
             {
@@ -179,7 +201,7 @@ namespace WN.ProductStore.Controllers
             return result;
         }
 
- 
+
 
         // PUT api/<controller>/5
         [HttpPost]

@@ -24,6 +24,7 @@ define(function (require) {
                 ProductService.getProductDetail(spid).success(function (response) {
                     $scope.model = response.Product;
                     $scope.ProductImages = response.ProductImages;
+                    $scope.model.Content = $sce.trustAsHtml(response.Product.Content);
                 });
             }
 

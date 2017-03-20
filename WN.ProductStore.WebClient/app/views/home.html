@@ -1,6 +1,4 @@
-<div class="clear">
 
-</div>
 <div ui-view></div>
 <!--引导 -->
 <div class="navCir">
@@ -9,13 +7,3 @@
   <li ng-class="{'active':stateIsFirst('home.carList')}"><a href="" ng-click="goCarList()"><i class="am-icon-shopping-basket"></i>购物车</a></li>
   <li ng-class="{'active':stateIsFirst('home.customerHome')}"><a href="" ng-click="goTo('home.customerHome')"><i class="am-icon-user"></i>我的</a></li>
 </div>
-
-
-<!--<script>
-  $(function () {
-    $(".navCir > li").click(function () {
-      $(".navCir > li").removeClass("active");
-      $(this).addClass("active");
-    });
-  });
-</script>-->
